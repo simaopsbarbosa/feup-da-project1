@@ -13,7 +13,7 @@ add_executable(DA2025_PRJ1_T13_G07 main.cpp ${PROJECT_SOURCES} ${PROJECT_HEADERS
 # import Doxygen
 find_package(Doxygen)
 if(DOXYGEN_FOUND)
-    set(BUILD_DOC_DIR "${CMAKE_SOURCE_DIR}/documentation")
+    set(BUILD_DOC_DIR "${CMAKE_SOURCE_DIR}/docs")
     if(NOT EXISTS "${BUILD_DOC_DIR}")
         file(MAKE_DIRECTORY "${BUILD_DOC_DIR}")
     endif()

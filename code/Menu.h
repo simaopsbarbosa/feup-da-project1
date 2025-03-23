@@ -14,7 +14,7 @@ public:
     void processOption(int option) const;
 
 private:
-    Graph<int> graph;
+    Graph<LocationInfo> graph;
 };
 
 #endif // MENU_HPP
