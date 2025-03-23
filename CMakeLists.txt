@@ -8,7 +8,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED True)
 file(GLOB_RECURSE PROJECT_SOURCES "code/*.cpp")
 file(GLOB_RECURSE PROJECT_HEADERS "code/**/*.h")
 
-add_executable(DA2025_PRJ1_T13_G07 ${PROJECT_SOURCES} ${PROJECT_HEADERS})
+add_executable(DA2025_PRJ1_T13_G07 main.cpp ${PROJECT_SOURCES} ${PROJECT_HEADERS})
 
 # import Doxygen
 find_package(Doxygen)

@@ -79,7 +79,7 @@ protected:
 template <class T>
 class Edge {
 public:
-    Edge(Vertex<T> *orig, Vertex<T> *dest, double w);
+    Edge(Vertex<T> *orig, Vertex<T> *dest, double dw, double ww);
 
     Vertex<T> * getDest() const;
     double getWalkingWeight() const;
@@ -340,7 +340,7 @@ void Vertex<T>::deleteEdge(Edge<T> *edge) {
 /********************** Edge  ****************************/
 
 template <class T>
-Edge<T>::Edge(Vertex<T> *orig, Vertex<T> *dest, double w): orig(orig), dest(dest), weight(w) {}
+Edge<T>::Edge(Vertex<T> *orig, Vertex<T> *dest, double dw, double ww): orig(orig), dest(dest), drivingWeight(dw), walkingWeight(ww) {}
 
 template <class T>
 Vertex<T> * Edge<T>::getDest() const {

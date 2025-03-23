@@ -7,6 +7,9 @@
 !*/
 !*.*
 
+# Don't ignore Doxyfile
+!docs/Doxyfile
+
 # Build directory
 /build/
 /out/
