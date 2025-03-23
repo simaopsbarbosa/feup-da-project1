@@ -1,5 +1,11 @@
 # macos
-**/.DS_Store
+.DS_Store
+
+# Ignore all executables (files with no extension)
+*
+!*/
+!*.*
+
 
 # Prerequisites
 *.d
