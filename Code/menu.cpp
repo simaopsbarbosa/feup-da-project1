@@ -1,4 +1,4 @@
-#include "menu.h"
+#include "Menu.h"
 
 void Menu::getMenuOptions() const {
   std::cout << "--------------Route Planning--------------\n";

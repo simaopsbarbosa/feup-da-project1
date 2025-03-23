@@ -4,7 +4,7 @@
 #include <iostream>
 #include <vector>
 #include <string>
-#include "Graph.h"
+#include "data-structures/Graph.h"
 
 class Menu {
 public:

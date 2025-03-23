@@ -1,4 +1,4 @@
-# macos
+# macOS system files
 .DS_Store
 **/.DS_Store
 
@@ -7,6 +7,17 @@
 !*/
 !*.*
 
+# Build directory
+/build/
+/out/
+/bin/
+/dist/
+
+# CMake files
+CMakeCache.txt
+CMakeFiles/
+cmake_install.cmake
+Makefile
 
 # Prerequisites
 *.d
@@ -41,4 +52,18 @@
 *.out
 *.app
 
+# CLion (JetBrains) files
+.idea/
+cmake-build-debug/
+cmake-build-release/
+
+# VS Code settings & extensions
 .vscode/
+*.code-workspace
+
+# Logs & Debugging files
+*.log
+*.cache
+*.swp
+*.swo
+*.bak
