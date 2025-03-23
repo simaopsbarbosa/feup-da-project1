@@ -82,7 +82,8 @@ public:
     Edge(Vertex<T> *orig, Vertex<T> *dest, double w);
 
     Vertex<T> * getDest() const;
-    double getWeight() const;
+    double getWalkingWeight() const;
+    double getDrivingWeight() const;
     bool isSelected() const;
     Vertex<T> * getOrig() const;
     Edge<T> *getReverse() const;
@@ -347,8 +348,13 @@ Vertex<T> * Edge<T>::getDest() const {
 }
 
 template <class T>
-double Edge<T>::getWeight() const {
-    return this->weight;
+double Edge<T>::getWalkingWeight() const {
+    return this->walkingWeight;
+}
+
+template <class T>
+double Edge<T>::getDrivingWeight() const {
+    return this->drivingWeight;
 }
 
 template <class T>
