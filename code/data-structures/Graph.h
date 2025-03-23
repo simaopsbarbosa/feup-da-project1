@@ -14,7 +14,6 @@
 #include <sstream>
 #include <vector>
 
-
 template <class T> class Edge;
 
 #define INF std::numeric_limits<double>::max()
@@ -65,7 +64,7 @@ public:
   void setIndegree(unsigned int indegree);
   void setDist(double dist);
   void setPath(Edge<T> *path);
-  Edge<T> *addEdge(Vertex<T> *dest, double w);
+  Edge<T> *addEdge(Vertex<T> *dest, double dw, double ww);
   bool removeEdge(T in);
   void removeOutgoingEdges();
 
@@ -112,8 +111,8 @@ public:
 
 protected:
   Vertex<T> *dest;      // destination vertex
-  double walkingWeight; // edge weight, can also be used for capacity
   double drivingWeight; // edge weight, can also be used for capacity
+  double walkingWeight; // edge weight, can also be used for capacity
 
   // auxiliary fields
   bool selected = false;
@@ -135,6 +134,10 @@ public:
    */
   Vertex<T> *findVertex(const T &in) const;
   /*
+   * Auxiliary function to find a vertex with a given code.
+   */
+  Vertex<T> *findVertexByCode(const std::string code) const;
+  /*
    *  Adds a vertex with a given content or info (in) to a graph (this).
    *  Returns true if successful, and false if a vertex with that content
    * already exists.
@@ -148,9 +151,10 @@ public:
    * Returns true if successful, and false if the source or destination vertex
    * does not exist.
    */
-  bool addEdge(const T &sourc, const T &dest, double w);
+  bool addEdge(const T &sourc, const T &dest, double dw, double ww);
   bool removeEdge(const T &source, const T &dest);
-  bool addBidirectionalEdge(const T &sourc, const T &dest, double w);
+  bool addBidirectionalEdge(const T &sourc, const T &dest, double dw,
+                            double ww);
 
   int getNumVertex() const;
 
@@ -181,8 +185,9 @@ template <class T> Vertex<T>::Vertex(T in) : info(in) {}
  * Auxiliary function to add an outgoing edge to a vertex (this),
  * with a given destination vertex (d) and edge weight (w).
  */
-template <class T> Edge<T> *Vertex<T>::addEdge(Vertex<T> *d, double w) {
-  auto newEdge = new Edge<T>(this, d, w);
+template <class T>
+Edge<T> *Vertex<T>::addEdge(Vertex<T> *d, double dw, double ww) {
+  auto newEdge = new Edge<T>(this, d, dw, ww);
   adj.push_back(newEdge);
   d->incoming.push_back(newEdge);
   return newEdge;
@@ -354,6 +359,17 @@ template <class T> Vertex<T> *Graph<T>::findVertex(const T &in) const {
 }
 
 /*
+ * Auxiliary function to find a vertex with a given code.
+ */
+template <class T>
+Vertex<T> *Graph<T>::findVertexByCode(const std::string code) const {
+  for (auto v : vertexSet)
+    if (v->getInfo().code == code)
+      return v;
+  return nullptr;
+}
+
+/*
  * Finds the index of the vertex with a given content.
  */
 template <class T> int Graph<T>::findVertexIdx(const T &in) const {
@@ -402,12 +418,12 @@ template <class T> bool Graph<T>::removeVertex(const T &in) {
  * does not exist.
  */
 template <class T>
-bool Graph<T>::addEdge(const T &sourc, const T &dest, double w) {
+bool Graph<T>::addEdge(const T &sourc, const T &dest, double dw, double ww) {
   auto v1 = findVertex(sourc);
   auto v2 = findVertex(dest);
   if (v1 == nullptr || v2 == nullptr)
     return false;
-  v1->addEdge(v2, w);
+  v1->addEdge(v2, dw, ww);
   return true;
 }
 
@@ -425,13 +441,14 @@ template <class T> bool Graph<T>::removeEdge(const T &sourc, const T &dest) {
 }
 
 template <class T>
-bool Graph<T>::addBidirectionalEdge(const T &sourc, const T &dest, double w) {
+bool Graph<T>::addBidirectionalEdge(const T &sourc, const T &dest, double dw,
+                                    double ww) {
   auto v1 = findVertex(sourc);
   auto v2 = findVertex(dest);
   if (v1 == nullptr || v2 == nullptr)
     return false;
-  auto e1 = v1->addEdge(v2, w);
-  auto e2 = v2->addEdge(v1, w);
+  auto e1 = v1->addEdge(v2, dw, ww);
+  auto e2 = v2->addEdge(v1, dw, ww);
   e1->setReverse(e2);
   e2->setReverse(e1);
   return true;

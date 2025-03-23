@@ -1,7 +1,7 @@
 #include "Menu.h"
 
 void Menu::getMenuOptions() const {
-  std::cout << "--------------Route Planning--------------\n";
+  std::cout << "\n--------------Route Planning--------------\n";
   std::cout << "1. Independent Route Planning\n";
   std::cout << "2. Restricted Route Planning\n";
   std::cout << "3. Environmentally-Friendly Route Planning\n";
@@ -40,25 +40,26 @@ void Menu::processOption(int option) const {
 }
 
 int Menu::buildGraph(std::string locations, std::string distances) {
-  std::ifstream file(locations);
 
-  if (!file.is_open()) {
+  // ####################### PARSE LOCATIONS #######################
+
+  std::ifstream locationsFile(locations);
+
+  if (!locationsFile.is_open()) {
     std::cerr << "[ERROR] Error opening file: " << locations << std::endl;
     return 1;
   }
 
-  std::string line;
+  std::string locationLine;
 
   // read and check first line
-  if (!std::getline(file, line)) {
+  if (!std::getline(locationsFile, locationLine)) {
     std::cerr << "[ERROR] Empty file: " << locations << std::endl;
     return 1;
   }
 
-  int count = 1;
-  while (std::getline(file, line)) {
-    std::stringstream ss(line);
-    count++;
+  while (std::getline(locationsFile, locationLine)) {
+    std::stringstream ss(locationLine);
     std::string location, code, id_str, parking_str;
     int id;
     bool parking;
@@ -71,13 +72,63 @@ int Menu::buildGraph(std::string locations, std::string distances) {
     std::getline(ss, parking_str, ',');
     parking = stoi(parking_str) == 1;
 
-    const LocationInfo locInfo(id, location, code, parking);
+    const LocationInfo locInfo{id, location, code, parking};
 
     graph.addVertex(locInfo);
   }
 
-  std::cout << graph.getNumVertex() << std::endl;
-  file.close();
+  locationsFile.close();
+
+  std::cout << "Success, " << graph.getNumVertex() << " locations detected.\n";
+
+  // ####################### PARSE DISTANCES #######################
+
+  std::ifstream distancesFile(distances);
+
+  if (!distancesFile.is_open()) {
+    std::cerr << "[ERROR] Error opening file: " << distances << std::endl;
+    return 1;
+  }
+
+  std::string distancesLine;
+
+  // read and check first line
+  if (!std::getline(distancesFile, distancesLine)) {
+    std::cerr << "[ERROR] Empty file: " << distances << std::endl;
+    return 1;
+  }
+
+  int edgeCounter = 0;
+  while (std::getline(distancesFile, distancesLine)) {
+    std::stringstream ss(distancesLine);
+    std::string location1, location2, dd_str, dw_str;
+    double dd, dw;
+
+    // extract values from line
+    std::getline(ss, location1, ',');
+    std::getline(ss, location2, ',');
+    std::getline(ss, dd_str, ',');
+    if (dd_str == "X") {
+      dd = -1;
+    } else {
+      dd = stoi(dd_str);
+    }
+    std::getline(ss, dw_str, ',');
+    if (dw_str == "X") {
+      dw = -1;
+    } else {
+      dw = stoi(dw_str);
+    }
+
+    graph.addEdge(graph.findVertexByCode(location1)->getInfo(),
+                  graph.findVertexByCode(location2)->getInfo(), dd, dw);
+    edgeCounter++;
+  }
+
+  distancesFile.close();
+
+  std::cout << "Success, " << edgeCounter << " distances detected.\n";
+
   return 0;
 }
 
@@ -86,5 +137,6 @@ Menu::Menu() {
       1) {
     return; // cannot read files
   }
+  std::cout << "\nGraph built successfully.\n";
   getMenuOptions();
 }
