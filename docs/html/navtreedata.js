@@ -24,7 +24,7 @@
 */
 var NAVTREE =
 [
-  [ "My Project", "index.html", ]
+  [ "DA2025_PRJ1_T13_G07", "index.html", ]
 ];
 
 var NAVTREEINDEX =
