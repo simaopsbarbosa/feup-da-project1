@@ -26,14 +26,17 @@ public:
 
     T getInfo() const;
     std::vector<Edge<T> *> getAdj() const;
+    bool isParking() const;
     bool isVisited() const;
     bool isProcessing() const;
     unsigned int getIndegree() const;
-    double getDist() const;
+    double getDrivingDist() const;
+    double getWalkingDist() const;
     Edge<T> *getPath() const;
     std::vector<Edge<T> *> getIncoming() const;
 
     void setInfo(T info);
+    void setParking(bool parking);
     void setVisited(bool visited);
     void setProcessing(bool processing);
 
@@ -53,13 +56,15 @@ public:
 protected:
     T info;                // info node
     std::vector<Edge<T> *> adj;  // outgoing edges
+    bool parking;
 
     // auxiliary fields
     bool visited = false; // used by DFS, BFS, Prim ...
     bool processing = false; // used by isDAG (in addition to the visited attribute)
     int low = -1, num = -1; // used by SCC Tarjan
     unsigned int indegree; // used by topsort
-    double dist = 0;
+    double walkingDist = 0;
+    double drivingDist = 0;
     Edge<T> *path = nullptr;
 
     std::vector<Edge<T> *> incoming; // incoming edges
@@ -88,7 +93,8 @@ public:
     void setFlow(double flow);
 protected:
     Vertex<T> * dest; // destination vertex
-    double weight; // edge weight, can also be used for capacity
+    double walkingWeight; // edge weight, can also be used for capacity
+    double drivingWeight; // edge weight, can also be used for capacity
 
     // auxiliary fields
     bool selected = false;
@@ -240,6 +246,11 @@ std::vector<Edge<T>*> Vertex<T>::getAdj() const {
 }
 
 template <class T>
+bool Vertex<T>::isParking() const {
+    return this->parking;
+}
+
+template <class T>
 bool Vertex<T>::isVisited() const {
     return this->visited;
 }
@@ -255,8 +266,13 @@ unsigned int Vertex<T>::getIndegree() const {
 }
 
 template <class T>
-double Vertex<T>::getDist() const {
-    return this->dist;
+double Vertex<T>::getWalkingDist() const {
+    return this->walkingDist;
+}
+
+template <class T>
+double Vertex<T>::getDrivingDist() const {
+    return this->drivingDist;
 }
 
 template <class T>
@@ -272,6 +288,11 @@ std::vector<Edge<T> *> Vertex<T>::getIncoming() const {
 template <class T>
 void Vertex<T>::setInfo(T in) {
     this->info = in;
+}
+
+template <class T>
+void Vertex<T>::setParking(bool parking) {
+    this->parking = parking;
 }
 
 template <class T>
