@@ -14,6 +14,11 @@ public:
   void getMenuOptions() const;
   void processOption(int option) const;
 
+  int independentRoutePlanning() const;
+  int restrictedRoutePlanning() const;
+  int environmentallyFriendlyRoutePlanning() const;;
+  int batchMode() const;
+
 private:
   Graph<LocationInfo> graph;
 };

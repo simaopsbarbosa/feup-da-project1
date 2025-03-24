@@ -18,19 +18,19 @@ void Menu::getMenuOptions() const {
 void Menu::processOption(int option) const {
   switch (option) {
   case 1:
-    std::cout << "\nCalculating independent route...\n";
+    independentRoutePlanning();
     break;
 
   case 2:
-    std::cout << "\nCalculating restricted route...\n";
+    restrictedRoutePlanning();
     break;
 
   case 3:
-    std::cout << "\nCalculating environmentally-friendly route...\n";
+    environmentallyFriendlyRoutePlanning();
     break;
 
   case 4:
-    std::cout << "\nEntering batch mode...\n";
+    batchMode();
     break;
 
   case 5:
@@ -41,6 +41,23 @@ void Menu::processOption(int option) const {
     std::cout << "\nInvalid option. Try again.\n";
     getMenuOptions();
   }
+}
+
+int Menu::independentRoutePlanning() const {
+  std::cout << "\nCalculating independent route...\n";
+  return 0;
+}
+int Menu::restrictedRoutePlanning() const {
+  std::cout << "\nCalculating restricted route...\n";
+  return 0;
+}
+int Menu::environmentallyFriendlyRoutePlanning() const {
+  std::cout << "\nCalculating environmentally-friendly route...\n";
+  return 0;
+}
+int Menu::batchMode() const {
+  std::cout << "\nEntering batch mode...\n";
+  return 0;
 }
 
 int Menu::buildGraph(std::string locations, std::string distances) {
