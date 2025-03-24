@@ -29,6 +29,10 @@ void Menu::processOption(int option) const {
     std::cout << "\nCalculating environmentally-friendly route...\n";
     break;
 
+  case 4:
+    std::cout << "\nEntering batch mode...\n";
+    break;
+
   case 5:
     std::cout << "\nLeaving program...\n";
     return;

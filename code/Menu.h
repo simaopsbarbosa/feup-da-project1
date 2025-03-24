@@ -2,6 +2,7 @@
 #define MENU_HPP
 
 #include "data-structures/Graph.h"
+#include "data-structures/LocationInfo.h"
 #include <iostream>
 #include <string>
 #include <vector>
