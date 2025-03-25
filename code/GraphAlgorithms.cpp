@@ -53,10 +53,31 @@ void GraphAlgorithms::dijkstra(Graph<LocationInfo>& graph, int source) {
     }
  }
 
-std::vector<LocationInfo> GraphAlgorithms::getPath(Graph<LocationInfo> *g, const int &origin, const int &dest) {
-  std::vector<LocationInfo> res;
+ std::vector<LocationInfo> GraphAlgorithms::getPath(Graph<LocationInfo> *g, const int &origin, const int &dest) {
+    std::vector<LocationInfo> res;
 
-  // should compute the best path given a graph
+    // Find the destination vertex
+    auto currentVertex = g->findVertexById(dest);
+    if (!currentVertex) {
+        std::cerr << "[ERROR] Destination node not found in the graph.\n";
+        return res; // Return an empty vector if the destination is not found
+    }
 
-  return res;
+    // Reconstruct the path from destination to origin
+    while (currentVertex != nullptr && currentVertex->getPath() != nullptr) {
+        res.push_back(currentVertex->getInfo()); // Add the current vertex to the path
+        currentVertex = currentVertex->getPath()->getOrig(); // Move to the predecessor
+    }
+
+    // Add the origin vertex to the path
+    if (currentVertex != nullptr && currentVertex->getInfo().id == origin) {
+        res.push_back(currentVertex->getInfo());
+    } else {
+        std::cerr << "[ERROR] No path found from origin to destination.\n";
+        return {}; // Return an empty vector if no path exists
+    }
+
+    // Reverse the path to get it in the correct order (from origin to destination)
+    std::reverse(res.begin(), res.end());
+    return res;
 }
