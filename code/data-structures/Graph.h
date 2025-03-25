@@ -23,8 +23,7 @@ template <class T> class Edge;
 template <class T> class Vertex {
 public:
   Vertex(T in);
-  bool
-  operator<(Vertex<T> &vertex) const; // required by MutablePriorityQueue
+  bool operator<(Vertex<T> &vertex) const; // required by MutablePriorityQueue
 
   T getInfo() const;
   std::vector<Edge<T> *> getAdj() const;
@@ -53,7 +52,7 @@ public:
   Edge<T> *addEdge(Vertex<T> *dest, double dw, double ww);
   bool removeEdge(T in);
   void removeOutgoingEdges();
-  int getQueueIndex() const; 
+  int getQueueIndex() const;
 
   friend class MutablePriorityQueue<Vertex>;
 
@@ -207,9 +206,8 @@ template <class T> bool Vertex<T>::removeEdge(T in) {
   return removedEdge;
 }
 
-template <class T>
-bool Vertex<T>::operator<(Vertex<T> & vertex) const {
-    return this->drivingDist < vertex.drivingDist;
+template <class T> bool Vertex<T>::operator<(Vertex<T> &vertex) const {
+  return this->drivingDist < vertex.drivingDist;
 }
 
 /*
@@ -276,9 +274,13 @@ template <class T> void Vertex<T>::setIndegree(unsigned int indegree) {
   this->indegree = indegree;
 }
 
-template <class T> void Vertex<T>::setDrivingDist(double dd) { this->drivingDist = dd; }
+template <class T> void Vertex<T>::setDrivingDist(double dd) {
+  this->drivingDist = dd;
+}
 
-template <class T> void Vertex<T>::setWalkingDist(double wd) { this->walkingDist = wd; }
+template <class T> void Vertex<T>::setWalkingDist(double wd) {
+  this->walkingDist = wd;
+}
 
 template <class T> void Vertex<T>::setPath(Edge<T> *path) { this->path = path; }
 
@@ -297,7 +299,7 @@ template <class T> void Vertex<T>::deleteEdge(Edge<T> *edge) {
 }
 
 template <class T> int Vertex<T>::getQueueIndex() const {
-    return this->queueIndex;
+  return this->queueIndex;
 }
 
 /********************** Edge  ****************************/
@@ -370,8 +372,7 @@ Vertex<T> *Graph<T>::findVertexByCode(const std::string code) const {
 /*
  * Auxiliary function to find a vertex with a given id.
  */
-template <class T>
-Vertex<T> *Graph<T>::findVertexById(const int id) const {
+template <class T> Vertex<T> *Graph<T>::findVertexById(const int id) const {
   for (auto v : vertexSet)
     if (v->getInfo().id == id)
       return v;

@@ -1,9 +1,9 @@
 #ifndef MENU_HPP
 #define MENU_HPP
 
+#include "GraphAlgorithms.h"
 #include "data-structures/Graph.h"
 #include "data-structures/LocationInfo.h"
-#include "GraphAlgorithms.h"
 #include <iostream>
 #include <string>
 #include <vector>

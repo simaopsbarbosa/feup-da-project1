@@ -5,9 +5,10 @@
 #include "data-structures/LocationInfo.h"
 
 namespace GraphAlgorithms {
-    void dijkstra(Graph<LocationInfo>* graph, int source);
-    bool relax(Edge<LocationInfo> *edge);
-    std::vector<LocationInfo> getPath(Graph<LocationInfo> *g, const int &origin, const int &dest);
-}
+void dijkstra(Graph<LocationInfo> *graph, int source);
+bool relax(Edge<LocationInfo> *edge);
+std::vector<LocationInfo> getPath(Graph<LocationInfo> *g, const int &origin,
+                                  const int &dest);
+} // namespace GraphAlgorithms
 
 #endif
