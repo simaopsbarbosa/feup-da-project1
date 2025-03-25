@@ -2,6 +2,7 @@
 #define LOCATION_INFO_H
 
 #include <string>
+#include <iostream>
 
 struct LocationInfo {
     int id;
@@ -22,6 +23,11 @@ struct LocationInfo {
 
     bool operator<(const LocationInfo &other) const {
         return id < other.id;
+    }
+
+    friend std::ostream& operator<<(std::ostream &os, const LocationInfo &info) {
+        os << "ID: " << info.id << ", Location: " << info.location << ", Code: " << info.code << ", Parking: " << (info.parking ? "Yes" : "No");
+        return os;
     }
 };
 

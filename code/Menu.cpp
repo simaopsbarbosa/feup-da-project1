@@ -44,10 +44,10 @@ void Menu::processOption(int option) {
 }
 
 int Menu::independentRoutePlanning() {
-  // get input 
+  // get input
   int source = 2; // temporary approach for algortihm testing
   int dest = 3;
-  
+
   // compute output
   std::cout << "\nCalculating independent route...\n";
   GraphAlgorithms::dijkstra(&graph, source);
@@ -61,6 +61,7 @@ int Menu::independentRoutePlanning() {
 
   return 0;
 }
+
 int Menu::restrictedRoutePlanning() {
   std::cout << "\nCalculating restricted route...\n";
   return 0;
@@ -109,7 +110,9 @@ int Menu::buildGraph(std::string locations, std::string distances) {
 
     const LocationInfo locInfo{id, location, code, parking};
 
-    graph.addVertex(locInfo);
+    if (!graph.addVertex(locInfo)) {
+      std::cerr << "[ERROR] Cannot build location: " << locInfo << std::endl;
+    }
   }
 
   locationsFile.close();
@@ -155,9 +158,14 @@ int Menu::buildGraph(std::string locations, std::string distances) {
       dw = stoi(dw_str);
     }
 
-    graph.addEdge(graph.findVertexByCode(location1)->getInfo(),
-                  graph.findVertexByCode(location2)->getInfo(), dd, dw);
-    edgeCounter++;
+    if (!graph.addEdge(graph.findVertexByCode(location1)->getInfo(),
+                       graph.findVertexByCode(location2)->getInfo(), dd, dw)) {
+      std::cerr << "[ERROR] Cannot build edge: from " << location1 << " to "
+                << location2 << ", with dd " << dd << " and dw " << dw
+                << std::endl;
+    } else {
+      edgeCounter++;
+    }
   }
 
   distancesFile.close();
