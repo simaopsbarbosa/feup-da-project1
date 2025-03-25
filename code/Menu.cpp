@@ -45,9 +45,9 @@ void Menu::processOption(int option) {
 
 int Menu::independentRoutePlanning() {
   // get input
-  int source = 2; // temporary approach for algortihm testing
-  int dest = 3;
-
+  int source = 3; // temporary approach for algortihm testing
+  int dest = 10; 
+  
   // compute output
   std::cout << "\nCalculating independent route...\n";
   GraphAlgorithms::dijkstra(&graph, source);

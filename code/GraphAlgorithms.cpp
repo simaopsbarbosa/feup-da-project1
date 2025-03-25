@@ -32,8 +32,7 @@ void GraphAlgorithms::dijkstra(Graph<LocationInfo>* graph, int source) {
     // Step 2: Process the priority queue
     while (!pq.empty()) {
         // Extract the vertex with the smallest distance
-        auto current = pq.extractMin();
-        auto currentVertex = graph->findVertexById(source);
+        auto currentVertex = pq.extractMin();
 
         // Iterate over all neighbors of the current vertex
         for (auto& edge : currentVertex->getAdj()) {
