@@ -45,9 +45,9 @@ void Menu::processOption(int option) {
 
 int Menu::independentRoutePlanning() {
   // get input
-  int source = 2; // temporary approach for algortihm testing
-  int dest = 3;
-
+  int source = 8; // temporary approach for algortihm testing
+  int dest = 1; 
+  
   // compute output
   std::cout << "\nCalculating independent route...\n";
   GraphAlgorithms::dijkstra(&graph, source);
@@ -147,13 +147,13 @@ int Menu::buildGraph(std::string locations, std::string distances) {
     std::getline(ss, location2, ',');
     std::getline(ss, dd_str, ',');
     if (dd_str == "X") {
-      dd = -1;
+      dd = INF;
     } else {
       dd = stoi(dd_str);
     }
     std::getline(ss, dw_str, ',');
     if (dw_str == "X") {
-      dw = -1;
+      dw = INF;
     } else {
       dw = stoi(dw_str);
     }
@@ -163,7 +163,20 @@ int Menu::buildGraph(std::string locations, std::string distances) {
       std::cerr << "[ERROR] Cannot build edge: from " << location1 << " to "
                 << location2 << ", with dd " << dd << " and dw " << dw
                 << std::endl;
-    } else {
+    } 
+
+    else {
+      edgeCounter++;
+    }
+    
+    if (!graph.addEdge(graph.findVertexByCode(location2)->getInfo(),
+                       graph.findVertexByCode(location1)->getInfo(), dd, dw)) {
+        std::cerr << "[ERROR] Cannot build edge: from " << location2 << " to "
+                  << location1 << ", with dd " << dd << " and dw " << dw
+                  << std::endl;
+    }
+
+    else {
       edgeCounter++;
     }
   }
@@ -176,7 +189,7 @@ int Menu::buildGraph(std::string locations, std::string distances) {
 }
 
 Menu::Menu() {
-  if (buildGraph("../data-set/Locations.csv", "../data-set/Distances.csv") ==
+  if (buildGraph("../data-set/Locations2.csv", "../data-set/Distances2.csv") ==
       1) {
     return; // cannot read files
   }

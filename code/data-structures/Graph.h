@@ -53,6 +53,7 @@ public:
   Edge<T> *addEdge(Vertex<T> *dest, double dw, double ww);
   bool removeEdge(T in);
   void removeOutgoingEdges();
+  int getQueueIndex() const; 
 
   friend class MutablePriorityQueue<Vertex>;
 
@@ -293,6 +294,10 @@ template <class T> void Vertex<T>::deleteEdge(Edge<T> *edge) {
     }
   }
   delete edge;
+}
+
+template <class T> int Vertex<T>::getQueueIndex() const {
+    return this->queueIndex;
 }
 
 /********************** Edge  ****************************/
