@@ -5,7 +5,7 @@
 #ifndef DA_TP_CLASSES_GRAPH
 #define DA_TP_CLASSES_GRAPH
 
-#include "../data-structures/MutablePriorityQueue.h" // not needed for now
+#include "../data-structures/MutablePriorityQueue.h"
 #include <algorithm>
 #include <fstream>
 #include <iostream>
@@ -24,7 +24,7 @@ template <class T> class Vertex {
 public:
   Vertex(T in);
   bool
-  operator<(Vertex<T> &vertex) const; // // required by MutablePriorityQueue
+  operator<(Vertex<T> &vertex) const; // required by MutablePriorityQueue
 
   T getInfo() const;
   std::vector<Edge<T> *> getAdj() const;
@@ -47,7 +47,8 @@ public:
   void setNum(int value);
 
   void setIndegree(unsigned int indegree);
-  void setDist(double dist);
+  void setDrivingDist(double dd);
+  void setWalkingDist(double wd);
   void setPath(Edge<T> *path);
   Edge<T> *addEdge(Vertex<T> *dest, double dw, double ww);
   bool removeEdge(T in);
@@ -122,6 +123,10 @@ public:
    * Auxiliary function to find a vertex with a given code.
    */
   Vertex<T> *findVertexByCode(const std::string code) const;
+  /*
+   * Auxiliary function to find a vertex with a given id.
+   */
+  Vertex<T> *findVertexById(const int id) const;
   /*
    *  Adds a vertex with a given content or info (in) to a graph (this).
    *  Returns true if successful, and false if a vertex with that content
@@ -201,6 +206,11 @@ template <class T> bool Vertex<T>::removeEdge(T in) {
   return removedEdge;
 }
 
+template <class T>
+bool Vertex<T>::operator<(Vertex<T> & vertex) const {
+    return this->drivingDist < vertex.drivingDist;
+}
+
 /*
  * Auxiliary function to remove an outgoing edge of a vertex.
  */
@@ -211,10 +221,6 @@ template <class T> void Vertex<T>::removeOutgoingEdges() {
     it = adj.erase(it);
     deleteEdge(edge);
   }
-}
-
-template <class T> bool Vertex<T>::operator<(Vertex<T> &vertex) const {
-  return this->dist < vertex.dist;
 }
 
 template <class T> T Vertex<T>::getInfo() const { return this->info; }
@@ -269,7 +275,9 @@ template <class T> void Vertex<T>::setIndegree(unsigned int indegree) {
   this->indegree = indegree;
 }
 
-template <class T> void Vertex<T>::setDist(double dist) { this->dist = dist; }
+template <class T> void Vertex<T>::setDrivingDist(double dd) { this->drivingDist = dd; }
+
+template <class T> void Vertex<T>::setWalkingDist(double wd) { this->walkingDist = wd; }
 
 template <class T> void Vertex<T>::setPath(Edge<T> *path) { this->path = path; }
 
@@ -350,6 +358,17 @@ template <class T>
 Vertex<T> *Graph<T>::findVertexByCode(const std::string code) const {
   for (auto v : vertexSet)
     if (v->getInfo().code == code)
+      return v;
+  return nullptr;
+}
+
+/*
+ * Auxiliary function to find a vertex with a given id.
+ */
+template <class T>
+Vertex<T> *Graph<T>::findVertexById(const int id) const {
+  for (auto v : vertexSet)
+    if (v->getInfo().id == id)
       return v;
   return nullptr;
 }

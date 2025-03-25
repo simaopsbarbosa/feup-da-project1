@@ -15,6 +15,14 @@ struct LocationInfo {
     bool operator==(const LocationInfo &other) const {
         return id == other.id && location == other.location && code == other.code && parking == other.parking;
     }
+
+    bool operator!=(const LocationInfo &other) const {
+        return !(*this == other);
+    }
+
+    bool operator<(const LocationInfo &other) const {
+        return id < other.id;
+    }
 };
 
 #endif // LOCATION_INFO_H

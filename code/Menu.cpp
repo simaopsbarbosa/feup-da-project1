@@ -1,6 +1,6 @@
 #include "Menu.h"
 
-void Menu::getMenuOptions() const {
+void Menu::getMenuOptions() {
   std::cout << "\n--------------Route Planning--------------\n";
   std::cout << "1. Independent Route Planning\n";
   std::cout << "2. Restricted Route Planning\n";
@@ -15,7 +15,7 @@ void Menu::getMenuOptions() const {
   processOption(option);
 }
 
-void Menu::processOption(int option) const {
+void Menu::processOption(int option) {
   switch (option) {
   case 1:
     independentRoutePlanning();
@@ -43,19 +43,33 @@ void Menu::processOption(int option) const {
   }
 }
 
-int Menu::independentRoutePlanning() const {
+int Menu::independentRoutePlanning() {
+  // get input 
+  int source = 2; // temporary approach for algortihm testing
+  int dest = 3;
+  
+  // compute output
   std::cout << "\nCalculating independent route...\n";
+  GraphAlgorithms::dijkstra(&graph, source);
+  std::vector<LocationInfo> path =
+      GraphAlgorithms::getPath(&graph, source, dest);
+
+  // show output
+  for (LocationInfo v : path) {
+    std::cout << v.location << std::endl;
+  }
+
   return 0;
 }
-int Menu::restrictedRoutePlanning() const {
+int Menu::restrictedRoutePlanning() {
   std::cout << "\nCalculating restricted route...\n";
   return 0;
 }
-int Menu::environmentallyFriendlyRoutePlanning() const {
+int Menu::environmentallyFriendlyRoutePlanning() {
   std::cout << "\nCalculating environmentally-friendly route...\n";
   return 0;
 }
-int Menu::batchMode() const {
+int Menu::batchMode() {
   std::cout << "\nEntering batch mode...\n";
   return 0;
 }

@@ -3,6 +3,7 @@
 
 #include "data-structures/Graph.h"
 #include "data-structures/LocationInfo.h"
+#include "GraphAlgorithms.h"
 #include <iostream>
 #include <string>
 #include <vector>
@@ -11,13 +12,13 @@ class Menu {
 public:
   Menu();
   int buildGraph(std::string locations, std::string distances);
-  void getMenuOptions() const;
-  void processOption(int option) const;
+  void getMenuOptions();
+  void processOption(int option);
 
-  int independentRoutePlanning() const;
-  int restrictedRoutePlanning() const;
-  int environmentallyFriendlyRoutePlanning() const;;
-  int batchMode() const;
+  int independentRoutePlanning();
+  int restrictedRoutePlanning();
+  int environmentallyFriendlyRoutePlanning();
+  int batchMode();
 
 private:
   Graph<LocationInfo> graph;
