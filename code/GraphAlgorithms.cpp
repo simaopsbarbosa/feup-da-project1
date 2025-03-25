@@ -37,7 +37,7 @@ void GraphAlgorithms::dijkstra(Graph<LocationInfo>* graph, int source) {
         // Iterate over all neighbors of the current vertex
         for (auto& edge : currentVertex->getAdj()) {
             auto neighbor = edge->getDest();
-
+            
             // Relax the edge
             if (relax(edge)) {
                 // If the neighbor is not in the queue, insert it

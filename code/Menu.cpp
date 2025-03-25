@@ -46,7 +46,7 @@ void Menu::processOption(int option) {
 int Menu::independentRoutePlanning() {
   // get input
   int source = 3; // temporary approach for algortihm testing
-  int dest = 10; 
+  int dest = 8; 
   
   // compute output
   std::cout << "\nCalculating independent route...\n";
@@ -176,7 +176,7 @@ int Menu::buildGraph(std::string locations, std::string distances) {
 }
 
 Menu::Menu() {
-  if (buildGraph("../data-set/Locations.csv", "../data-set/Distances.csv") ==
+  if (buildGraph("../data-set/Locations2.csv", "../data-set/Distances2.csv") ==
       1) {
     return; // cannot read files
   }
