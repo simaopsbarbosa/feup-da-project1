@@ -1,66 +1,77 @@
 #include "Menu.h"
 
 void Menu::getMenuOptions() {
-  std::cout << "\n--------------Route Planning--------------\n";
+  std::cout << "\n--------------------ROUTE PLANNING--------------------\n";
   std::cout << "1. Independent Route Planning\n";
   std::cout << "2. Restricted Route Planning\n";
   std::cout << "3. Environmentally-Friendly Route Planning\n";
   std::cout << "4. Batch mode\n";
   std::cout << "5. Leave\n";
-  std::cout << "------------------------------------------\n";
+  std::cout << "------------------------------------------------------\n";
   std::cout << "Choose an option: ";
-
+  
   int option;
   std::cin >> option;
+  std::cout << "\n";
+  
   processOption(option);
 }
 
 void Menu::processOption(int option) {
   switch (option) {
-  case 1:
+    case 1:
     independentRoutePlanning();
     break;
-
-  case 2:
+    
+    case 2:
     restrictedRoutePlanning();
     break;
-
-  case 3:
+    
+    case 3:
     environmentallyFriendlyRoutePlanning();
     break;
-
-  case 4:
+    
+    case 4:
     batchMode();
     break;
-
-  case 5:
+    
+    case 5:
     std::cout << "\nLeaving program...\n";
     return;
-
-  default:
+    
+    default:
     std::cout << "\nInvalid option. Try again.\n";
     getMenuOptions();
   }
 }
 
 int Menu::independentRoutePlanning() {
-
+  
   // get input
-  int source = 1; // temporary approach for algortihm testing
-  int dest = 1000;
-
+  int source, dest;
+  std::cout << "------------------------INPUT-------------------------\n";
+  std::cout << "Source node's ID: ";
+  std::cin >> source;
+  std::cout << "Destination node's ID: ";
+  std::cin >> dest;
+  std::cout << "------------------------------------------------------\n";
+  
   // compute output
-  std::cout << "\nCalculating independent route...\n";
   GraphAlgorithms::dijkstra(&graph, source);
   std::vector<LocationInfo> path =
-      GraphAlgorithms::getPath(&graph, source, dest);
-
+  GraphAlgorithms::getPath(&graph, source, dest);
+  
   // show output
-  for (LocationInfo v : path) {
-    std::cout << v.id << " ";
+  std::cout << "------------------------OUTPUT------------------------\n";
+  for (int i = 0; i < path.size(); ++i) {
+    std::cout << path[i].id;
+    if (i < path.size() - 1) {
+      std::cout << ",";
+    }
   }
-  std::cout << "\n";
-
+  std::cout << " ("<< graph.findVertexById(dest)->getDrivingDist() << ")\n";
+  std::cout << "------------------------------------------------------\n";
+  
   return 0;
 }
 
@@ -191,10 +202,11 @@ int Menu::buildGraph(std::string locations, std::string distances) {
 }
 
 Menu::Menu() {
-  if (buildGraph("../data-set/Locations.csv", "../data-set/Distances.csv") ==
+  std::cout << "\n";
+  if (buildGraph("../data-set/Locations2.csv", "../data-set/Distances2.csv") ==
       1) {
     return; // cannot read files
   }
-  std::cout << "\nGraph built successfully.\n";
+  std::cout << "Graph built successfully.\n";
   getMenuOptions();
 }
