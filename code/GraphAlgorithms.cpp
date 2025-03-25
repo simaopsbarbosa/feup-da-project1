@@ -11,29 +11,29 @@ bool GraphAlgorithms::relax(Edge<LocationInfo> *edge) { // d[u] + w(u,v) < d[v]
   return false;
 }
 
-void GraphAlgorithms::dijkstra(Graph<LocationInfo>& graph, int source) {
+void GraphAlgorithms::dijkstra(Graph<LocationInfo>* graph, int source) {
     // Step 1: Initialize distances and priority queue
-    MutablePriorityQueue<LocationInfo> pq;
+    MutablePriorityQueue<Vertex<LocationInfo>> pq;
 
-    for (auto& vertex : graph.getVertexSet()) {
+    for (auto& vertex : graph->getVertexSet()) {
         vertex->setDrivingDist(INF); // Set all distances to infinity
         vertex->setPath(nullptr);   // No previous node initially
     }
 
     // Set the source vertex distance to 0 and add it to the priority queue
-    auto sourceVertex = graph.findVertexById(source);
+    auto sourceVertex = graph->findVertexById(source);
     if (!sourceVertex) {
         std::cerr << "[ERROR] Source node not found in the graph.\n";
         return;
     }
     sourceVertex->setDrivingDist(0);
-    pq.insert(&sourceVertex->getInfo());
+    pq.insert(sourceVertex);
 
     // Step 2: Process the priority queue
     while (!pq.empty()) {
         // Extract the vertex with the smallest distance
         auto current = pq.extractMin();
-        auto currentVertex = graph.findVertexById(current->id);
+        auto currentVertex = graph->findVertexById(source);
 
         // Iterate over all neighbors of the current vertex
         for (auto& edge : currentVertex->getAdj()) {
@@ -43,10 +43,10 @@ void GraphAlgorithms::dijkstra(Graph<LocationInfo>& graph, int source) {
             if (relax(edge)) {
                 // If the neighbor is not in the queue, insert it
                 if (neighbor->getQueueIndex() == 0) {
-                    pq.insert(&neighbor->getInfo());
+                    pq.insert(neighbor);
                 } else {
                     // Otherwise, update its position in the queue
-                    pq.decreaseKey(&neighbor->getInfo());
+                    pq.decreaseKey(neighbor);
                 }
             }
         }
