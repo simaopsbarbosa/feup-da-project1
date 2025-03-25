@@ -44,9 +44,10 @@ void Menu::processOption(int option) {
 }
 
 int Menu::independentRoutePlanning() {
+  
   // get input
-  int source = 8; // temporary approach for algortihm testing
-  int dest = 1; 
+  int source = 5; // temporary approach for algortihm testing
+  int dest = 4; 
   
   // compute output
   std::cout << "\nCalculating independent route...\n";
@@ -56,8 +57,9 @@ int Menu::independentRoutePlanning() {
 
   // show output
   for (LocationInfo v : path) {
-    std::cout << v.location << std::endl;
+    std::cout << v.id << " ";
   }
+  std::cout << "\n";
 
   return 0;
 }
