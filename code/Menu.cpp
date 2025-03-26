@@ -46,30 +46,47 @@ void Menu::processOption(int option) {
 }
 
 int Menu::independentRoutePlanning() {
-  
-  // get input
-  int source, dest;
   std::cout << "------------------------INPUT-------------------------\n";
+  int source, dest;
   std::cout << "Source node's ID: ";
   std::cin >> source;
   std::cout << "Destination node's ID: ";
   std::cin >> dest;
   std::cout << "------------------------------------------------------\n";
   
-  // compute output
-  GraphAlgorithms::dijkstra(&graph, source);
-  std::vector<LocationInfo> path =
-  GraphAlgorithms::getPath(&graph, source, dest);
   
-  // show output
   std::cout << "------------------------OUTPUT------------------------\n";
-  for (int i = 0; i < path.size(); ++i) {
-    std::cout << path[i].id;
-    if (i < path.size() - 1) {
+  
+  std::cout << "BestDrivingRoute:";
+  GraphAlgorithms::dijkstra(&graph, source);
+  std::vector<LocationInfo> primaryPath =
+  GraphAlgorithms::getPath(&graph, source, dest);
+
+  for (int i = 0; i < primaryPath.size(); ++i) {
+    std::cout << primaryPath[i].id;
+    if (i < primaryPath.size() - 1) {
       std::cout << ",";
     }
   }
-  std::cout << " ("<< graph.findVertexById(dest)->getDrivingDist() << ")\n";
+  std::cout << "("<< graph.findVertexById(dest)->getDrivingDist() << ")\n";
+  
+  std::cout << "AlternativeDrivingRoute:";
+  GraphAlgorithms::dijkstra(&graph, source, true);
+  std::vector<LocationInfo> altPath =
+  GraphAlgorithms::getPath(&graph, source, dest);
+  
+  if (altPath.size() == 0 || (altPath.size() == 2 && primaryPath.size() == 2)) {
+    // altPath can be 2 , as long as primaryPath isnt 2 too (they would be the same)
+    std::cout << "none\n";
+  } else {
+    for (int i = 0; i < altPath.size(); ++i) {
+      std::cout << altPath[i].id;
+      if (i < altPath.size() - 1) {
+        std::cout << ",";
+      }
+    }
+    std::cout << "("<< graph.findVertexById(dest)->getDrivingDist() << ")\n";
+  }
   std::cout << "------------------------------------------------------\n";
   
   return 0;

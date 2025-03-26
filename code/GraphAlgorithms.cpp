@@ -33,11 +33,13 @@ void GraphAlgorithms::dijkstra(Graph<LocationInfo> *graph, int source,
 
   while (!pq.empty()) {
     auto currentVertex = pq.extractMin();
-    if (hasRestrictions && currentVertex->isVisited()) continue;
+    if (hasRestrictions && currentVertex->isVisited())
+      continue;
 
     for (auto &edge : currentVertex->getAdj()) {
       auto neighbor = edge->getDest();
-      if (hasRestrictions && neighbor->isVisited()) continue;
+      if (hasRestrictions && neighbor->isVisited())
+        continue;
       if (relax(edge)) {
         if (neighbor->getQueueIndex() == 0) {
           pq.insert(neighbor);
@@ -49,13 +51,12 @@ void GraphAlgorithms::dijkstra(Graph<LocationInfo> *graph, int source,
   }
 }
 
-
 std::vector<LocationInfo> GraphAlgorithms::getPath(Graph<LocationInfo> *g,
                                                    const int &origin,
                                                    const int &dest) {
 
   if (g->findVertexById(dest)->getDrivingDist() == INF) {
-    std::cerr << "[ERROR] Destination is unreachable from the origin.\n";
+    // destination is unreachable from the origin
     return {};
   }
 
@@ -69,13 +70,14 @@ std::vector<LocationInfo> GraphAlgorithms::getPath(Graph<LocationInfo> *g,
 
   while (currentVertex != nullptr && currentVertex->getPath() != nullptr) {
     res.push_back(currentVertex->getInfo());
-    currentVertex->setVisited(true);
     currentVertex = currentVertex->getPath()->getOrig();
-}
+    if (currentVertex->getInfo().id != origin && currentVertex->getInfo().id != dest) {
+        currentVertex->setVisited(true);
+    }
+  }
 
-if (currentVertex != nullptr && currentVertex->getInfo().id == origin) {
+  if (currentVertex != nullptr && currentVertex->getInfo().id == origin) {
     res.push_back(currentVertex->getInfo());
-    currentVertex->setVisited(true);
   } else {
     std::cerr << "[ERROR] No path found from origin to destination.\n";
     return {};
