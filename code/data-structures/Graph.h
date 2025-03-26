@@ -145,6 +145,7 @@ public:
   bool removeEdge(const T &source, const T &dest);
   bool addBidirectionalEdge(const T &sourc, const T &dest, double dw,
                             double ww);
+  Edge<T>* findEdge(int sourceId, int destId);
 
   int getNumVertex() const;
 
@@ -448,6 +449,18 @@ template <class T> bool Graph<T>::removeEdge(const T &sourc, const T &dest) {
     return false;
   }
   return srcVertex->removeEdge(dest);
+}
+
+template <class T> Edge<T>* Graph<T>::findEdge(int sourceId, int destId) {
+  auto sourceVertex = findVertexById(sourceId);
+  if (!sourceVertex) return nullptr;
+
+  for (auto& edge : sourceVertex->getAdj()) {
+      if (edge->getDest()->getInfo().id == destId) {
+          return edge;
+      }
+  }
+  return nullptr;
 }
 
 template <class T>

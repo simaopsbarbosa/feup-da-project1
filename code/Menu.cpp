@@ -92,8 +92,97 @@ int Menu::independentRoutePlanning() {
   return 0;
 }
 
+std::vector<int> Menu::parseNodes(const std::string &input) {
+  std::vector<int> nodes;
+  if (!input.empty()) {
+    std::stringstream ss(input);
+    std::string node;
+    while (std::getline(ss, node, ',')) {
+      nodes.push_back(std::stoi(node));
+    }
+  }
+  return nodes;
+}
+
+std::vector<std::pair<int, int>> Menu::parseSegments(const std::string &input) {
+  std::vector<std::pair<int, int>> segments;
+  if (!input.empty()) {
+    std::stringstream ss(input);
+    std::string segment;
+
+    while (std::getline(ss, segment, ')')) {
+      segment.erase(std::remove(segment.begin(), segment.end(), ' '), segment.end());
+
+      size_t startPos = segment.find('(');
+      if (startPos != std::string::npos) {
+        segment = segment.substr(startPos + 1);
+
+        size_t separatorPos = segment.find(',');
+        if (separatorPos != std::string::npos) {
+          int node1 = std::stoi(segment.substr(0, separatorPos));
+          int node2 = std::stoi(segment.substr(separatorPos + 1));
+          segments.emplace_back(node1, node2);
+        } else {
+          std::cerr << "[ERROR] Invalid segment format: " << segment << "\n";
+        }
+      } else {
+        std::cerr << "[ERROR] Invalid segment format: " << segment << "\n";
+      }
+    }
+  }
+  return segments;
+}
+
 int Menu::restrictedRoutePlanning() {
-  std::cout << "\nCalculating restricted route...\n";
+  std::cout << "------------------------INPUT-------------------------\n";
+  int source, dest, includeNode;
+  std::string includeNodeInput;
+  std::string avoidNodesInput, avoidSegmentsInput;
+  std::cout << "Source node's ID: ";
+  std::cin >> source;
+  std::cout << "Destination node's ID: ";
+  std::cin >> dest;
+  std::cin.ignore();
+
+  std::cout << "AvoidNodes: ";
+  std::getline(std::cin, avoidNodesInput);
+  std::vector<int> avoidNodes = parseNodes(avoidNodesInput);
+
+  std::cout << "AvoidSegments: ";
+  std::getline(std::cin, avoidSegmentsInput);
+  std::vector<std::pair<int, int>> avoidSegments = parseSegments(avoidSegmentsInput);
+
+  std::cout << "IncludeNode: ";
+  std::getline(std::cin, includeNodeInput);
+  includeNode = includeNodeInput.empty() ? -1 : std::stoi(includeNodeInput);
+  std::cout << "------------------------------------------------------\n";
+
+
+  std::cout << "------------------------OUTPUT------------------------\n";
+  std::cout << "RestrictedDrivingRoute:";
+  std::vector<LocationInfo> restrictedPath =
+      GraphAlgorithms::restrictedRoute(&graph, source, dest, avoidNodes, avoidSegments, includeNode);
+
+  if (restrictedPath.empty()) {
+    std::cout << "none\n";
+  } else {
+    double totalWeight = 0.0; 
+
+    for (size_t i = 0; i < restrictedPath.size(); ++i) {
+      std::cout << restrictedPath[i].id;
+      if (i < restrictedPath.size() - 1) {
+        std::cout << ",";
+
+        auto edge = graph.findEdge(restrictedPath[i].id, restrictedPath[i + 1].id);
+        if (edge) {
+          totalWeight += edge->getDrivingWeight();
+        }
+      }
+    }
+    std::cout << "(" << totalWeight << ")\n";
+  }
+  std::cout << "------------------------------------------------------\n";
+
   return 0;
 }
 int Menu::environmentallyFriendlyRoutePlanning() {
