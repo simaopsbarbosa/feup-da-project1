@@ -14,7 +14,8 @@ bool GraphAlgorithms::relax(Edge<LocationInfo> *edge) { // d[u] + w(u,v) < d[v]
 }
 
 void GraphAlgorithms::dijkstra(Graph<LocationInfo> *graph, int source,
-                               bool hasRestrictions) {
+                               bool hasRestrictions, const std::vector<int> &avoidNodes,
+                               const std::vector<std::pair<int, int>> &avoidSegments) {
   MutablePriorityQueue<Vertex<LocationInfo>> pq;
 
   for (auto &vertex : graph->getVertexSet()) {
@@ -33,11 +34,24 @@ void GraphAlgorithms::dijkstra(Graph<LocationInfo> *graph, int source,
 
   while (!pq.empty()) {
     auto currentVertex = pq.extractMin();
+
+    if (!avoidNodes.empty() &&
+        std::find(avoidNodes.begin(), avoidNodes.end(), currentVertex->getInfo().id) != avoidNodes.end()) {
+      continue;
+    }
+
     if (hasRestrictions && currentVertex->isVisited())
       continue;
 
     for (auto &edge : currentVertex->getAdj()) {
       auto neighbor = edge->getDest();
+
+      if (!avoidSegments.empty() &&
+          std::find(avoidSegments.begin(), avoidSegments.end(),
+                    std::make_pair(currentVertex->getInfo().id, neighbor->getInfo().id)) != avoidSegments.end()) {
+        continue;
+      }
+
       if (hasRestrictions && neighbor->isVisited())
         continue;
       if (relax(edge)) {
@@ -85,4 +99,39 @@ std::vector<LocationInfo> GraphAlgorithms::getPath(Graph<LocationInfo> *g,
 
   std::reverse(res.begin(), res.end());
   return res;
+}
+
+std::vector<LocationInfo> GraphAlgorithms::restrictedRoute(Graph<LocationInfo> *graph, int source, int dest,
+  const std::vector<int> &avoidNodes,
+  const std::vector<std::pair<int, int>> &avoidSegments,
+  int includeNode) {
+  std::vector<LocationInfo> fullPath;
+
+  if (includeNode != -1) {
+    GraphAlgorithms::dijkstra(graph, source, false, avoidNodes, avoidSegments);
+    std::vector<LocationInfo> pathToInclude = getPath(graph, source, includeNode);
+
+    if (pathToInclude.empty()) {
+      std::cerr << "[ERROR] No path found from source to includeNode.\n";
+      return {};
+    }
+
+    GraphAlgorithms::dijkstra(graph, includeNode, false, avoidNodes, avoidSegments);
+    std::vector<LocationInfo> pathToDestination = getPath(graph, includeNode, dest);
+
+    if (pathToDestination.empty()) {
+      std::cerr << "[ERROR] No path found from includeNode to destination.\n";
+      return {};
+    }
+
+    pathToInclude.pop_back(); 
+    fullPath.insert(fullPath.end(), pathToInclude.begin(), pathToInclude.end());
+    fullPath.insert(fullPath.end(), pathToDestination.begin(), pathToDestination.end());
+  } 
+  else {
+    GraphAlgorithms::dijkstra(graph, source, false, avoidNodes, avoidSegments);
+    fullPath = GraphAlgorithms::getPath(graph, source, dest);
+  }
+
+  return fullPath;
 }

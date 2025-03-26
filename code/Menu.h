@@ -19,6 +19,8 @@ public:
   int restrictedRoutePlanning();
   int environmentallyFriendlyRoutePlanning();
   int batchMode();
+  std::vector<int> parseNodes(const std::string &input);
+  std::vector<std::pair<int, int>> parseSegments(const std::string &input);
 
 private:
   Graph<LocationInfo> graph;
