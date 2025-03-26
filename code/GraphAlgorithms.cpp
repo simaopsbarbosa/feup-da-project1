@@ -13,7 +13,8 @@ bool GraphAlgorithms::relax(Edge<LocationInfo> *edge) { // d[u] + w(u,v) < d[v]
   return false;
 }
 
-void GraphAlgorithms::dijkstra(Graph<LocationInfo> *graph, int source) {
+void GraphAlgorithms::dijkstra(Graph<LocationInfo> *graph, int source,
+                               bool hasRestrictions) {
   MutablePriorityQueue<Vertex<LocationInfo>> pq;
 
   for (auto &vertex : graph->getVertexSet()) {
@@ -26,13 +27,17 @@ void GraphAlgorithms::dijkstra(Graph<LocationInfo> *graph, int source) {
     std::cerr << "[ERROR] Source node not found in the graph.\n";
     return;
   }
+
   sourceVertex->setDrivingDist(0);
   pq.insert(sourceVertex);
 
   while (!pq.empty()) {
     auto currentVertex = pq.extractMin();
+    if (hasRestrictions && currentVertex->isVisited()) continue;
+
     for (auto &edge : currentVertex->getAdj()) {
       auto neighbor = edge->getDest();
+      if (hasRestrictions && neighbor->isVisited()) continue;
       if (relax(edge)) {
         if (neighbor->getQueueIndex() == 0) {
           pq.insert(neighbor);
@@ -44,9 +49,16 @@ void GraphAlgorithms::dijkstra(Graph<LocationInfo> *graph, int source) {
   }
 }
 
+
 std::vector<LocationInfo> GraphAlgorithms::getPath(Graph<LocationInfo> *g,
                                                    const int &origin,
                                                    const int &dest) {
+
+  if (g->findVertexById(dest)->getDrivingDist() == INF) {
+    std::cerr << "[ERROR] Destination is unreachable from the origin.\n";
+    return {};
+  }
+
   std::vector<LocationInfo> res;
 
   auto currentVertex = g->findVertexById(dest);
@@ -57,11 +69,13 @@ std::vector<LocationInfo> GraphAlgorithms::getPath(Graph<LocationInfo> *g,
 
   while (currentVertex != nullptr && currentVertex->getPath() != nullptr) {
     res.push_back(currentVertex->getInfo());
+    currentVertex->setVisited(true);
     currentVertex = currentVertex->getPath()->getOrig();
-  }
+}
 
-  if (currentVertex != nullptr && currentVertex->getInfo().id == origin) {
+if (currentVertex != nullptr && currentVertex->getInfo().id == origin) {
     res.push_back(currentVertex->getInfo());
+    currentVertex->setVisited(true);
   } else {
     std::cerr << "[ERROR] No path found from origin to destination.\n";
     return {};
