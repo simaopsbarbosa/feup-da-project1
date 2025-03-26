@@ -110,14 +110,12 @@ std::vector<std::pair<int, int>> Menu::parseSegments(const std::string &input) {
     std::stringstream ss(input);
     std::string segment;
 
-    while (std::getline(ss, segment, ')')) { // Dividir por ')'
-      // Remover espaços em branco
+    while (std::getline(ss, segment, ')')) {
       segment.erase(std::remove(segment.begin(), segment.end(), ' '), segment.end());
 
-      // Verificar se o segmento começa com '('
       size_t startPos = segment.find('(');
       if (startPos != std::string::npos) {
-        segment = segment.substr(startPos + 1); // Remover '('
+        segment = segment.substr(startPos + 1);
 
         size_t separatorPos = segment.find(',');
         if (separatorPos != std::string::npos) {
