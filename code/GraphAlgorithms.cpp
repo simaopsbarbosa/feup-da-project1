@@ -13,9 +13,10 @@ bool GraphAlgorithms::relax(Edge<LocationInfo> *edge) { // d[u] + w(u,v) < d[v]
   return false;
 }
 
-void GraphAlgorithms::dijkstra(Graph<LocationInfo> *graph, int source,
-                               bool hasRestrictions, const std::vector<int> &avoidNodes,
-                               const std::vector<std::pair<int, int>> &avoidSegments) {
+void GraphAlgorithms::dijkstra(
+    Graph<LocationInfo> *graph, int source, bool hasRestrictions,
+    const std::vector<int> &avoidNodes,
+    const std::vector<std::pair<int, int>> &avoidSegments) {
   MutablePriorityQueue<Vertex<LocationInfo>> pq;
 
   for (auto &vertex : graph->getVertexSet()) {
@@ -36,7 +37,8 @@ void GraphAlgorithms::dijkstra(Graph<LocationInfo> *graph, int source,
     auto currentVertex = pq.extractMin();
 
     if (!avoidNodes.empty() &&
-        std::find(avoidNodes.begin(), avoidNodes.end(), currentVertex->getInfo().id) != avoidNodes.end()) {
+        std::find(avoidNodes.begin(), avoidNodes.end(),
+                  currentVertex->getInfo().id) != avoidNodes.end()) {
       continue;
     }
 
@@ -48,7 +50,9 @@ void GraphAlgorithms::dijkstra(Graph<LocationInfo> *graph, int source,
 
       if (!avoidSegments.empty() &&
           std::find(avoidSegments.begin(), avoidSegments.end(),
-                    std::make_pair(currentVertex->getInfo().id, neighbor->getInfo().id)) != avoidSegments.end()) {
+                    std::make_pair(currentVertex->getInfo().id,
+                                   neighbor->getInfo().id)) !=
+              avoidSegments.end()) {
         continue;
       }
 
@@ -85,15 +89,16 @@ std::vector<LocationInfo> GraphAlgorithms::getPath(Graph<LocationInfo> *g,
   while (currentVertex != nullptr && currentVertex->getPath() != nullptr) {
     res.push_back(currentVertex->getInfo());
     currentVertex = currentVertex->getPath()->getOrig();
-    if (currentVertex->getInfo().id != origin && currentVertex->getInfo().id != dest) {
-        currentVertex->setVisited(true);
+    if (currentVertex->getInfo().id != origin &&
+        currentVertex->getInfo().id != dest) {
+      currentVertex->setVisited(true);
     }
   }
 
   if (currentVertex != nullptr && currentVertex->getInfo().id == origin) {
     res.push_back(currentVertex->getInfo());
   } else {
-    std::cerr << "[ERROR] No path found from origin to destination.\n";
+    // no path found from origin to destination
     return {};
   }
 
@@ -101,34 +106,37 @@ std::vector<LocationInfo> GraphAlgorithms::getPath(Graph<LocationInfo> *g,
   return res;
 }
 
-std::vector<LocationInfo> GraphAlgorithms::restrictedRoute(Graph<LocationInfo> *graph, int source, int dest,
-  const std::vector<int> &avoidNodes,
-  const std::vector<std::pair<int, int>> &avoidSegments,
-  int includeNode) {
+std::vector<LocationInfo> GraphAlgorithms::restrictedRoute(
+    Graph<LocationInfo> *graph, int source, int dest,
+    const std::vector<int> &avoidNodes,
+    const std::vector<std::pair<int, int>> &avoidSegments, int includeNode) {
   std::vector<LocationInfo> fullPath;
 
   if (includeNode != -1) {
     GraphAlgorithms::dijkstra(graph, source, false, avoidNodes, avoidSegments);
-    std::vector<LocationInfo> pathToInclude = getPath(graph, source, includeNode);
+    std::vector<LocationInfo> pathToInclude =
+        getPath(graph, source, includeNode);
 
     if (pathToInclude.empty()) {
-      std::cerr << "[ERROR] No path found from source to includeNode.\n";
+      // no path found from source to includeNode
       return {};
     }
 
-    GraphAlgorithms::dijkstra(graph, includeNode, false, avoidNodes, avoidSegments);
-    std::vector<LocationInfo> pathToDestination = getPath(graph, includeNode, dest);
+    GraphAlgorithms::dijkstra(graph, includeNode, false, avoidNodes,
+                              avoidSegments);
+    std::vector<LocationInfo> pathToDestination =
+        getPath(graph, includeNode, dest);
 
     if (pathToDestination.empty()) {
-      std::cerr << "[ERROR] No path found from includeNode to destination.\n";
+      // no path found from includeNode to destination
       return {};
     }
 
-    pathToInclude.pop_back(); 
+    pathToInclude.pop_back();
     fullPath.insert(fullPath.end(), pathToInclude.begin(), pathToInclude.end());
-    fullPath.insert(fullPath.end(), pathToDestination.begin(), pathToDestination.end());
-  } 
-  else {
+    fullPath.insert(fullPath.end(), pathToDestination.begin(),
+                    pathToDestination.end());
+  } else {
     GraphAlgorithms::dijkstra(graph, source, false, avoidNodes, avoidSegments);
     fullPath = GraphAlgorithms::getPath(graph, source, dest);
   }

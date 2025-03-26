@@ -9,37 +9,37 @@ void Menu::getMenuOptions() {
   std::cout << "5. Leave\n";
   std::cout << "------------------------------------------------------\n";
   std::cout << "Choose an option: ";
-  
+
   int option;
   std::cin >> option;
   std::cout << "\n";
-  
+
   processOption(option);
 }
 
 void Menu::processOption(int option) {
   switch (option) {
-    case 1:
+  case 1:
     independentRoutePlanning();
     break;
-    
-    case 2:
+
+  case 2:
     restrictedRoutePlanning();
     break;
-    
-    case 3:
+
+  case 3:
     environmentallyFriendlyRoutePlanning();
     break;
-    
-    case 4:
+
+  case 4:
     batchMode();
     break;
-    
-    case 5:
+
+  case 5:
     std::cout << "\nLeaving program...\n";
     return;
-    
-    default:
+
+  default:
     std::cout << "\nInvalid option. Try again.\n";
     getMenuOptions();
   }
@@ -53,14 +53,13 @@ int Menu::independentRoutePlanning() {
   std::cout << "Destination node's ID: ";
   std::cin >> dest;
   std::cout << "------------------------------------------------------\n";
-  
-  
+
   std::cout << "------------------------OUTPUT------------------------\n";
-  
+
   std::cout << "BestDrivingRoute:";
   GraphAlgorithms::dijkstra(&graph, source);
   std::vector<LocationInfo> primaryPath =
-  GraphAlgorithms::getPath(&graph, source, dest);
+      GraphAlgorithms::getPath(&graph, source, dest);
 
   for (int i = 0; i < primaryPath.size(); ++i) {
     std::cout << primaryPath[i].id;
@@ -68,15 +67,16 @@ int Menu::independentRoutePlanning() {
       std::cout << ",";
     }
   }
-  std::cout << "("<< graph.findVertexById(dest)->getDrivingDist() << ")\n";
-  
+  std::cout << "(" << graph.findVertexById(dest)->getDrivingDist() << ")\n";
+
   std::cout << "AlternativeDrivingRoute:";
   GraphAlgorithms::dijkstra(&graph, source, true);
   std::vector<LocationInfo> altPath =
-  GraphAlgorithms::getPath(&graph, source, dest);
-  
+      GraphAlgorithms::getPath(&graph, source, dest);
+
   if (altPath.size() == 0 || (altPath.size() == 2 && primaryPath.size() == 2)) {
-    // altPath can be 2 , as long as primaryPath isnt 2 too (they would be the same)
+    // altPath can be 2 , as long as primaryPath isnt 2 too (they would be the
+    // same)
     std::cout << "none\n";
   } else {
     for (int i = 0; i < altPath.size(); ++i) {
@@ -85,10 +85,72 @@ int Menu::independentRoutePlanning() {
         std::cout << ",";
       }
     }
-    std::cout << "("<< graph.findVertexById(dest)->getDrivingDist() << ")\n";
+    std::cout << "(" << graph.findVertexById(dest)->getDrivingDist() << ")\n";
   }
   std::cout << "------------------------------------------------------\n";
-  
+
+  return 0;
+}
+
+int Menu::restrictedRoutePlanning() {
+  std::cout << "------------------------INPUT-------------------------\n";
+  int source, dest, includeNode;
+  std::string includeNodeInput;
+  std::string avoidNodesInput, avoidSegmentsInput;
+  std::cout << "Source node's ID: ";
+  std::cin >> source;
+  std::cout << "Destination node's ID: ";
+  std::cin >> dest;
+  std::cin.ignore();
+
+  std::cout << "AvoidNodes: ";
+  std::getline(std::cin, avoidNodesInput);
+  std::vector<int> avoidNodes = parseNodes(avoidNodesInput);
+
+  std::cout << "AvoidSegments: ";
+  std::getline(std::cin, avoidSegmentsInput);
+  std::vector<std::pair<int, int>> avoidSegments =
+      parseSegments(avoidSegmentsInput);
+
+  std::cout << "IncludeNode: ";
+  std::getline(std::cin, includeNodeInput);
+  includeNode = includeNodeInput.empty() ? -1 : std::stoi(includeNodeInput);
+  std::cout << "------------------------------------------------------\n";
+
+  std::cout << "------------------------OUTPUT------------------------\n";
+  std::cout << "RestrictedDrivingRoute:";
+  std::vector<LocationInfo> restrictedPath = GraphAlgorithms::restrictedRoute(
+      &graph, source, dest, avoidNodes, avoidSegments, includeNode);
+
+  if (restrictedPath.empty()) {
+    std::cout << "none\n";
+  } else {
+    double totalWeight = 0.0;
+
+    for (size_t i = 0; i < restrictedPath.size(); ++i) {
+      std::cout << restrictedPath[i].id;
+      if (i < restrictedPath.size() - 1) {
+        std::cout << ",";
+
+        auto edge =
+            graph.findEdge(restrictedPath[i].id, restrictedPath[i + 1].id);
+        if (edge) {
+          totalWeight += edge->getDrivingWeight();
+        }
+      }
+    }
+    std::cout << "(" << totalWeight << ")\n";
+  }
+  std::cout << "------------------------------------------------------\n";
+
+  return 0;
+}
+int Menu::environmentallyFriendlyRoutePlanning() {
+  std::cout << "\nCalculating environmentally-friendly route...\n";
+  return 0;
+}
+int Menu::batchMode() {
+  std::cout << "\nEntering batch mode...\n";
   return 0;
 }
 
@@ -111,7 +173,8 @@ std::vector<std::pair<int, int>> Menu::parseSegments(const std::string &input) {
     std::string segment;
 
     while (std::getline(ss, segment, ')')) {
-      segment.erase(std::remove(segment.begin(), segment.end(), ' '), segment.end());
+      segment.erase(std::remove(segment.begin(), segment.end(), ' '),
+                    segment.end());
 
       size_t startPos = segment.find('(');
       if (startPos != std::string::npos) {
@@ -131,67 +194,6 @@ std::vector<std::pair<int, int>> Menu::parseSegments(const std::string &input) {
     }
   }
   return segments;
-}
-
-int Menu::restrictedRoutePlanning() {
-  std::cout << "------------------------INPUT-------------------------\n";
-  int source, dest, includeNode;
-  std::string includeNodeInput;
-  std::string avoidNodesInput, avoidSegmentsInput;
-  std::cout << "Source node's ID: ";
-  std::cin >> source;
-  std::cout << "Destination node's ID: ";
-  std::cin >> dest;
-  std::cin.ignore();
-
-  std::cout << "AvoidNodes: ";
-  std::getline(std::cin, avoidNodesInput);
-  std::vector<int> avoidNodes = parseNodes(avoidNodesInput);
-
-  std::cout << "AvoidSegments: ";
-  std::getline(std::cin, avoidSegmentsInput);
-  std::vector<std::pair<int, int>> avoidSegments = parseSegments(avoidSegmentsInput);
-
-  std::cout << "IncludeNode: ";
-  std::getline(std::cin, includeNodeInput);
-  includeNode = includeNodeInput.empty() ? -1 : std::stoi(includeNodeInput);
-  std::cout << "------------------------------------------------------\n";
-
-
-  std::cout << "------------------------OUTPUT------------------------\n";
-  std::cout << "RestrictedDrivingRoute:";
-  std::vector<LocationInfo> restrictedPath =
-      GraphAlgorithms::restrictedRoute(&graph, source, dest, avoidNodes, avoidSegments, includeNode);
-
-  if (restrictedPath.empty()) {
-    std::cout << "none\n";
-  } else {
-    double totalWeight = 0.0; 
-
-    for (size_t i = 0; i < restrictedPath.size(); ++i) {
-      std::cout << restrictedPath[i].id;
-      if (i < restrictedPath.size() - 1) {
-        std::cout << ",";
-
-        auto edge = graph.findEdge(restrictedPath[i].id, restrictedPath[i + 1].id);
-        if (edge) {
-          totalWeight += edge->getDrivingWeight();
-        }
-      }
-    }
-    std::cout << "(" << totalWeight << ")\n";
-  }
-  std::cout << "------------------------------------------------------\n";
-
-  return 0;
-}
-int Menu::environmentallyFriendlyRoutePlanning() {
-  std::cout << "\nCalculating environmentally-friendly route...\n";
-  return 0;
-}
-int Menu::batchMode() {
-  std::cout << "\nEntering batch mode...\n";
-  return 0;
 }
 
 int Menu::buildGraph(std::string locations, std::string distances) {
