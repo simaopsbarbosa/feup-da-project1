@@ -8,9 +8,9 @@
 namespace GraphAlgorithms {
 
 bool                      relax(Edge<LocationInfo> *edge, bool isDriving = true);
-std::vector<LocationInfo> dijkstraDriving(Graph<LocationInfo> *graph, int source, const int &dest, const std::vector<int> &avoidNodes,
+std::vector<LocationInfo> dijkstraDriving(Graph<LocationInfo> *graph, int source, int dest, const std::vector<int> &avoidNodes,
                                           const std::vector<std::pair<int, int>> &avoidSegments);
-std::vector<LocationInfo> dijkstraWalking(Graph<LocationInfo> *graph, int source, const int &dest, const std::vector<int> &avoidNodes,
+std::vector<LocationInfo> dijkstraWalking(Graph<LocationInfo> *graph, int source, int dest, const std::vector<int> &avoidNodes,
                                           const std::vector<std::pair<int, int>> &avoidSegments);
 std::vector<LocationInfo> restrictedRoute(Graph<LocationInfo> *graph, int source, int dest, const std::vector<int> &avoidNodes,
                                           const std::vector<std::pair<int, int>> &avoidSegments, int includeNode = -1);
