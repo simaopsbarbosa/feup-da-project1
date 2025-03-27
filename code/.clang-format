@@ -45,8 +45,8 @@ IncludeCategories:
     Priority: 3
 
 # Line Wrapping
-ColumnLimit: 100
-PenaltyBreakString: 100
+ColumnLimit: 150
+PenaltyBreakString: 150
 ReflowComments: false
 
 # Miscellaneous
@@ -57,4 +57,4 @@ Cpp11BracedListStyle: true
 AllowShortFunctionsOnASingleLine: None
 
 # Penalty for Excess Characters
-PenaltyExcessCharacter: 50
+PenaltyExcessCharacter: 120

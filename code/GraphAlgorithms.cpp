@@ -3,24 +3,33 @@
 #include <iostream>
 #include <queue>
 
-bool GraphAlgorithms::relax(Edge<LocationInfo> *edge) { // d[u] + w(u,v) < d[v]
-    if (edge->getOrig()->getDrivingDist() + edge->getDrivingWeight() <
-        edge->getDest()->getDrivingDist()) {
-        edge->getDest()->setDrivingDist(edge->getOrig()->getDrivingDist() +
-                                        edge->getDrivingWeight());
+bool GraphAlgorithms::relax(Edge<LocationInfo> *edge, bool isDriving) {
+    double currentDist = isDriving ? edge->getOrig()->getDrivingDist() : edge->getOrig()->getWalkingDist();
+    double edgeWeight  = isDriving ? edge->getDrivingWeight() : edge->getWalkingWeight();
+    double newDist     = currentDist + edgeWeight;
+
+    if (newDist < (isDriving ? edge->getDest()->getDrivingDist() : edge->getDest()->getWalkingDist())) {
+        if (isDriving) {
+            edge->getDest()->setDrivingDist(newDist);
+        } else {
+            edge->getDest()->setWalkingDist(newDist);
+        }
         edge->getDest()->setPath(edge);
         return true;
     }
     return false;
 }
 
-void GraphAlgorithms::dijkstra(Graph<LocationInfo> *graph, int source, bool hasRestrictions,
-                               const std::vector<int>                 &avoidNodes,
-                               const std::vector<std::pair<int, int>> &avoidSegments) {
+void GraphAlgorithms::dijkstra(Graph<LocationInfo> *graph, int source, bool hasRestrictions, const std::vector<int> &avoidNodes,
+                               const std::vector<std::pair<int, int>> &avoidSegments, bool isDriving) {
     MutablePriorityQueue<Vertex<LocationInfo>> pq;
 
     for (auto &vertex : graph->getVertexSet()) {
-        vertex->setDrivingDist(INF);
+        if (isDriving) {
+            vertex->setDrivingDist(INF);
+        } else {
+            vertex->setWalkingDist(INF);
+        }
         vertex->setPath(nullptr);
     }
 
@@ -30,14 +39,17 @@ void GraphAlgorithms::dijkstra(Graph<LocationInfo> *graph, int source, bool hasR
         return;
     }
 
-    sourceVertex->setDrivingDist(0);
+    if (isDriving) {
+        sourceVertex->setDrivingDist(0);
+    } else {
+        sourceVertex->setWalkingDist(0);
+    }
     pq.insert(sourceVertex);
 
     while (!pq.empty()) {
         auto currentVertex = pq.extractMin();
 
-        if (!avoidNodes.empty() && std::find(avoidNodes.begin(), avoidNodes.end(),
-                                             currentVertex->getInfo().id) != avoidNodes.end()) {
+        if (!avoidNodes.empty() && std::find(avoidNodes.begin(), avoidNodes.end(), currentVertex->getInfo().id) != avoidNodes.end()) {
             continue;
         }
 
@@ -47,16 +59,14 @@ void GraphAlgorithms::dijkstra(Graph<LocationInfo> *graph, int source, bool hasR
         for (auto &edge : currentVertex->getAdj()) {
             auto neighbor = edge->getDest();
 
-            if (!avoidSegments.empty() &&
-                std::find(avoidSegments.begin(), avoidSegments.end(),
-                          std::make_pair(currentVertex->getInfo().id, neighbor->getInfo().id)) !=
-                        avoidSegments.end()) {
+            if (!avoidSegments.empty() && std::find(avoidSegments.begin(), avoidSegments.end(),
+                                                    std::make_pair(currentVertex->getInfo().id, neighbor->getInfo().id)) != avoidSegments.end()) {
                 continue;
             }
 
             if (hasRestrictions && neighbor->isVisited())
                 continue;
-            if (relax(edge)) {
+            if (relax(edge, isDriving)) {
                 if (neighbor->getQueueIndex() == 0) {
                     pq.insert(neighbor);
                 } else {
@@ -67,9 +77,8 @@ void GraphAlgorithms::dijkstra(Graph<LocationInfo> *graph, int source, bool hasR
     }
 }
 
-std::vector<LocationInfo> GraphAlgorithms::getPath(Graph<LocationInfo> *g, const int &origin,
-                                                   const int &dest) {
-    if (g->findVertexById(dest)->getDrivingDist() == INF) {
+std::vector<LocationInfo> GraphAlgorithms::getPath(Graph<LocationInfo> *g, const int &origin, const int &dest, bool isDriving) {
+    if ((isDriving ? g->findVertexById(dest)->getDrivingDist() : g->findVertexById(dest)->getWalkingDist()) == INF) {
         // destination is unreachable from the origin
         return {};
     }
@@ -101,9 +110,8 @@ std::vector<LocationInfo> GraphAlgorithms::getPath(Graph<LocationInfo> *g, const
     return res;
 }
 
-std::vector<LocationInfo> GraphAlgorithms::restrictedRoute(
-        Graph<LocationInfo> *graph, int source, int dest, const std::vector<int> &avoidNodes,
-        const std::vector<std::pair<int, int>> &avoidSegments, int includeNode) {
+std::vector<LocationInfo> GraphAlgorithms::restrictedRoute(Graph<LocationInfo> *graph, int source, int dest, const std::vector<int> &avoidNodes,
+                                                           const std::vector<std::pair<int, int>> &avoidSegments, int includeNode) {
     std::vector<LocationInfo> fullPath;
 
     if (includeNode != -1) {
@@ -132,4 +140,82 @@ std::vector<LocationInfo> GraphAlgorithms::restrictedRoute(
     }
 
     return fullPath;
+}
+
+Path GraphAlgorithms::environmentalRoute(Graph<LocationInfo> *graph, int source, int dest, int maxWalkingTime, const std::vector<int> &avoidNodes,
+                                         const std::vector<std::pair<int, int>> &avoidSegments) {
+
+    Vertex<LocationInfo> *sourceVertex = graph->findVertexById(source);
+    Vertex<LocationInfo> *destVertex   = graph->findVertexById(dest);
+
+    if (!sourceVertex || !destVertex) {
+        return {};
+    }
+
+    if (sourceVertex->getInfo().parking || destVertex->getInfo().parking) {
+        return {};
+    }
+
+    struct ParkingNode {
+        Vertex<LocationInfo>     *node;
+        std::vector<LocationInfo> drivingPath;
+        double                    drivingDist;
+    };
+
+    std::vector<ParkingNode> parkingNodes;
+    dijkstra(graph, source, false, avoidNodes, avoidSegments, true);
+
+    for (auto &vertex : graph->getVertexSet()) {
+        if (vertex->getInfo().parking && vertex->getDrivingDist() != INF) {
+            std::vector<LocationInfo> drivingPath = getPath(graph, source, vertex->getInfo().id, true);
+            if (!drivingPath.empty()) {
+                parkingNodes.push_back({vertex, drivingPath, vertex->getDrivingDist()});
+            }
+        }
+    }
+
+    if (parkingNodes.empty()) {
+        return {};
+    }
+
+    std::vector<Path> walkingPaths;
+    for (auto &parkingNode : parkingNodes) {
+        if (parkingNode.drivingPath.empty()) {
+            continue;
+        }
+
+        int parkingNodeId = parkingNode.drivingPath.back().id;
+        dijkstra(graph, parkingNodeId, false, avoidNodes, avoidSegments, false);
+        std::vector<LocationInfo> thisWalkingPath = getPath(graph, parkingNodeId, dest, false);
+
+        if (thisWalkingPath.empty()) {
+            continue;
+        }
+
+        if (sourceVertex->getWalkingDist() > maxWalkingTime) {
+            continue;
+        }
+
+        Path newPath;
+        newPath.drivingPath = parkingNode.drivingPath;
+        newPath.drivingTime = parkingNode.drivingDist;
+        newPath.parkingNode = parkingNode.node;
+        newPath.walkingPath = thisWalkingPath;
+        newPath.walkingTime = parkingNode.node->getWalkingDist();
+        newPath.totalTime   = newPath.drivingTime + newPath.walkingTime;
+        walkingPaths.push_back(newPath);
+    }
+
+    if (walkingPaths.empty()) {
+        return {};
+    }
+
+    std::sort(walkingPaths.begin(), walkingPaths.end(), [](const Path &a, const Path &b) {
+        if (a.totalTime != b.totalTime) {
+            return a.totalTime < b.totalTime;
+        }
+        return a.walkingTime > b.walkingTime;
+    });
+
+    return walkingPaths[0];
 }

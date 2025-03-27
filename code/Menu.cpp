@@ -116,8 +116,7 @@ int Menu::restrictedRoutePlanning() {
 
     std::cout << "------------------------OUTPUT------------------------\n";
     std::cout << "RestrictedDrivingRoute:";
-    std::vector<LocationInfo> restrictedPath = GraphAlgorithms::restrictedRoute(
-            &graph, source, dest, avoidNodes, avoidSegments, includeNode);
+    std::vector<LocationInfo> restrictedPath = GraphAlgorithms::restrictedRoute(&graph, source, dest, avoidNodes, avoidSegments, includeNode);
 
     if (restrictedPath.empty()) {
         std::cout << "none\n";
@@ -142,7 +141,53 @@ int Menu::restrictedRoutePlanning() {
     return 0;
 }
 int Menu::environmentallyFriendlyRoutePlanning() {
-    std::cout << "\nCalculating environmentally-friendly route...\n";
+    std::cout << "------------------------INPUT-------------------------\n";
+    int         source, dest, includeNode, maxWalkingTime;
+    std::string includeNodeInput;
+    std::string avoidNodesInput, avoidSegmentsInput;
+    std::cout << "Source node's ID: ";
+    std::cin >> source;
+    std::cout << "Destination node's ID: ";
+    std::cin >> dest;
+    std::cout << "MaxWalkingTime: ";
+    std::cin >> maxWalkingTime;
+    std::cin.ignore();
+
+    std::cout << "AvoidNodes: ";
+    std::getline(std::cin, avoidNodesInput);
+    std::vector<int> avoidNodes = parseNodes(avoidNodesInput);
+
+    std::cout << "AvoidSegments: ";
+    std::getline(std::cin, avoidSegmentsInput);
+    std::vector<std::pair<int, int>> avoidSegments = parseSegments(avoidSegmentsInput);
+
+    std::cout << "IncludeNode: ";
+    std::getline(std::cin, includeNodeInput);
+    includeNode = includeNodeInput.empty() ? -1 : std::stoi(includeNodeInput);
+    std::cout << "------------------------------------------------------\n";
+
+    std::cout << "------------------------OUTPUT------------------------\n";
+    Path path = GraphAlgorithms::environmentalRoute(&graph, source, dest, maxWalkingTime, avoidNodes, avoidSegments);
+    std::cout << "Source:" << source << "\n";
+    std::cout << "Destination:" << dest << "\n";
+    std::cout << "DrivingRoute:";
+    for (int i = 0; i < path.drivingPath.size(); ++i) {
+        std::cout << path.drivingPath[i].id;
+        if (i < path.drivingPath.size() - 1) {
+            std::cout << ",";
+        }
+    }
+    std::cout << "(" << graph.findVertexById(path.parkingNode->getInfo().id)->getDrivingDist() << ")\n";
+    std::cout << "ParkingNode:" << path.parkingNode->getInfo().id << "\n";
+    std::cout << "WalkingRoute:";
+    for (int i = 0; i < path.walkingPath.size(); ++i) {
+        std::cout << path.walkingPath[i].id;
+        if (i < path.walkingPath.size() - 1) {
+            std::cout << ",";
+        }
+    }
+    std::cout << "(" << graph.findVertexById(source)->getWalkingDist() << ")\n";
+    std::cout << "------------------------------------------------------\n";
     return 0;
 }
 int Menu::batchMode() {
@@ -274,20 +319,18 @@ int Menu::buildGraph(std::string locations, std::string distances) {
             dw = stoi(dw_str);
         }
 
-        if (!graph.addEdge(graph.findVertexByCode(location1)->getInfo(),
-                           graph.findVertexByCode(location2)->getInfo(), dd, dw)) {
-            std::cerr << "[ERROR] Cannot build edge: from " << location1 << " to " << location2
-                      << ", with dd " << dd << " and dw " << dw << std::endl;
+        if (!graph.addEdge(graph.findVertexByCode(location1)->getInfo(), graph.findVertexByCode(location2)->getInfo(), dd, dw)) {
+            std::cerr << "[ERROR] Cannot build edge: from " << location1 << " to " << location2 << ", with dd " << dd << " and dw " << dw
+                      << std::endl;
         }
 
         else {
             edgeCounter++;
         }
 
-        if (!graph.addEdge(graph.findVertexByCode(location2)->getInfo(),
-                           graph.findVertexByCode(location1)->getInfo(), dd, dw)) {
-            std::cerr << "[ERROR] Cannot build edge: from " << location2 << " to " << location1
-                      << ", with dd " << dd << " and dw " << dw << std::endl;
+        if (!graph.addEdge(graph.findVertexByCode(location2)->getInfo(), graph.findVertexByCode(location1)->getInfo(), dd, dw)) {
+            std::cerr << "[ERROR] Cannot build edge: from " << location2 << " to " << location1 << ", with dd " << dd << " and dw " << dw
+                      << std::endl;
         }
 
         else {

@@ -4,6 +4,7 @@
 #include "GraphAlgorithms.h"
 #include "data-structures/Graph.h"
 #include "data-structures/LocationInfo.h"
+#include "data-structures/Path.h"
 
 #include <iostream>
 #include <string>
