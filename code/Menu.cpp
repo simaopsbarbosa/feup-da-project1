@@ -57,8 +57,7 @@ int Menu::independentRoutePlanning() {
     std::cout << "------------------------OUTPUT------------------------\n";
 
     std::cout << "BestDrivingRoute:";
-    GraphAlgorithms::dijkstra(&graph, source);
-    std::vector<LocationInfo> primaryPath = GraphAlgorithms::getPath(&graph, source, dest);
+    std::vector<LocationInfo> primaryPath = GraphAlgorithms::dijkstraDriving(&graph, source, dest, {}, {});
 
     for (int i = 0; i < primaryPath.size(); ++i) {
         std::cout << primaryPath[i].id;
@@ -69,8 +68,18 @@ int Menu::independentRoutePlanning() {
     std::cout << "(" << graph.findVertexById(dest)->getDrivingDist() << ")\n";
 
     std::cout << "AlternativeDrivingRoute:";
-    GraphAlgorithms::dijkstra(&graph, source, true);
-    std::vector<LocationInfo> altPath = GraphAlgorithms::getPath(&graph, source, dest);
+    
+    std::vector<int> nodesToAvoid;
+    for (int i = 1; i < primaryPath.size() - 1; ++i) {  // Exclude the source and dest
+        nodesToAvoid.push_back(primaryPath[i].id);
+    }
+
+    std::cout << "AVOIDING NODES: ";
+    for (auto &node : nodesToAvoid) {
+        std::cout << node << ",";
+    }
+
+    std::vector<LocationInfo> altPath = GraphAlgorithms::dijkstraDriving(&graph, source, dest, {2,4}, {}); // path = 0
 
     if (altPath.size() == 0 || (altPath.size() == 2 && primaryPath.size() == 2)) {
         // altPath can be 2 , as long as primaryPath isnt 2 too (they would be the
@@ -168,29 +177,30 @@ int Menu::environmentallyFriendlyRoutePlanning() {
     std::cout << "------------------------------------------------------\n";
 
     std::cout << "------------------------OUTPUT------------------------\n";
-    Path path = GraphAlgorithms::environmentalRoute(&graph, source, dest, maxWalkingTime, avoidNodes, avoidSegments);
-    std::cout << "Source:" << source << "\n";
-    std::cout << "Destination:" << dest << "\n";
-    std::cout << "DrivingRoute:";
-    for (int i = 0; i < path.drivingPath.size(); ++i) {
-        std::cout << path.drivingPath[i].id;
-        if (i < path.drivingPath.size() - 1) {
-            std::cout << ",";
-        }
-    }
-    std::cout << "(" << graph.findVertexById(path.parkingNode->getInfo().id)->getDrivingDist() << ")\n";
-    std::cout << "ParkingNode:" << path.parkingNode->getInfo().id << "\n";
-    std::cout << "WalkingRoute:";
-    for (int i = 0; i < path.walkingPath.size(); ++i) {
-        std::cout << path.walkingPath[i].id;
-        if (i < path.walkingPath.size() - 1) {
-            std::cout << ",";
-        }
-    }
-    std::cout << "(" << graph.findVertexById(source)->getWalkingDist() << ")\n";
+    // Path path = GraphAlgorithms::environmentalRoute(&graph, source, dest, maxWalkingTime, avoidNodes, avoidSegments);
+    // std::cout << "Source:" << source << "\n";
+    // std::cout << "Destination:" << dest << "\n";
+    // std::cout << "DrivingRoute:";
+    // for (int i = 0; i < path.drivingPath.size(); ++i) {
+    //     std::cout << path.drivingPath[i].id;
+    //     if (i < path.drivingPath.size() - 1) {
+    //         std::cout << ",";
+    //     }
+    // }
+    // std::cout << "(" << graph.findVertexById(path.parkingNode->getInfo().id)->getDrivingDist() << ")\n";
+    // std::cout << "ParkingNode:" << path.parkingNode->getInfo().id << "\n";
+    // std::cout << "WalkingRoute:";
+    // for (int i = 0; i < path.walkingPath.size(); ++i) {
+    //     std::cout << path.walkingPath[i].id;
+    //     if (i < path.walkingPath.size() - 1) {
+    //         std::cout << ",";
+    //     }
+    // }
+    // std::cout << "(" << path.drivingTime << ")\n";
     std::cout << "------------------------------------------------------\n";
     return 0;
 }
+
 int Menu::batchMode() {
     std::cout << "\nEntering batch mode...\n";
     return 0;
@@ -352,5 +362,6 @@ Menu::Menu() {
         return; // cannot read files
     }
     std::cout << "Graph built successfully.\n";
+    
     getMenuOptions();
 }

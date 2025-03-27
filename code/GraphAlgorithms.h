@@ -7,14 +7,17 @@
 
 namespace GraphAlgorithms {
 
-void                      dijkstra(Graph<LocationInfo> *graph, int source, bool hasRestrictions = false, const std::vector<int> &avoidNodes = {},
-                                   const std::vector<std::pair<int, int>> &avoidSegments = {}, bool isDriving = true);
 bool                      relax(Edge<LocationInfo> *edge, bool isDriving = true);
-std::vector<LocationInfo> getPath(Graph<LocationInfo> *g, const int &origin, const int &dest, bool isDriving = true);
+std::vector<LocationInfo> dijkstraDriving(Graph<LocationInfo> *graph, int source, const int &dest, const std::vector<int> &avoidNodes,
+                                          const std::vector<std::pair<int, int>> &avoidSegments);
+std::vector<LocationInfo> dijkstraWalking(Graph<LocationInfo> *graph, int source, const int &dest, const std::vector<int> &avoidNodes,
+                                          const std::vector<std::pair<int, int>> &avoidSegments);
 std::vector<LocationInfo> restrictedRoute(Graph<LocationInfo> *graph, int source, int dest, const std::vector<int> &avoidNodes,
                                           const std::vector<std::pair<int, int>> &avoidSegments, int includeNode = -1);
-Path                      environmentalRoute(Graph<LocationInfo> *graph, int source, int dest, double maxWalkingTime, const std::vector<int> &avoidNodes,
-                                             const std::vector<std::pair<int, int>> &avoidSegments);
+Path environmentalRoute(Graph<LocationInfo> *graph, int source, int dest, double maxWalkingTime, const std::vector<int> &avoidNodes,
+                        const std::vector<std::pair<int, int>> &avoidSegments);
+std::vector<Vertex<LocationInfo> *> getParkingNodes(Graph<LocationInfo> *graph, int source, const std::vector<int> &avoidNodes,
+                                                    const std::vector<std::pair<int, int>> &avoidSegments);
 } // namespace GraphAlgorithms
 
 #endif
