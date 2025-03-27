@@ -142,7 +142,8 @@ int Menu::restrictedRoutePlanning() {
 }
 int Menu::environmentallyFriendlyRoutePlanning() {
     std::cout << "------------------------INPUT-------------------------\n";
-    int         source, dest, includeNode, maxWalkingTime;
+    int         source, dest, includeNode;
+    double      maxWalkingTime;
     std::string includeNodeInput;
     std::string avoidNodesInput, avoidSegmentsInput;
     std::cout << "Source node's ID: ";

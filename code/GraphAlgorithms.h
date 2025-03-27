@@ -13,7 +13,7 @@ bool                      relax(Edge<LocationInfo> *edge, bool isDriving = true)
 std::vector<LocationInfo> getPath(Graph<LocationInfo> *g, const int &origin, const int &dest, bool isDriving = true);
 std::vector<LocationInfo> restrictedRoute(Graph<LocationInfo> *graph, int source, int dest, const std::vector<int> &avoidNodes,
                                           const std::vector<std::pair<int, int>> &avoidSegments, int includeNode = -1);
-Path                      environmentalRoute(Graph<LocationInfo> *graph, int source, int dest, int maxWalkingTime, const std::vector<int> &avoidNodes,
+Path                      environmentalRoute(Graph<LocationInfo> *graph, int source, int dest, double maxWalkingTime, const std::vector<int> &avoidNodes,
                                              const std::vector<std::pair<int, int>> &avoidSegments);
 } // namespace GraphAlgorithms
 

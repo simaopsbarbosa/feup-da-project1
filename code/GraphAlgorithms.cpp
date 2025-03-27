@@ -142,7 +142,7 @@ std::vector<LocationInfo> GraphAlgorithms::restrictedRoute(Graph<LocationInfo> *
     return fullPath;
 }
 
-Path GraphAlgorithms::environmentalRoute(Graph<LocationInfo> *graph, int source, int dest, int maxWalkingTime, const std::vector<int> &avoidNodes,
+Path GraphAlgorithms::environmentalRoute(Graph<LocationInfo> *graph, int source, int dest, double maxWalkingTime, const std::vector<int> &avoidNodes,
                                          const std::vector<std::pair<int, int>> &avoidSegments) {
 
     Vertex<LocationInfo> *sourceVertex = graph->findVertexById(source);
