@@ -48,9 +48,9 @@ void Menu::processOption(int option) {
 int Menu::independentRoutePlanning() {
     std::cout << "------------------------INPUT-------------------------\n";
     int source, dest;
-    std::cout << "Source node's ID: ";
+    std::cout << "Source:";
     std::cin >> source;
-    std::cout << "Destination node's ID: ";
+    std::cout << "Destination:";
     std::cin >> dest;
     std::cout << "------------------------------------------------------\n";
 
@@ -103,9 +103,9 @@ int Menu::restrictedRoutePlanning() {
     int         source, dest, includeNode;
     std::string includeNodeInput;
     std::string avoidNodesInput, avoidSegmentsInput;
-    std::cout << "Source node's ID: ";
+    std::cout << "Source:";
     std::cin >> source;
-    std::cout << "Destination node's ID: ";
+    std::cout << "Destination:";
     std::cin >> dest;
     std::cin.ignore();
 
@@ -154,9 +154,9 @@ int Menu::environmentallyFriendlyRoutePlanning() {
     double      maxWalkingTime;
     std::string includeNodeInput;
     std::string avoidNodesInput, avoidSegmentsInput;
-    std::cout << "Source node's ID: ";
+    std::cout << "Source:";
     std::cin >> source;
-    std::cout << "Destination node's ID: ";
+    std::cout << "Destination:";
     std::cin >> dest;
     std::cout << "MaxWalkingTime: ";
     std::cin >> maxWalkingTime;
@@ -176,37 +176,49 @@ int Menu::environmentallyFriendlyRoutePlanning() {
     std::cout << "------------------------------------------------------\n";
 
     std::cout << "------------------------OUTPUT------------------------\n";
-    EnvironmentalPath path = GraphAlgorithms::environmentalRoute(&graph, source, dest, maxWalkingTime, avoidNodes, avoidSegments);
+    EnvironmentalPath path                 = GraphAlgorithms::environmentalRoute(&graph, source, dest, maxWalkingTime, avoidNodes, avoidSegments);
+    bool              shouldDisplayMessage = false;
     std::cout << "Source:" << source << "\n";
     std::cout << "Destination:" << dest << "\n";
     std::cout << "DrivingRoute:";
     if (path.drivingPath.empty()) {
         std::cout << "none\n";
-        std::cout << "------------------------------------------------------\n";
-        return 0;
-    }
-    for (int i = 0; i < path.drivingPath.size(); ++i) {
-        std::cout << path.drivingPath[i].id;
-        if (i < path.drivingPath.size() - 1) {
-            std::cout << ",";
+        shouldDisplayMessage = true;
+    } else {
+        for (int i = 0; i < path.drivingPath.size(); ++i) {
+            std::cout << path.drivingPath[i].id;
+            if (i < path.drivingPath.size() - 1) {
+                std::cout << ",";
+            }
         }
+        std::cout << "(" << graph.findVertexById(path.parkingNode->getInfo().id)->getDrivingDist() << ")\n";
     }
-    std::cout << "(" << graph.findVertexById(path.parkingNode->getInfo().id)->getDrivingDist() << ")\n";
-    std::cout << "ParkingNode:" << path.parkingNode->getInfo().id << "\n";
+    std::cout << "ParkingNode:";
+    if (path.parkingNode == nullptr) {
+        shouldDisplayMessage = true;
+        std::cout << "none\n";
+    } else {
+        std::cout << path.parkingNode->getInfo().id << "\n";
+    }
     std::cout << "WalkingRoute:";
     if (path.walkingPath.empty()) {
+        shouldDisplayMessage = true;
         std::cout << "none\n";
-        std::cout << "------------------------------------------------------\n";
-        return 0;
-    }
-    for (int i = 0; i < path.walkingPath.size(); ++i) {
-        std::cout << path.walkingPath[i].id;
-        if (i < path.walkingPath.size() - 1) {
-            std::cout << ",";
+    } else {
+        for (int i = 0; i < path.walkingPath.size(); ++i) {
+            std::cout << path.walkingPath[i].id;
+            if (i < path.walkingPath.size() - 1) {
+                std::cout << ",";
+            }
         }
+        std::cout << "(" << path.walkingTime << ")\n";
     }
-    std::cout << "(" << path.walkingTime << ")\n";
-    std::cout << "TotalTime:" << path.totalTime << "\n";
+    if (shouldDisplayMessage) {
+        std::cout << "TotalTime:\n";
+        std::cout << "Message:" << path.message << "\n";
+    } else {
+        std::cout << "TotalTime:" << path.totalTime << "\n";
+    }
     std::cout << "------------------------------------------------------\n";
     return 0;
 }

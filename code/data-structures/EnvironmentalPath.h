@@ -13,8 +13,9 @@ struct EnvironmentalPath {
     std::vector<LocationInfo> walkingPath;
     double                    walkingTime;
     double                    totalTime;
+    std::string               message;
 
-    EnvironmentalPath() : drivingPath(), drivingTime(0.0), parkingNode(nullptr), walkingPath(), walkingTime(0.0), totalTime(0.0) {
+    EnvironmentalPath() : drivingPath(), drivingTime(0.0), parkingNode(nullptr), walkingPath(), walkingTime(0.0), totalTime(0.0), message("") {
     }
 };
 

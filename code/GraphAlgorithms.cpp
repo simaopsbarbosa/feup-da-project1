@@ -280,22 +280,22 @@ EnvironmentalPath GraphAlgorithms::environmentalRoute(Graph<LocationInfo> *graph
 
     Vertex<LocationInfo> *sourceVertex = graph->findVertexById(source);
     if (sourceVertex == nullptr) {
-        std::cerr << "[ERROR] Source node not found in the graph.\n";
+        res.message = "Source node not found in the graph.";
         return res;
     }
     Vertex<LocationInfo> *destVertex = graph->findVertexById(dest);
     if (destVertex == nullptr) {
-        std::cerr << "[ERROR] Destination node not found in the graph.\n";
+        res.message = "Destination node not found in the graph.";
         return res;
     }
 
     if (graph->findEdge(source, dest) != nullptr) {
-        std::cerr << "[ERROR] Source and destination cannot be adjacent.\n";
+        res.message = "Source and destination cannot be adjacent.";
         return res;
     }
 
     if (sourceVertex->getInfo().parking || destVertex->getInfo().parking) {
-        std::cerr << "[ERROR] Source or destination cannot be parking nodes.\n";
+        res.message = "Source or destination cannot be parking nodes.";
         return res;
     }
 
@@ -303,7 +303,7 @@ EnvironmentalPath GraphAlgorithms::environmentalRoute(Graph<LocationInfo> *graph
             GraphAlgorithms::getParkingNodes(graph, source, avoidNodes, avoidSegments);
 
     if (parkingNodes.empty()) {
-        std::cerr << "[ERROR] No suitable parking node found.\n";
+        res.message = "No suitable parking node found.";
         return res;
     }
 
@@ -315,7 +315,7 @@ EnvironmentalPath GraphAlgorithms::environmentalRoute(Graph<LocationInfo> *graph
         std::vector<LocationInfo> walkingPath = GraphAlgorithms::dijkstraWalking(graph, parkingVertex->getInfo().id, dest, avoidNodes, avoidSegments);
 
         // If no walking route found or walking time exceeds max, skip this parking node.
-        if (walkingPath.empty() || parkingVertex->getWalkingDist() > maxWalkingTime) {
+        if (walkingPath.empty() || destVertex->getWalkingDist() > maxWalkingTime) {
             continue;
         }
 
@@ -330,7 +330,7 @@ EnvironmentalPath GraphAlgorithms::environmentalRoute(Graph<LocationInfo> *graph
     }
 
     if (validRoutes.empty()) {
-        std::cerr << "[ERROR] No valid walking route within max walking time.\n";
+        res.message = "No valid walking route within max walking time.";
         return res;
     }
 
