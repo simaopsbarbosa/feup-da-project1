@@ -1,0 +1,86 @@
+\doxysection{Graph\+Algorithms Namespace Reference}
+\hypertarget{namespace_graph_algorithms}{}\label{namespace_graph_algorithms}\index{GraphAlgorithms@{GraphAlgorithms}}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+bool \mbox{\hyperlink{namespace_graph_algorithms_ad7539f73539ad028603834297e92f262}{relax}} (\mbox{\hyperlink{class_edge}{Edge}}$<$ \mbox{\hyperlink{struct_location_info}{Location\+Info}} $>$ \texorpdfstring{$\ast$}{*}edge, bool is\+Driving=true)
+\item 
+std\+::vector$<$ \mbox{\hyperlink{struct_location_info}{Location\+Info}} $>$ \mbox{\hyperlink{namespace_graph_algorithms_ad0b355dbc6ee4505261170b7807be1df}{get\+Path}} (\mbox{\hyperlink{class_graph}{Graph}}$<$ \mbox{\hyperlink{struct_location_info}{Location\+Info}} $>$ \texorpdfstring{$\ast$}{*}g, const int \&origin, const int \&dest, bool is\+Driving)
+\item 
+std\+::vector$<$ \mbox{\hyperlink{struct_location_info}{Location\+Info}} $>$ \mbox{\hyperlink{namespace_graph_algorithms_a9dc4dd3b5c180f6d6da8c97c2bf78ac1}{dijkstra\+Driving}} (\mbox{\hyperlink{class_graph}{Graph}}$<$ \mbox{\hyperlink{struct_location_info}{Location\+Info}} $>$ \texorpdfstring{$\ast$}{*}graph, int source, int dest, const std\+::vector$<$ int $>$ \&avoid\+Nodes, const std\+::vector$<$ std\+::pair$<$ int, int $>$ $>$ \&avoid\+Segments)
+\item 
+std\+::vector$<$ \mbox{\hyperlink{struct_location_info}{Location\+Info}} $>$ \mbox{\hyperlink{namespace_graph_algorithms_a083c6864a8d1572b59b240e5331787bc}{dijkstra\+Walking}} (\mbox{\hyperlink{class_graph}{Graph}}$<$ \mbox{\hyperlink{struct_location_info}{Location\+Info}} $>$ \texorpdfstring{$\ast$}{*}graph, int source, int dest, const std\+::vector$<$ int $>$ \&avoid\+Nodes, const std\+::vector$<$ std\+::pair$<$ int, int $>$ $>$ \&avoid\+Segments)
+\item 
+std\+::vector$<$ \mbox{\hyperlink{struct_location_info}{Location\+Info}} $>$ \mbox{\hyperlink{namespace_graph_algorithms_acc2240cd6475571dfceccf4b170a0b71}{normal\+Route}} (\mbox{\hyperlink{class_graph}{Graph}}$<$ \mbox{\hyperlink{struct_location_info}{Location\+Info}} $>$ \texorpdfstring{$\ast$}{*}graph, int source, int dest, const std\+::vector$<$ int $>$ \&avoid\+Nodes, const std\+::vector$<$ std\+::pair$<$ int, int $>$ $>$ \&avoid\+Segments, int include\+Node=-\/1)
+\item 
+std\+::vector$<$ \mbox{\hyperlink{struct_environmental_path}{Environmental\+Path}} $>$ \mbox{\hyperlink{namespace_graph_algorithms_a3c3c493521b7bbdf877a4178b6e82a09}{environmental\+Route}} (\mbox{\hyperlink{class_graph}{Graph}}$<$ \mbox{\hyperlink{struct_location_info}{Location\+Info}} $>$ \texorpdfstring{$\ast$}{*}graph, int source, int dest, double max\+Walking\+Time, const std\+::vector$<$ int $>$ \&avoid\+Nodes, const std\+::vector$<$ std\+::pair$<$ int, int $>$ $>$ \&avoid\+Segments)
+\begin{DoxyCompactList}\small\item\em Computes the most environmentally friendly route. \end{DoxyCompactList}\item 
+std\+::vector$<$ std\+::pair$<$ \mbox{\hyperlink{class_vertex}{Vertex}}$<$ \mbox{\hyperlink{struct_location_info}{Location\+Info}} $>$ \texorpdfstring{$\ast$}{*}, std\+::vector$<$ \mbox{\hyperlink{struct_location_info}{Location\+Info}} $>$ $>$ $>$ \mbox{\hyperlink{namespace_graph_algorithms_ae93c882ba57501977a06f6cd052c2389}{get\+Parking\+Nodes}} (\mbox{\hyperlink{class_graph}{Graph}}$<$ \mbox{\hyperlink{struct_location_info}{Location\+Info}} $>$ \texorpdfstring{$\ast$}{*}graph, int source, const std\+::vector$<$ int $>$ \&avoid\+Nodes, const std\+::vector$<$ std\+::pair$<$ int, int $>$ $>$ \&avoid\+Segments)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\Hypertarget{namespace_graph_algorithms_a9dc4dd3b5c180f6d6da8c97c2bf78ac1}\index{GraphAlgorithms@{GraphAlgorithms}!dijkstraDriving@{dijkstraDriving}}
+\index{dijkstraDriving@{dijkstraDriving}!GraphAlgorithms@{GraphAlgorithms}}
+\doxysubsubsection{\texorpdfstring{dijkstraDriving()}{dijkstraDriving()}}
+{\footnotesize\ttfamily \label{namespace_graph_algorithms_a9dc4dd3b5c180f6d6da8c97c2bf78ac1} 
+std\+::vector$<$ \mbox{\hyperlink{struct_location_info}{Location\+Info}} $>$ Graph\+Algorithms\+::dijkstra\+Driving (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_graph}{Graph}}$<$ \mbox{\hyperlink{struct_location_info}{Location\+Info}} $>$ \texorpdfstring{$\ast$}{*}}]{graph}{, }\item[{int}]{source}{, }\item[{int}]{dest}{, }\item[{const std\+::vector$<$ int $>$ \&}]{avoid\+Nodes}{, }\item[{const std\+::vector$<$ std\+::pair$<$ int, int $>$ $>$ \&}]{avoid\+Segments}{}\end{DoxyParamCaption})}
+
+\Hypertarget{namespace_graph_algorithms_a083c6864a8d1572b59b240e5331787bc}\index{GraphAlgorithms@{GraphAlgorithms}!dijkstraWalking@{dijkstraWalking}}
+\index{dijkstraWalking@{dijkstraWalking}!GraphAlgorithms@{GraphAlgorithms}}
+\doxysubsubsection{\texorpdfstring{dijkstraWalking()}{dijkstraWalking()}}
+{\footnotesize\ttfamily \label{namespace_graph_algorithms_a083c6864a8d1572b59b240e5331787bc} 
+std\+::vector$<$ \mbox{\hyperlink{struct_location_info}{Location\+Info}} $>$ Graph\+Algorithms\+::dijkstra\+Walking (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_graph}{Graph}}$<$ \mbox{\hyperlink{struct_location_info}{Location\+Info}} $>$ \texorpdfstring{$\ast$}{*}}]{graph}{, }\item[{int}]{source}{, }\item[{int}]{dest}{, }\item[{const std\+::vector$<$ int $>$ \&}]{avoid\+Nodes}{, }\item[{const std\+::vector$<$ std\+::pair$<$ int, int $>$ $>$ \&}]{avoid\+Segments}{}\end{DoxyParamCaption})}
+
+\Hypertarget{namespace_graph_algorithms_a3c3c493521b7bbdf877a4178b6e82a09}\index{GraphAlgorithms@{GraphAlgorithms}!environmentalRoute@{environmentalRoute}}
+\index{environmentalRoute@{environmentalRoute}!GraphAlgorithms@{GraphAlgorithms}}
+\doxysubsubsection{\texorpdfstring{environmentalRoute()}{environmentalRoute()}}
+{\footnotesize\ttfamily \label{namespace_graph_algorithms_a3c3c493521b7bbdf877a4178b6e82a09} 
+std\+::vector$<$ \mbox{\hyperlink{struct_environmental_path}{Environmental\+Path}} $>$ Graph\+Algorithms\+::environmental\+Route (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_graph}{Graph}}$<$ \mbox{\hyperlink{struct_location_info}{Location\+Info}} $>$ \texorpdfstring{$\ast$}{*}}]{graph}{, }\item[{int}]{source}{, }\item[{int}]{dest}{, }\item[{double}]{max\+Walking\+Time}{, }\item[{const std\+::vector$<$ int $>$ \&}]{avoid\+Nodes}{, }\item[{const std\+::vector$<$ std\+::pair$<$ int, int $>$ $>$ \&}]{avoid\+Segments}{}\end{DoxyParamCaption})}
+
+
+
+Computes the most environmentally friendly route. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em graph} & The graph of locations. \\
+\hline
+{\em source} & The starting node. \\
+\hline
+{\em dest} & The destination node. \\
+\hline
+{\em max\+Walking\+Time} & The maximum walking time. \\
+\hline
+{\em avoid\+Nodes} & Nodes to avoid. \\
+\hline
+{\em avoid\+Segments} & Road segments to avoid. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+An \doxylink{struct_environmental_path}{Environmental\+Path} containing the optimal route. 
+\end{DoxyReturn}
+\Hypertarget{namespace_graph_algorithms_ae93c882ba57501977a06f6cd052c2389}\index{GraphAlgorithms@{GraphAlgorithms}!getParkingNodes@{getParkingNodes}}
+\index{getParkingNodes@{getParkingNodes}!GraphAlgorithms@{GraphAlgorithms}}
+\doxysubsubsection{\texorpdfstring{getParkingNodes()}{getParkingNodes()}}
+{\footnotesize\ttfamily \label{namespace_graph_algorithms_ae93c882ba57501977a06f6cd052c2389} 
+std\+::vector$<$ std\+::pair$<$ \mbox{\hyperlink{class_vertex}{Vertex}}$<$ \mbox{\hyperlink{struct_location_info}{Location\+Info}} $>$ \texorpdfstring{$\ast$}{*}, std\+::vector$<$ \mbox{\hyperlink{struct_location_info}{Location\+Info}} $>$ $>$ $>$ Graph\+Algorithms\+::get\+Parking\+Nodes (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_graph}{Graph}}$<$ \mbox{\hyperlink{struct_location_info}{Location\+Info}} $>$ \texorpdfstring{$\ast$}{*}}]{graph}{, }\item[{int}]{source}{, }\item[{const std\+::vector$<$ int $>$ \&}]{avoid\+Nodes}{, }\item[{const std\+::vector$<$ std\+::pair$<$ int, int $>$ $>$ \&}]{avoid\+Segments}{}\end{DoxyParamCaption})}
+
+\Hypertarget{namespace_graph_algorithms_ad0b355dbc6ee4505261170b7807be1df}\index{GraphAlgorithms@{GraphAlgorithms}!getPath@{getPath}}
+\index{getPath@{getPath}!GraphAlgorithms@{GraphAlgorithms}}
+\doxysubsubsection{\texorpdfstring{getPath()}{getPath()}}
+{\footnotesize\ttfamily \label{namespace_graph_algorithms_ad0b355dbc6ee4505261170b7807be1df} 
+std\+::vector$<$ \mbox{\hyperlink{struct_location_info}{Location\+Info}} $>$ Graph\+Algorithms\+::get\+Path (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_graph}{Graph}}$<$ \mbox{\hyperlink{struct_location_info}{Location\+Info}} $>$ \texorpdfstring{$\ast$}{*}}]{g}{, }\item[{const int \&}]{origin}{, }\item[{const int \&}]{dest}{, }\item[{bool}]{is\+Driving}{}\end{DoxyParamCaption})}
+
+\Hypertarget{namespace_graph_algorithms_acc2240cd6475571dfceccf4b170a0b71}\index{GraphAlgorithms@{GraphAlgorithms}!normalRoute@{normalRoute}}
+\index{normalRoute@{normalRoute}!GraphAlgorithms@{GraphAlgorithms}}
+\doxysubsubsection{\texorpdfstring{normalRoute()}{normalRoute()}}
+{\footnotesize\ttfamily \label{namespace_graph_algorithms_acc2240cd6475571dfceccf4b170a0b71} 
+std\+::vector$<$ \mbox{\hyperlink{struct_location_info}{Location\+Info}} $>$ Graph\+Algorithms\+::normal\+Route (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_graph}{Graph}}$<$ \mbox{\hyperlink{struct_location_info}{Location\+Info}} $>$ \texorpdfstring{$\ast$}{*}}]{graph}{, }\item[{int}]{source}{, }\item[{int}]{dest}{, }\item[{const std\+::vector$<$ int $>$ \&}]{avoid\+Nodes}{, }\item[{const std\+::vector$<$ std\+::pair$<$ int, int $>$ $>$ \&}]{avoid\+Segments}{, }\item[{int}]{include\+Node}{ = {\ttfamily -\/1}}\end{DoxyParamCaption})}
+
+\Hypertarget{namespace_graph_algorithms_ad7539f73539ad028603834297e92f262}\index{GraphAlgorithms@{GraphAlgorithms}!relax@{relax}}
+\index{relax@{relax}!GraphAlgorithms@{GraphAlgorithms}}
+\doxysubsubsection{\texorpdfstring{relax()}{relax()}}
+{\footnotesize\ttfamily \label{namespace_graph_algorithms_ad7539f73539ad028603834297e92f262} 
+bool Graph\+Algorithms\+::relax (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_edge}{Edge}}$<$ \mbox{\hyperlink{struct_location_info}{Location\+Info}} $>$ \texorpdfstring{$\ast$}{*}}]{edge}{, }\item[{bool}]{is\+Driving}{ = {\ttfamily true}}\end{DoxyParamCaption})}
+

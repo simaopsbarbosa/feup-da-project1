@@ -1,0 +1,28 @@
+\doxysection{Environmental\+Path.\+h}
+\hypertarget{_environmental_path_8h_source}{}\label{_environmental_path_8h_source}\index{/Users/simaobarbosa/Developer/feup/da/project/code/data-\/structures/EnvironmentalPath.h@{/Users/simaobarbosa/Developer/feup/da/project/code/data-\/structures/EnvironmentalPath.h}}
+\mbox{\hyperlink{_environmental_path_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ ENVIRONMENTALPATH\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ ENVIRONMENTALPATH\_H}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_graph_8h}{Graph.h}}"{}}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_location_info_8h}{LocationInfo.h}}"{}}}
+\DoxyCodeLine{00006\ }
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{00008\ }
+\DoxyCodeLine{00009\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_environmental_path_a8108cb507b116087908635c43a1ac50b}{EnvironmentalPath}}\ \{}
+\DoxyCodeLine{00010\ \ \ \ \ std::vector<LocationInfo>\ \mbox{\hyperlink{struct_environmental_path_a9f6f49ad75c85811ae37742d515eb3f5}{drivingPath}};}
+\DoxyCodeLine{00011\ \ \ \ \ \textcolor{keywordtype}{double}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{struct_environmental_path_ad8839d4bfe9665517ff1db366a1ef754}{drivingTime}};}
+\DoxyCodeLine{00012\ \ \ \ \ \mbox{\hyperlink{class_vertex}{Vertex<LocationInfo>}}\ \ \ \ \ *\mbox{\hyperlink{struct_environmental_path_a3c62db974953f73f10feefb7ce4cc3fe}{parkingNode}};}
+\DoxyCodeLine{00013\ \ \ \ \ std::vector<LocationInfo>\ \mbox{\hyperlink{struct_environmental_path_a88056ac9ab6396a1ed1134b974d77f3d}{walkingPath}};}
+\DoxyCodeLine{00014\ \ \ \ \ \textcolor{keywordtype}{double}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{struct_environmental_path_a8ab76097bfcf91a7508d7194a9224330}{walkingTime}};}
+\DoxyCodeLine{00015\ \ \ \ \ \textcolor{keywordtype}{double}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{struct_environmental_path_a6c15aa27c760c25dfcee9bbbecfa9a32}{totalTime}};}
+\DoxyCodeLine{00016\ \ \ \ \ std::string\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{struct_environmental_path_a7c19aa5c4b996686c030178f5d3f143a}{message}};}
+\DoxyCodeLine{00017\ }
+\DoxyCodeLine{00018\ \ \ \ \ \mbox{\hyperlink{struct_environmental_path_a8108cb507b116087908635c43a1ac50b}{EnvironmentalPath}}()\ :\ \mbox{\hyperlink{struct_environmental_path_a9f6f49ad75c85811ae37742d515eb3f5}{drivingPath}}(),\ \mbox{\hyperlink{struct_environmental_path_ad8839d4bfe9665517ff1db366a1ef754}{drivingTime}}(0.0),\ \mbox{\hyperlink{struct_environmental_path_a3c62db974953f73f10feefb7ce4cc3fe}{parkingNode}}(nullptr),\ \mbox{\hyperlink{struct_environmental_path_a88056ac9ab6396a1ed1134b974d77f3d}{walkingPath}}(),\ \mbox{\hyperlink{struct_environmental_path_a8ab76097bfcf91a7508d7194a9224330}{walkingTime}}(0.0),\ \mbox{\hyperlink{struct_environmental_path_a6c15aa27c760c25dfcee9bbbecfa9a32}{totalTime}}(0.0),\ \mbox{\hyperlink{struct_environmental_path_a7c19aa5c4b996686c030178f5d3f143a}{message}}(\textcolor{stringliteral}{"{}"{}})\ \{}
+\DoxyCodeLine{00019\ \ \ \ \ \}}
+\DoxyCodeLine{00020\ \};}
+\DoxyCodeLine{00021\ }
+\DoxyCodeLine{00022\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ ENVIRONMENTALPATH\_H}}
+
+\end{DoxyCode}

@@ -1,0 +1,115 @@
+\doxysection{Mutable\+Priority\+Queue\texorpdfstring{$<$}{<} M \texorpdfstring{$>$}{>} Class Template Reference}
+\hypertarget{class_mutable_priority_queue}{}\label{class_mutable_priority_queue}\index{MutablePriorityQueue$<$ M $>$@{MutablePriorityQueue$<$ M $>$}}
+
+
+{\ttfamily \#include $<$Mutable\+Priority\+Queue.\+h$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_mutable_priority_queue_a4d4d12a8c7d8f9fa88d3142e09f764f6}{Mutable\+Priority\+Queue}} ()
+\item 
+void \mbox{\hyperlink{class_mutable_priority_queue_a3cfb95724838a02bfae84c23156b1530}{insert}} (M \texorpdfstring{$\ast$}{*}x)
+\item 
+M \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{class_mutable_priority_queue_af47686310dc556773819d2ba0fdb1255}{extract\+Min}} ()
+\item 
+void \mbox{\hyperlink{class_mutable_priority_queue_a487b80554cf82afc8c1978f156dc1df3}{decrease\+Key}} (M \texorpdfstring{$\ast$}{*}x)
+\item 
+bool \mbox{\hyperlink{class_mutable_priority_queue_a502df7a510f7d9970f89a0b5900cf581}{empty}} ()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{class_mutable_priority_queue_abf47064c891271ddf8e926548941dfba}{heapify\+Up}} (unsigned i)
+\item 
+void \mbox{\hyperlink{class_mutable_priority_queue_a1c52374e7f84badd54579336c0444901}{heapify\+Down}} (unsigned i)
+\item 
+void \mbox{\hyperlink{class_mutable_priority_queue_adff86b3b8e4ee117d48b7d2fc6934727}{set}} (unsigned i, M \texorpdfstring{$\ast$}{*}x)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::vector$<$ M \texorpdfstring{$\ast$}{*} $>$ \mbox{\hyperlink{class_mutable_priority_queue_a904df59236b51c3652fde8140baf43f2}{H}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$class M$>$\newline
+class Mutable\+Priority\+Queue$<$ M $>$}
+class M must have\+: (i) accessible field int queue\+Index; (ii) operator\texorpdfstring{$<$}{<} defined. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_mutable_priority_queue_a4d4d12a8c7d8f9fa88d3142e09f764f6}\index{MutablePriorityQueue$<$ M $>$@{MutablePriorityQueue$<$ M $>$}!MutablePriorityQueue@{MutablePriorityQueue}}
+\index{MutablePriorityQueue@{MutablePriorityQueue}!MutablePriorityQueue$<$ M $>$@{MutablePriorityQueue$<$ M $>$}}
+\doxysubsubsection{\texorpdfstring{MutablePriorityQueue()}{MutablePriorityQueue()}}
+{\footnotesize\ttfamily \label{class_mutable_priority_queue_a4d4d12a8c7d8f9fa88d3142e09f764f6} 
+template$<$class M$>$ \\
+\mbox{\hyperlink{class_mutable_priority_queue}{Mutable\+Priority\+Queue}}$<$ M $>$\mbox{\hyperlink{class_mutable_priority_queue}{\+::\+Mutable\+Priority\+Queue}} (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_mutable_priority_queue_a487b80554cf82afc8c1978f156dc1df3}\index{MutablePriorityQueue$<$ M $>$@{MutablePriorityQueue$<$ M $>$}!decreaseKey@{decreaseKey}}
+\index{decreaseKey@{decreaseKey}!MutablePriorityQueue$<$ M $>$@{MutablePriorityQueue$<$ M $>$}}
+\doxysubsubsection{\texorpdfstring{decreaseKey()}{decreaseKey()}}
+{\footnotesize\ttfamily \label{class_mutable_priority_queue_a487b80554cf82afc8c1978f156dc1df3} 
+template$<$class M$>$ \\
+void \mbox{\hyperlink{class_mutable_priority_queue}{Mutable\+Priority\+Queue}}$<$ M $>$\+::decrease\+Key (\begin{DoxyParamCaption}\item[{M \texorpdfstring{$\ast$}{*}}]{x}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_mutable_priority_queue_a502df7a510f7d9970f89a0b5900cf581}\index{MutablePriorityQueue$<$ M $>$@{MutablePriorityQueue$<$ M $>$}!empty@{empty}}
+\index{empty@{empty}!MutablePriorityQueue$<$ M $>$@{MutablePriorityQueue$<$ M $>$}}
+\doxysubsubsection{\texorpdfstring{empty()}{empty()}}
+{\footnotesize\ttfamily \label{class_mutable_priority_queue_a502df7a510f7d9970f89a0b5900cf581} 
+template$<$class M$>$ \\
+bool \mbox{\hyperlink{class_mutable_priority_queue}{Mutable\+Priority\+Queue}}$<$ M $>$\+::empty (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_mutable_priority_queue_af47686310dc556773819d2ba0fdb1255}\index{MutablePriorityQueue$<$ M $>$@{MutablePriorityQueue$<$ M $>$}!extractMin@{extractMin}}
+\index{extractMin@{extractMin}!MutablePriorityQueue$<$ M $>$@{MutablePriorityQueue$<$ M $>$}}
+\doxysubsubsection{\texorpdfstring{extractMin()}{extractMin()}}
+{\footnotesize\ttfamily \label{class_mutable_priority_queue_af47686310dc556773819d2ba0fdb1255} 
+template$<$class M$>$ \\
+M \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{class_mutable_priority_queue}{Mutable\+Priority\+Queue}}$<$ M $>$\+::extract\+Min (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_mutable_priority_queue_a1c52374e7f84badd54579336c0444901}\index{MutablePriorityQueue$<$ M $>$@{MutablePriorityQueue$<$ M $>$}!heapifyDown@{heapifyDown}}
+\index{heapifyDown@{heapifyDown}!MutablePriorityQueue$<$ M $>$@{MutablePriorityQueue$<$ M $>$}}
+\doxysubsubsection{\texorpdfstring{heapifyDown()}{heapifyDown()}}
+{\footnotesize\ttfamily \label{class_mutable_priority_queue_a1c52374e7f84badd54579336c0444901} 
+template$<$class M$>$ \\
+void \mbox{\hyperlink{class_mutable_priority_queue}{Mutable\+Priority\+Queue}}$<$ M $>$\+::heapify\+Down (\begin{DoxyParamCaption}\item[{unsigned}]{i}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{class_mutable_priority_queue_abf47064c891271ddf8e926548941dfba}\index{MutablePriorityQueue$<$ M $>$@{MutablePriorityQueue$<$ M $>$}!heapifyUp@{heapifyUp}}
+\index{heapifyUp@{heapifyUp}!MutablePriorityQueue$<$ M $>$@{MutablePriorityQueue$<$ M $>$}}
+\doxysubsubsection{\texorpdfstring{heapifyUp()}{heapifyUp()}}
+{\footnotesize\ttfamily \label{class_mutable_priority_queue_abf47064c891271ddf8e926548941dfba} 
+template$<$class M$>$ \\
+void \mbox{\hyperlink{class_mutable_priority_queue}{Mutable\+Priority\+Queue}}$<$ M $>$\+::heapify\+Up (\begin{DoxyParamCaption}\item[{unsigned}]{i}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{class_mutable_priority_queue_a3cfb95724838a02bfae84c23156b1530}\index{MutablePriorityQueue$<$ M $>$@{MutablePriorityQueue$<$ M $>$}!insert@{insert}}
+\index{insert@{insert}!MutablePriorityQueue$<$ M $>$@{MutablePriorityQueue$<$ M $>$}}
+\doxysubsubsection{\texorpdfstring{insert()}{insert()}}
+{\footnotesize\ttfamily \label{class_mutable_priority_queue_a3cfb95724838a02bfae84c23156b1530} 
+template$<$class M$>$ \\
+void \mbox{\hyperlink{class_mutable_priority_queue}{Mutable\+Priority\+Queue}}$<$ M $>$\+::insert (\begin{DoxyParamCaption}\item[{M \texorpdfstring{$\ast$}{*}}]{x}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_mutable_priority_queue_adff86b3b8e4ee117d48b7d2fc6934727}\index{MutablePriorityQueue$<$ M $>$@{MutablePriorityQueue$<$ M $>$}!set@{set}}
+\index{set@{set}!MutablePriorityQueue$<$ M $>$@{MutablePriorityQueue$<$ M $>$}}
+\doxysubsubsection{\texorpdfstring{set()}{set()}}
+{\footnotesize\ttfamily \label{class_mutable_priority_queue_adff86b3b8e4ee117d48b7d2fc6934727} 
+template$<$class M$>$ \\
+void \mbox{\hyperlink{class_mutable_priority_queue}{Mutable\+Priority\+Queue}}$<$ M $>$\+::set (\begin{DoxyParamCaption}\item[{unsigned}]{i}{, }\item[{M \texorpdfstring{$\ast$}{*}}]{x}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{class_mutable_priority_queue_a904df59236b51c3652fde8140baf43f2}\index{MutablePriorityQueue$<$ M $>$@{MutablePriorityQueue$<$ M $>$}!H@{H}}
+\index{H@{H}!MutablePriorityQueue$<$ M $>$@{MutablePriorityQueue$<$ M $>$}}
+\doxysubsubsection{\texorpdfstring{H}{H}}
+{\footnotesize\ttfamily \label{class_mutable_priority_queue_a904df59236b51c3652fde8140baf43f2} 
+template$<$class M$>$ \\
+std\+::vector$<$M \texorpdfstring{$\ast$}{*}$>$ \mbox{\hyperlink{class_mutable_priority_queue}{Mutable\+Priority\+Queue}}$<$ M $>$\+::H\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/\+Users/simaobarbosa/\+Developer/feup/da/project/code/data-\/structures/\mbox{\hyperlink{_mutable_priority_queue_8h}{Mutable\+Priority\+Queue.\+h}}\end{DoxyCompactItemize}

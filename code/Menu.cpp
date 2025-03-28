@@ -57,7 +57,7 @@ int Menu::independentRoutePlanning() {
     std::cout << "------------------------OUTPUT------------------------\n";
 
     std::cout << "BestDrivingRoute:";
-    std::vector<LocationInfo> primaryPath = GraphAlgorithms::dijkstraDriving(&graph, source, dest, {}, {});
+    std::vector<LocationInfo> primaryPath = GraphAlgorithms::normalRoute(&graph, source, dest, {}, {});
 
     if (primaryPath.empty()) {
         std::cout << "none\n";
@@ -79,7 +79,7 @@ int Menu::independentRoutePlanning() {
     for (int i = 1; i < primaryPath.size() - 1; ++i) {
         nodesToAvoid.push_back(primaryPath[i].id);
     }
-    std::vector<LocationInfo> altPath = GraphAlgorithms::dijkstraDriving(&graph, source, dest, nodesToAvoid, {});
+    std::vector<LocationInfo> altPath = GraphAlgorithms::normalRoute(&graph, source, dest, nodesToAvoid, {});
 
     if (altPath.size() == 0 || (altPath.size() == 2 && primaryPath.size() == 2)) {
         // altPath can be 2 , as long as primaryPath isnt 2 too (they would be the
@@ -125,7 +125,7 @@ int Menu::restrictedRoutePlanning() {
 
     std::cout << "------------------------OUTPUT------------------------\n";
     std::cout << "RestrictedDrivingRoute:";
-    std::vector<LocationInfo> restrictedPath = GraphAlgorithms::restrictedRoute(&graph, source, dest, avoidNodes, avoidSegments, includeNode);
+    std::vector<LocationInfo> restrictedPath = GraphAlgorithms::normalRoute(&graph, source, dest, avoidNodes, avoidSegments, includeNode);
 
     if (restrictedPath.empty()) {
         std::cout << "none\n";

@@ -181,25 +181,18 @@ std::vector<LocationInfo> GraphAlgorithms::dijkstraWalking(Graph<LocationInfo> *
     return {};
 }
 
-std::vector<LocationInfo> GraphAlgorithms::restrictedRoute(Graph<LocationInfo> *graph, int source, int dest, const std::vector<int> &avoidNodes,
-                                                           const std::vector<std::pair<int, int>> &avoidSegments, int includeNode) {
+std::vector<LocationInfo> GraphAlgorithms::normalRoute(Graph<LocationInfo> *graph, int source, int dest, const std::vector<int> &avoidNodes,
+                                                       const std::vector<std::pair<int, int>> &avoidSegments, int includeNode) {
     std::vector<LocationInfo> fullPath;
-
     if (includeNode != -1) {
         std::vector<LocationInfo> pathToInclude = dijkstraDriving(graph, source, includeNode, avoidNodes, avoidSegments);
-
         if (pathToInclude.empty()) {
-            // no path found from source to includeNode
             return {};
         }
-
         std::vector<LocationInfo> pathToDestination = dijkstraDriving(graph, includeNode, dest, avoidNodes, avoidSegments);
-
         if (pathToDestination.empty()) {
-            // no path found from includeNode to destination
             return {};
         }
-
         pathToInclude.pop_back();
         fullPath.insert(fullPath.end(), pathToInclude.begin(), pathToInclude.end());
         fullPath.insert(fullPath.end(), pathToDestination.begin(), pathToDestination.end());
@@ -258,6 +251,7 @@ GraphAlgorithms::getParkingNodes(Graph<LocationInfo> *graph, int source, const s
     }
     return parkingNodes;
 }
+
 
 std::vector<EnvironmentalPath> GraphAlgorithms::environmentalRoute(Graph<LocationInfo> *graph, int source, int dest, double maxWalkingTime,
                                                                    const std::vector<int>                 &avoidNodes,

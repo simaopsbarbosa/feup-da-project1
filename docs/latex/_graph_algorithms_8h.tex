@@ -1,0 +1,27 @@
+\doxysection{/\+Users/simaobarbosa/\+Developer/feup/da/project/code/\+Graph\+Algorithms.h File Reference}
+\hypertarget{_graph_algorithms_8h}{}\label{_graph_algorithms_8h}\index{/Users/simaobarbosa/Developer/feup/da/project/code/GraphAlgorithms.h@{/Users/simaobarbosa/Developer/feup/da/project/code/GraphAlgorithms.h}}
+{\ttfamily \#include "{}data-\/structures/\+Environmental\+Path.\+h"{}}\newline
+{\ttfamily \#include "{}data-\/structures/\+Graph.\+h"{}}\newline
+{\ttfamily \#include "{}data-\/structures/\+Location\+Info.\+h"{}}\newline
+\doxysubsubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \mbox{\hyperlink{namespace_graph_algorithms}{Graph\+Algorithms}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+bool \mbox{\hyperlink{namespace_graph_algorithms_ad7539f73539ad028603834297e92f262}{Graph\+Algorithms\+::relax}} (\mbox{\hyperlink{class_edge}{Edge}}$<$ \mbox{\hyperlink{struct_location_info}{Location\+Info}} $>$ \texorpdfstring{$\ast$}{*}edge, bool is\+Driving=true)
+\item 
+std\+::vector$<$ \mbox{\hyperlink{struct_location_info}{Location\+Info}} $>$ \mbox{\hyperlink{namespace_graph_algorithms_ad0b355dbc6ee4505261170b7807be1df}{Graph\+Algorithms\+::get\+Path}} (\mbox{\hyperlink{class_graph}{Graph}}$<$ \mbox{\hyperlink{struct_location_info}{Location\+Info}} $>$ \texorpdfstring{$\ast$}{*}g, const int \&origin, const int \&dest, bool is\+Driving)
+\item 
+std\+::vector$<$ \mbox{\hyperlink{struct_location_info}{Location\+Info}} $>$ \mbox{\hyperlink{namespace_graph_algorithms_a9dc4dd3b5c180f6d6da8c97c2bf78ac1}{Graph\+Algorithms\+::dijkstra\+Driving}} (\mbox{\hyperlink{class_graph}{Graph}}$<$ \mbox{\hyperlink{struct_location_info}{Location\+Info}} $>$ \texorpdfstring{$\ast$}{*}graph, int source, int dest, const std\+::vector$<$ int $>$ \&avoid\+Nodes, const std\+::vector$<$ std\+::pair$<$ int, int $>$ $>$ \&avoid\+Segments)
+\item 
+std\+::vector$<$ \mbox{\hyperlink{struct_location_info}{Location\+Info}} $>$ \mbox{\hyperlink{namespace_graph_algorithms_a083c6864a8d1572b59b240e5331787bc}{Graph\+Algorithms\+::dijkstra\+Walking}} (\mbox{\hyperlink{class_graph}{Graph}}$<$ \mbox{\hyperlink{struct_location_info}{Location\+Info}} $>$ \texorpdfstring{$\ast$}{*}graph, int source, int dest, const std\+::vector$<$ int $>$ \&avoid\+Nodes, const std\+::vector$<$ std\+::pair$<$ int, int $>$ $>$ \&avoid\+Segments)
+\item 
+std\+::vector$<$ \mbox{\hyperlink{struct_location_info}{Location\+Info}} $>$ \mbox{\hyperlink{namespace_graph_algorithms_acc2240cd6475571dfceccf4b170a0b71}{Graph\+Algorithms\+::normal\+Route}} (\mbox{\hyperlink{class_graph}{Graph}}$<$ \mbox{\hyperlink{struct_location_info}{Location\+Info}} $>$ \texorpdfstring{$\ast$}{*}graph, int source, int dest, const std\+::vector$<$ int $>$ \&avoid\+Nodes, const std\+::vector$<$ std\+::pair$<$ int, int $>$ $>$ \&avoid\+Segments, int include\+Node=-\/1)
+\item 
+std\+::vector$<$ \mbox{\hyperlink{struct_environmental_path}{Environmental\+Path}} $>$ \mbox{\hyperlink{namespace_graph_algorithms_a3c3c493521b7bbdf877a4178b6e82a09}{Graph\+Algorithms\+::environmental\+Route}} (\mbox{\hyperlink{class_graph}{Graph}}$<$ \mbox{\hyperlink{struct_location_info}{Location\+Info}} $>$ \texorpdfstring{$\ast$}{*}graph, int source, int dest, double max\+Walking\+Time, const std\+::vector$<$ int $>$ \&avoid\+Nodes, const std\+::vector$<$ std\+::pair$<$ int, int $>$ $>$ \&avoid\+Segments)
+\begin{DoxyCompactList}\small\item\em Computes the most environmentally friendly route. \end{DoxyCompactList}\item 
+std\+::vector$<$ std\+::pair$<$ \mbox{\hyperlink{class_vertex}{Vertex}}$<$ \mbox{\hyperlink{struct_location_info}{Location\+Info}} $>$ \texorpdfstring{$\ast$}{*}, std\+::vector$<$ \mbox{\hyperlink{struct_location_info}{Location\+Info}} $>$ $>$ $>$ \mbox{\hyperlink{namespace_graph_algorithms_ae93c882ba57501977a06f6cd052c2389}{Graph\+Algorithms\+::get\+Parking\+Nodes}} (\mbox{\hyperlink{class_graph}{Graph}}$<$ \mbox{\hyperlink{struct_location_info}{Location\+Info}} $>$ \texorpdfstring{$\ast$}{*}graph, int source, const std\+::vector$<$ int $>$ \&avoid\+Nodes, const std\+::vector$<$ std\+::pair$<$ int, int $>$ $>$ \&avoid\+Segments)
+\end{DoxyCompactItemize}
