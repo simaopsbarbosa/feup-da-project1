@@ -184,7 +184,6 @@ int Menu::environmentallyFriendlyRoutePlanning() {
     std::cout << "Destination:" << dest << "\n";
     std::cout << "MaxWalkTime:" << maxWalkingTime << "\n";
 
-    // Display a single result if available (T3.1).
     if (paths.size() == 1) {
         const EnvironmentalPath &p = paths[0];
         std::cout << "DrivingRoute:";
@@ -215,7 +214,6 @@ int Menu::environmentallyFriendlyRoutePlanning() {
             std::cout << "Message:" << p.message << "\n";
         }
     } else if (paths.size() == 2) {
-        // If two alternatives are returned (approximate solution), show both.
         std::cout << "DrivingRoute1:";
         if (paths[0].drivingPath.empty()) {
             std::cout << "none\n";
@@ -273,7 +271,7 @@ int Menu::environmentallyFriendlyRoutePlanning() {
 int Menu::batchMode() {
     std::ifstream inputFile("../data-set/input.txt");
     std::ofstream outputFile("../data-set/output.txt");
-	std::string line;
+    std::string   line;
 
     if (!inputFile.is_open() || !outputFile.is_open()) {
         std::cerr << "[ERROR] Unable to open batch input or output file.\n";
@@ -281,140 +279,200 @@ int Menu::batchMode() {
     }
 
     while (std::getline(inputFile, line)) {
-        std::string mode = line.substr(6);
+        std::string mode = line.substr(line.find(':') + 1);
+
         int source, dest;
         std::getline(inputFile, line);
-        source = std::stoi(line.substr(8));
+        source = std::stoi(line.substr(line.find(':') + 1));
+
         std::getline(inputFile, line);
-        dest = std::stoi(line.substr(12));
+        dest = std::stoi(line.substr(line.find(':') + 1));
 
         if (mode == "driving-walking") {
-			double maxWalkingTime;
+            double maxWalkingTime;
             std::getline(inputFile, line);
-            maxWalkingTime = std::stod(line.substr(15));
+            maxWalkingTime = std::stod(line.substr(line.find(':') + 1));
 
-            std::vector<int> avoidNodes;
             std::getline(inputFile, line);
-            avoidNodes = parseNodes(line.substr(11));
+            std::string      avoidNodesStr = line.substr(line.find(':') + 1);
+            std::vector<int> avoidNodes    = parseNodes(avoidNodesStr);
 
-            std::vector<std::pair<int, int>> avoidSegments;
             std::getline(inputFile, line);
-            avoidSegments = parseSegments(line.substr(15));
+            std::string                      avoidSegmentsStr = line.substr(line.find(':') + 1);
+            std::vector<std::pair<int, int>> avoidSegments    = parseSegments(avoidSegmentsStr);
 
-            EnvironmentalPath path = GraphAlgorithms::environmentalRoute(&graph, source, dest, maxWalkingTime, avoidNodes, avoidSegments);
+            std::vector<EnvironmentalPath> paths =
+                    GraphAlgorithms::environmentalRoute(&graph, source, dest, maxWalkingTime, avoidNodes, avoidSegments);
 
             outputFile << "Source:" << source << "\n";
             outputFile << "Destination:" << dest << "\n";
-            outputFile << "DrivingRoute:";
-            if (path.drivingPath.empty()) {
-                outputFile << "none\n";
-            } else {
-                for (int i = 0; i < path.drivingPath.size(); ++i) {
-                    outputFile << path.drivingPath[i].id;
-                    if (i < path.drivingPath.size() - 1) {
-                        outputFile << ",";
-                    }
-                }
-                outputFile << "(" << path.drivingTime << ")\n";
-            }
-            outputFile << "ParkingNode:";
-            if (path.parkingNode == nullptr) {
-                outputFile << "none\n";
-            } else {
-            	outputFile << path.parkingNode->getInfo().id << "\n";
-            }
-			outputFile << "WalkingRoute:";
-            if (path.walkingPath.empty()) {
-                outputFile << "none\n";
-            } else {
-                for (int i = 0; i < path.walkingPath.size(); ++i) {
-                    outputFile << path.walkingPath[i].id;
-                    if (i < path.walkingPath.size() - 1) {
-                        outputFile << ",";
-                    }
-                }
-                outputFile << "(" << path.walkingTime << ")\n";
-            }
-			outputFile << "TotalTime:" << path.totalTime << "\n";
 
-        } else if (mode == "driving") {
-            std::vector<int> avoidNodes;
-            std::getline(inputFile, line);
-            avoidNodes = parseNodes(line.substr(11));
-
-            std::vector<std::pair<int, int>> avoidSegments;
-            std::getline(inputFile, line);
-            avoidSegments = parseSegments(line.substr(15));
-
-            int includeNode;
-        	std::getline(inputFile, line);
-        	includeNode = std::stoi(line.substr(13));
-
-			if (avoidNodes.empty() && avoidSegments.empty() && includeNode <= 0) {
-                std::vector<LocationInfo> path;
-                path = GraphAlgorithms::dijkstraDriving(&graph, source, dest, {}, {});
-                outputFile << "Source:" << source << "\n";
-                outputFile << "Destination:" << dest << "\n";
-                if (path.empty()) {
+            if (paths.size() == 1) {
+                const EnvironmentalPath &p = paths[0];
+                outputFile << "DrivingRoute:";
+                if (p.drivingPath.empty()) {
                     outputFile << "none\n";
                 } else {
-                    outputFile << "BestDrivingRoute:";
-                    for (int i = 0; i < path.size(); ++i) {
-                        outputFile << path[i].id;
-                        if (i < path.size() - 1) {
+                    for (size_t i = 0; i < p.drivingPath.size(); ++i) {
+                        outputFile << p.drivingPath[i].id;
+                        if (i < p.drivingPath.size() - 1)
                             outputFile << ",";
-                        }
                     }
-                    outputFile << "(" << path.size() << ")\n";
-
-                    outputFile << "AlternativeDrivingRoute:";
-                    std::vector<int> nodesToAvoid;
-
-                    for (int i = 0; i < path.size() - 1; ++i) {
-                        nodesToAvoid.push_back(path[i].id);
-                    }
-
-                    std::vector<LocationInfo> altPath;
-                    altPath = GraphAlgorithms::dijkstraDriving(&graph, source, dest, nodesToAvoid, {});
-
-                    if (altPath.size() == 0 || (altPath.size() == 2 && path.size() == 2)) {
-                        outputFile << "none\n";
-                    } else {
-                        for (int i = 0; i < altPath.size(); ++i) {
-                            outputFile << altPath[i].id;
-                            if (i < altPath.size() - 1) {
-                                outputFile << ",";
-                            }
-                        }
-                        outputFile << "(" << path.size() << ")\n";
-                    }
+                    outputFile << "(" << graph.findVertexById(p.parkingNode->getInfo().id)->getDrivingDist() << ")\n";
                 }
-			} else {
-                outputFile << "RestrictedDrivingRoute:";
-                std::vector<LocationInfo> restrictedPath;
-                restrictedPath = GraphAlgorithms::restrictedRoute(&graph, source, dest, avoidNodes, avoidSegments, includeNode);
+                outputFile << "ParkingNode:" << (p.parkingNode ? std::to_string(p.parkingNode->getInfo().id) : "none") << "\n";
+                outputFile << "WalkingRoute:";
+                if (p.walkingPath.empty()) {
+                    outputFile << "none\n";
+                } else {
+                    for (size_t i = 0; i < p.walkingPath.size(); ++i) {
+                        outputFile << p.walkingPath[i].id;
+                        if (i < p.walkingPath.size() - 1)
+                            outputFile << ",";
+                    }
+                    outputFile << "(" << p.walkingTime << ")\n";
+                }
+                outputFile << "TotalTime:" << p.totalTime << "\n";
+                if (!p.message.empty()) {
+                    outputFile << "Message:" << p.message << "\n";
+                }
+            } else if (paths.size() == 2) {
+                outputFile << "DrivingRoute1:";
+                if (paths[0].drivingPath.empty()) {
+                    outputFile << "none\n";
+                } else {
+                    for (size_t i = 0; i < paths[0].drivingPath.size(); ++i) {
+                        outputFile << paths[0].drivingPath[i].id;
+                        if (i < paths[0].drivingPath.size() - 1)
+                            outputFile << ",";
+                    }
+                    outputFile << "(" << graph.findVertexById(paths[0].parkingNode->getInfo().id)->getDrivingDist() << ")\n";
+                }
+                outputFile << "ParkingNode1:" << (paths[0].parkingNode ? std::to_string(paths[0].parkingNode->getInfo().id) : "none") << "\n";
+                outputFile << "WalkingRoute1:";
+                if (paths[0].walkingPath.empty()) {
+                    outputFile << "none\n";
+                } else {
+                    for (size_t i = 0; i < paths[0].walkingPath.size(); ++i) {
+                        outputFile << paths[0].walkingPath[i].id;
+                        if (i < paths[0].walkingPath.size() - 1)
+                            outputFile << ",";
+                    }
+                    outputFile << "(" << paths[0].walkingTime << ")\n";
+                }
+                outputFile << "TotalTime1:" << paths[0].totalTime << "\n";
 
+                outputFile << "DrivingRoute2:";
+                if (paths[1].drivingPath.empty()) {
+                    outputFile << "none\n";
+                } else {
+                    for (size_t i = 0; i < paths[1].drivingPath.size(); ++i) {
+                        outputFile << paths[1].drivingPath[i].id;
+                        if (i < paths[1].drivingPath.size() - 1)
+                            outputFile << ",";
+                    }
+                    outputFile << "(" << (paths[1].parkingNode ? graph.findVertexById(paths[1].parkingNode->getInfo().id)->getDrivingDist() : 0)
+                               << ")\n";
+                }
+                outputFile << "ParkingNode2:" << (paths[1].parkingNode ? std::to_string(paths[1].parkingNode->getInfo().id) : "none") << "\n";
+                outputFile << "WalkingRoute2:";
+                if (paths[1].walkingPath.empty()) {
+                    outputFile << "none\n";
+                } else {
+                    for (size_t i = 0; i < paths[1].walkingPath.size(); ++i) {
+                        outputFile << paths[1].walkingPath[i].id;
+                        if (i < paths[1].walkingPath.size() - 1)
+                            outputFile << ",";
+                    }
+                    outputFile << "(" << paths[1].walkingTime << ")\n";
+                }
+                outputFile << "TotalTime2:" << paths[1].totalTime << "\n";
+            } else {
+                outputFile << "DrivingRoute:\n";
+                outputFile << "ParkingNode:\n";
+                outputFile << "WalkingRoute:\n";
+                outputFile << "TotalTime:\n";
+                outputFile << "Message:No possible route with max. walking time of " << maxWalkingTime << " minutes.\n";
+            }
+        } else if (mode == "driving") {
+            std::vector<int>                 avoidNodes;
+            std::vector<std::pair<int, int>> avoidSegments;
+            int                              includeNode = -1;
+
+            if (inputFile.peek() != EOF) {
+                std::getline(inputFile, line);
+                if (line.find("AvoidNodes:") != std::string::npos)
+                    avoidNodes = parseNodes(line.substr(line.find(':') + 1));
+            }
+            if (inputFile.peek() != EOF) {
+                std::getline(inputFile, line);
+                if (line.find("AvoidSegments:") != std::string::npos)
+                    avoidSegments = parseSegments(line.substr(line.find(':') + 1));
+            }
+            if (inputFile.peek() != EOF) {
+                std::getline(inputFile, line);
+                if (line.find("IncludeNode:") != std::string::npos) {
+                    std::string includeNodeStr = line.substr(line.find(':') + 1);
+                    includeNode                = includeNodeStr.empty() ? -1 : std::stoi(includeNodeStr);
+                }
+            }
+
+            outputFile << "Source:" << source << "\n";
+            outputFile << "Destination:" << dest << "\n";
+
+            if (avoidNodes.empty() && avoidSegments.empty() && includeNode <= 0) {
+                outputFile << "BestDrivingRoute:";
+                std::vector<LocationInfo> primaryPath = GraphAlgorithms::normalRoute(&graph, source, dest, {}, {});
+                if (primaryPath.empty()) {
+                    outputFile << "none\n";
+                } else {
+                    for (size_t i = 0; i < primaryPath.size(); ++i) {
+                        outputFile << primaryPath[i].id;
+                        if (i < primaryPath.size() - 1)
+                            outputFile << ",";
+                    }
+                    outputFile << "(" << graph.findVertexById(dest)->getDrivingDist() << ")\n";
+                }
+
+                outputFile << "AlternativeDrivingRoute:";
+                std::vector<int> nodesToAvoid;
+                for (size_t i = 1; i < primaryPath.size() - 1; ++i) {
+                    nodesToAvoid.push_back(primaryPath[i].id);
+                }
+                std::vector<LocationInfo> altPath = GraphAlgorithms::normalRoute(&graph, source, dest, nodesToAvoid, {});
+                if (altPath.empty() || (altPath.size() == 2 && primaryPath.size() == 2)) {
+                    outputFile << "none\n";
+                } else {
+                    for (size_t i = 0; i < altPath.size(); ++i) {
+                        outputFile << altPath[i].id;
+                        if (i < altPath.size() - 1)
+                            outputFile << ",";
+                    }
+                    outputFile << "(" << graph.findVertexById(dest)->getDrivingDist() << ")\n";
+                }
+            } else {
+                outputFile << "RestrictedDrivingRoute:";
+                std::vector<LocationInfo> restrictedPath = GraphAlgorithms::normalRoute(&graph, source, dest, avoidNodes, avoidSegments, includeNode);
                 if (restrictedPath.empty()) {
                     outputFile << "none\n";
                 } else {
                     double totalWeight = 0.0;
-                    for (int i = 0; i < restrictedPath.size(); ++i) {
+                    for (size_t i = 0; i < restrictedPath.size(); ++i) {
                         outputFile << restrictedPath[i].id;
                         if (i < restrictedPath.size() - 1) {
                             outputFile << ",";
                             auto edge = graph.findEdge(restrictedPath[i].id, restrictedPath[i + 1].id);
-                            if (edge) {
+                            if (edge)
                                 totalWeight += edge->getDrivingWeight();
-                            }
                         }
                     }
                     outputFile << "(" << totalWeight << ")\n";
                 }
-			}
+            }
         }
     }
 
-	inputFile.close();
+    inputFile.close();
     outputFile.close();
     return 0;
 }
@@ -571,7 +629,7 @@ int Menu::buildGraph(std::string locations, std::string distances) {
 
 Menu::Menu() {
     std::cout << "\n";
-    if (buildGraph("../data-set/Locations.csv", "../data-set/Distances.csv") == 1) {
+    if (buildGraph("../data-set/Locations2.csv", "../data-set/Distances2.csv") == 1) {
         return; // cannot read files
     }
     std::cout << "Graph built successfully.\n";
