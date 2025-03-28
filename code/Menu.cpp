@@ -176,26 +176,37 @@ int Menu::environmentallyFriendlyRoutePlanning() {
     std::cout << "------------------------------------------------------\n";
 
     std::cout << "------------------------OUTPUT------------------------\n";
-    // Path path = GraphAlgorithms::environmentalRoute(&graph, source, dest, maxWalkingTime, avoidNodes, avoidSegments);
-    // std::cout << "Source:" << source << "\n";
-    // std::cout << "Destination:" << dest << "\n";
-    // std::cout << "DrivingRoute:";
-    // for (int i = 0; i < path.drivingPath.size(); ++i) {
-    //     std::cout << path.drivingPath[i].id;
-    //     if (i < path.drivingPath.size() - 1) {
-    //         std::cout << ",";
-    //     }
-    // }
-    // std::cout << "(" << graph.findVertexById(path.parkingNode->getInfo().id)->getDrivingDist() << ")\n";
-    // std::cout << "ParkingNode:" << path.parkingNode->getInfo().id << "\n";
-    // std::cout << "WalkingRoute:";
-    // for (int i = 0; i < path.walkingPath.size(); ++i) {
-    //     std::cout << path.walkingPath[i].id;
-    //     if (i < path.walkingPath.size() - 1) {
-    //         std::cout << ",";
-    //     }
-    // }
-    // std::cout << "(" << path.drivingTime << ")\n";
+    EnvironmentalPath path = GraphAlgorithms::environmentalRoute(&graph, source, dest, maxWalkingTime, avoidNodes, avoidSegments);
+    std::cout << "Source:" << source << "\n";
+    std::cout << "Destination:" << dest << "\n";
+    std::cout << "DrivingRoute:";
+    if (path.drivingPath.empty()) {
+        std::cout << "none\n";
+        std::cout << "------------------------------------------------------\n";
+        return 0;
+    }
+    for (int i = 0; i < path.drivingPath.size(); ++i) {
+        std::cout << path.drivingPath[i].id;
+        if (i < path.drivingPath.size() - 1) {
+            std::cout << ",";
+        }
+    }
+    std::cout << "(" << graph.findVertexById(path.parkingNode->getInfo().id)->getDrivingDist() << ")\n";
+    std::cout << "ParkingNode:" << path.parkingNode->getInfo().id << "\n";
+    std::cout << "WalkingRoute:";
+    if (path.walkingPath.empty()) {
+        std::cout << "none\n";
+        std::cout << "------------------------------------------------------\n";
+        return 0;
+    }
+    for (int i = 0; i < path.walkingPath.size(); ++i) {
+        std::cout << path.walkingPath[i].id;
+        if (i < path.walkingPath.size() - 1) {
+            std::cout << ",";
+        }
+    }
+    std::cout << "(" << path.walkingTime << ")\n";
+    std::cout << "TotalTime:" << path.totalTime << "\n";
     std::cout << "------------------------------------------------------\n";
     return 0;
 }
