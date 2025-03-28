@@ -271,7 +271,151 @@ int Menu::environmentallyFriendlyRoutePlanning() {
 }
 
 int Menu::batchMode() {
-    std::cout << "\nEntering batch mode...\n";
+    std::ifstream inputFile("../data-set/input.txt");
+    std::ofstream outputFile("../data-set/output.txt");
+	std::string line;
+
+    if (!inputFile.is_open() || !outputFile.is_open()) {
+        std::cerr << "[ERROR] Unable to open batch input or output file.\n";
+        return 1;
+    }
+
+    while (std::getline(inputFile, line)) {
+        std::string mode = line.substr(6);
+        int source, dest;
+        std::getline(inputFile, line);
+        source = std::stoi(line.substr(8));
+        std::getline(inputFile, line);
+        dest = std::stoi(line.substr(12));
+
+        if (mode == "driving-walking") {
+			double maxWalkingTime;
+            std::getline(inputFile, line);
+            maxWalkingTime = std::stod(line.substr(15));
+
+            std::vector<int> avoidNodes;
+            std::getline(inputFile, line);
+            avoidNodes = parseNodes(line.substr(11));
+
+            std::vector<std::pair<int, int>> avoidSegments;
+            std::getline(inputFile, line);
+            avoidSegments = parseSegments(line.substr(15));
+
+            EnvironmentalPath path = GraphAlgorithms::environmentalRoute(&graph, source, dest, maxWalkingTime, avoidNodes, avoidSegments);
+
+            outputFile << "Source:" << source << "\n";
+            outputFile << "Destination:" << dest << "\n";
+            outputFile << "DrivingRoute:";
+            if (path.drivingPath.empty()) {
+                outputFile << "none\n";
+            } else {
+                for (int i = 0; i < path.drivingPath.size(); ++i) {
+                    outputFile << path.drivingPath[i].id;
+                    if (i < path.drivingPath.size() - 1) {
+                        outputFile << ",";
+                    }
+                }
+                outputFile << "(" << path.drivingTime << ")\n";
+            }
+            outputFile << "ParkingNode:";
+            if (path.parkingNode == nullptr) {
+                outputFile << "none\n";
+            } else {
+            	outputFile << path.parkingNode->getInfo().id << "\n";
+            }
+			outputFile << "WalkingRoute:";
+            if (path.walkingPath.empty()) {
+                outputFile << "none\n";
+            } else {
+                for (int i = 0; i < path.walkingPath.size(); ++i) {
+                    outputFile << path.walkingPath[i].id;
+                    if (i < path.walkingPath.size() - 1) {
+                        outputFile << ",";
+                    }
+                }
+                outputFile << "(" << path.walkingTime << ")\n";
+            }
+			outputFile << "TotalTime:" << path.totalTime << "\n";
+
+        } else if (mode == "driving") {
+            std::vector<int> avoidNodes;
+            std::getline(inputFile, line);
+            avoidNodes = parseNodes(line.substr(11));
+
+            std::vector<std::pair<int, int>> avoidSegments;
+            std::getline(inputFile, line);
+            avoidSegments = parseSegments(line.substr(15));
+
+            int includeNode;
+        	std::getline(inputFile, line);
+        	includeNode = std::stoi(line.substr(13));
+
+			if (avoidNodes.empty() && avoidSegments.empty() && includeNode <= 0) {
+                std::vector<LocationInfo> path;
+                path = GraphAlgorithms::dijkstraDriving(&graph, source, dest, {}, {});
+                outputFile << "Source:" << source << "\n";
+                outputFile << "Destination:" << dest << "\n";
+                if (path.empty()) {
+                    outputFile << "none\n";
+                } else {
+                    outputFile << "BestDrivingRoute:";
+                    for (int i = 0; i < path.size(); ++i) {
+                        outputFile << path[i].id;
+                        if (i < path.size() - 1) {
+                            outputFile << ",";
+                        }
+                    }
+                    outputFile << "(" << path.size() << ")\n";
+
+                    outputFile << "AlternativeDrivingRoute:";
+                    std::vector<int> nodesToAvoid;
+
+                    for (int i = 0; i < path.size() - 1; ++i) {
+                        nodesToAvoid.push_back(path[i].id);
+                    }
+
+                    std::vector<LocationInfo> altPath;
+                    altPath = GraphAlgorithms::dijkstraDriving(&graph, source, dest, nodesToAvoid, {});
+
+                    if (altPath.size() == 0 || (altPath.size() == 2 && path.size() == 2)) {
+                        outputFile << "none\n";
+                    } else {
+                        for (int i = 0; i < altPath.size(); ++i) {
+                            outputFile << altPath[i].id;
+                            if (i < altPath.size() - 1) {
+                                outputFile << ",";
+                            }
+                        }
+                        outputFile << "(" << path.size() << ")\n";
+                    }
+                }
+			} else {
+                outputFile << "RestrictedDrivingRoute:";
+                std::vector<LocationInfo> restrictedPath;
+                restrictedPath = GraphAlgorithms::restrictedRoute(&graph, source, dest, avoidNodes, avoidSegments, includeNode);
+
+                if (restrictedPath.empty()) {
+                    outputFile << "none\n";
+                } else {
+                    double totalWeight = 0.0;
+                    for (int i = 0; i < restrictedPath.size(); ++i) {
+                        outputFile << restrictedPath[i].id;
+                        if (i < restrictedPath.size() - 1) {
+                            outputFile << ",";
+                            auto edge = graph.findEdge(restrictedPath[i].id, restrictedPath[i + 1].id);
+                            if (edge) {
+                                totalWeight += edge->getDrivingWeight();
+                            }
+                        }
+                    }
+                    outputFile << "(" << totalWeight << ")\n";
+                }
+			}
+        }
+    }
+
+	inputFile.close();
+    outputFile.close();
     return 0;
 }
 
