@@ -183,6 +183,12 @@ std::vector<LocationInfo> GraphAlgorithms::dijkstraWalking(Graph<LocationInfo> *
 
 std::vector<LocationInfo> GraphAlgorithms::normalRoute(Graph<LocationInfo> *graph, int source, int dest, const std::vector<int> &avoidNodes,
                                                        const std::vector<std::pair<int, int>> &avoidSegments, int includeNode) {
+
+    if (source == dest) {
+        // source node equal to destination node
+        return {};
+    }
+
     std::vector<LocationInfo> fullPath;
     if (includeNode != -1) {
         std::vector<LocationInfo> pathToInclude = dijkstraDriving(graph, source, includeNode, avoidNodes, avoidSegments);
@@ -252,12 +258,17 @@ GraphAlgorithms::getParkingNodes(Graph<LocationInfo> *graph, int source, const s
     return parkingNodes;
 }
 
-
 std::vector<EnvironmentalPath> GraphAlgorithms::environmentalRoute(Graph<LocationInfo> *graph, int source, int dest, double maxWalkingTime,
                                                                    const std::vector<int>                 &avoidNodes,
                                                                    const std::vector<std::pair<int, int>> &avoidSegments) {
-
     std::vector<EnvironmentalPath> results;
+
+    if (source == dest) {
+        EnvironmentalPath err;
+        err.message = "Source node equal to destination node.";
+        results.push_back(err);
+        return results;
+    }
 
     Vertex<LocationInfo> *sourceVertex = graph->findVertexById(source);
     if (sourceVertex == nullptr) {
