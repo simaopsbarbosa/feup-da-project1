@@ -6,6 +6,8 @@
 
 #include <iostream>
 #include <string>
+#include <fstream>
+#include <sstream>
 #include <vector>
 
 class Menu {
