@@ -1,12 +1,12 @@
-#ifndef PATH_H
-#define PATH_H
+#ifndef ENVIRONMENTALPATH_H
+#define ENVIRONMENTALPATH_H
 
 #include "Graph.h"
 #include "LocationInfo.h"
 
 #include <vector>
 
-struct Path {
+struct EnvironmentalPath {
     std::vector<LocationInfo> drivingPath;
     double                    drivingTime;
     Vertex<LocationInfo>     *parkingNode;
@@ -14,8 +14,8 @@ struct Path {
     double                    walkingTime;
     double                    totalTime;
 
-    Path() : drivingPath(), drivingTime(0.0), parkingNode(nullptr), walkingPath(), walkingTime(0.0), totalTime(0.0) {
+    EnvironmentalPath() : drivingPath(), drivingTime(0.0), parkingNode(nullptr), walkingPath(), walkingTime(0.0), totalTime(0.0) {
     }
 };
 
-#endif // PATH_H
+#endif // ENVIRONMENTALPATH_H

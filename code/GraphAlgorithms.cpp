@@ -191,3 +191,28 @@ std::vector<Vertex<LocationInfo> *> GraphAlgorithms::getParkingNodes(Graph<Locat
 
     return parkingNodes;
 }
+
+EnvironmentalPath environmentalRoute(Graph<LocationInfo> *graph, int source, int dest, double maxWalkingTime, const std::vector<int> &avoidNodes,
+                                     const std::vector<std::pair<int, int>> &avoidSegments) {
+    EnvironmentalPath res;
+
+    Vertex<LocationInfo> *sourceVertex = graph->findVertexById(source);
+    Vertex<LocationInfo> *destVertex   = graph->findVertexById(dest);
+
+    if (graph->findEdge(source, dest) != nullptr) {
+        std::cerr << "[ERROR] Source and destination cannot be adjacent.\n";
+    }
+
+    if (graph->findVertexById(source)->getInfo().parking || graph->findVertexById(dest)->getInfo().parking) {
+        std::cerr << "[ERROR] Source or destination cannot be parking nodes.\n";
+    }
+
+    std::vector<Vertex<LocationInfo> *> parkingNodes = GraphAlgorithms::getParkingNodes(graph, source, avoidNodes, avoidSegments);
+    if (parkingNodes.empty()) {
+        std::cerr << "[ERROR] No suitable parking node found.\n";
+        return res;
+    }
+
+
+    return res;
+}
