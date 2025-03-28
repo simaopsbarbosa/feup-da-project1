@@ -82,7 +82,8 @@ int Menu::independentRoutePlanning() {
     std::vector<LocationInfo> altPath = GraphAlgorithms::dijkstraDriving(&graph, source, dest, nodesToAvoid, {});
 
     if (altPath.size() == 0 || (altPath.size() == 2 && primaryPath.size() == 2)) {
-        // altPath can be 2 , as long as primaryPath isnt 2 too (they would be the same)
+        // altPath can be 2 , as long as primaryPath isnt 2 too (they would be the
+        // same)
         std::cout << "none\n";
     } else {
         for (int i = 0; i < altPath.size(); ++i) {
@@ -154,6 +155,7 @@ int Menu::environmentallyFriendlyRoutePlanning() {
     double      maxWalkingTime;
     std::string includeNodeInput;
     std::string avoidNodesInput, avoidSegmentsInput;
+
     std::cout << "Source:";
     std::cin >> source;
     std::cout << "Destination:";
@@ -176,48 +178,93 @@ int Menu::environmentallyFriendlyRoutePlanning() {
     std::cout << "------------------------------------------------------\n";
 
     std::cout << "------------------------OUTPUT------------------------\n";
-    EnvironmentalPath path                 = GraphAlgorithms::environmentalRoute(&graph, source, dest, maxWalkingTime, avoidNodes, avoidSegments);
-    bool              shouldDisplayMessage = false;
+    std::vector<EnvironmentalPath> paths = GraphAlgorithms::environmentalRoute(&graph, source, dest, maxWalkingTime, avoidNodes, avoidSegments);
+
     std::cout << "Source:" << source << "\n";
     std::cout << "Destination:" << dest << "\n";
-    std::cout << "DrivingRoute:";
-    if (path.drivingPath.empty()) {
-        std::cout << "none\n";
-        shouldDisplayMessage = true;
-    } else {
-        for (int i = 0; i < path.drivingPath.size(); ++i) {
-            std::cout << path.drivingPath[i].id;
-            if (i < path.drivingPath.size() - 1) {
-                std::cout << ",";
+    std::cout << "MaxWalkTime:" << maxWalkingTime << "\n";
+
+    // Display a single result if available (T3.1).
+    if (paths.size() == 1) {
+        const EnvironmentalPath &p = paths[0];
+        std::cout << "DrivingRoute:";
+        if (p.drivingPath.empty()) {
+            std::cout << "none\n";
+        } else {
+            for (size_t i = 0; i < p.drivingPath.size(); ++i) {
+                std::cout << p.drivingPath[i].id;
+                if (i < p.drivingPath.size() - 1)
+                    std::cout << ",";
             }
+            std::cout << "(" << graph.findVertexById(p.parkingNode->getInfo().id)->getDrivingDist() << ")\n";
         }
-        std::cout << "(" << graph.findVertexById(path.parkingNode->getInfo().id)->getDrivingDist() << ")\n";
-    }
-    std::cout << "ParkingNode:";
-    if (path.parkingNode == nullptr) {
-        shouldDisplayMessage = true;
-        std::cout << "none\n";
-    } else {
-        std::cout << path.parkingNode->getInfo().id << "\n";
-    }
-    std::cout << "WalkingRoute:";
-    if (path.walkingPath.empty()) {
-        shouldDisplayMessage = true;
-        std::cout << "none\n";
-    } else {
-        for (int i = 0; i < path.walkingPath.size(); ++i) {
-            std::cout << path.walkingPath[i].id;
-            if (i < path.walkingPath.size() - 1) {
-                std::cout << ",";
+        std::cout << "ParkingNode:" << (p.parkingNode ? std::to_string(p.parkingNode->getInfo().id) : "none") << "\n";
+        std::cout << "WalkingRoute:";
+        if (p.walkingPath.empty()) {
+            std::cout << "none\n";
+        } else {
+            for (size_t i = 0; i < p.walkingPath.size(); ++i) {
+                std::cout << p.walkingPath[i].id;
+                if (i < p.walkingPath.size() - 1)
+                    std::cout << ",";
             }
+            std::cout << "(" << p.walkingTime << ")\n";
         }
-        std::cout << "(" << path.walkingTime << ")\n";
-    }
-    if (shouldDisplayMessage) {
-        std::cout << "TotalTime:\n";
-        std::cout << "Message:" << path.message << "\n";
-    } else {
-        std::cout << "TotalTime:" << path.totalTime << "\n";
+        std::cout << "TotalTime:" << p.totalTime << "\n";
+        if (!p.message.empty()) {
+            std::cout << "Message:" << p.message << "\n";
+        }
+    } else if (paths.size() == 2) {
+        // If two alternatives are returned (approximate solution), show both.
+        std::cout << "DrivingRoute1:";
+        if (paths[0].drivingPath.empty()) {
+            std::cout << "none\n";
+        } else {
+            for (size_t i = 0; i < paths[0].drivingPath.size(); ++i) {
+                std::cout << paths[0].drivingPath[i].id;
+                if (i < paths[0].drivingPath.size() - 1)
+                    std::cout << ",";
+            }
+            std::cout << "(" << graph.findVertexById(paths[0].parkingNode->getInfo().id)->getDrivingDist() << ")\n";
+        }
+        std::cout << "ParkingNode1:" << (paths[0].parkingNode ? std::to_string(paths[0].parkingNode->getInfo().id) : "none") << "\n";
+        std::cout << "WalkingRoute1:";
+        if (paths[0].walkingPath.empty()) {
+            std::cout << "none\n";
+        } else {
+            for (size_t i = 0; i < paths[0].walkingPath.size(); ++i) {
+                std::cout << paths[0].walkingPath[i].id;
+                if (i < paths[0].walkingPath.size() - 1)
+                    std::cout << ",";
+            }
+            std::cout << "(" << paths[0].walkingTime << ")\n";
+        }
+        std::cout << "TotalTime1:" << paths[0].totalTime << "\n";
+
+        std::cout << "DrivingRoute2:";
+        if (paths[1].drivingPath.empty()) {
+            std::cout << "none\n";
+        } else {
+            for (size_t i = 0; i < paths[1].drivingPath.size(); ++i) {
+                std::cout << paths[1].drivingPath[i].id;
+                if (i < paths[1].drivingPath.size() - 1)
+                    std::cout << ",";
+            }
+            std::cout << "(" << (paths[1].parkingNode ? graph.findVertexById(paths[1].parkingNode->getInfo().id)->getDrivingDist() : 0) << ")\n";
+        }
+        std::cout << "ParkingNode2:" << (paths[1].parkingNode ? std::to_string(paths[1].parkingNode->getInfo().id) : "none") << "\n";
+        std::cout << "WalkingRoute2:";
+        if (paths[1].walkingPath.empty()) {
+            std::cout << "none\n";
+        } else {
+            for (size_t i = 0; i < paths[1].walkingPath.size(); ++i) {
+                std::cout << paths[1].walkingPath[i].id;
+                if (i < paths[1].walkingPath.size() - 1)
+                    std::cout << ",";
+            }
+            std::cout << "(" << paths[1].walkingTime << ")\n";
+        }
+        std::cout << "TotalTime2:" << paths[1].totalTime << "\n";
     }
     std::cout << "------------------------------------------------------\n";
     return 0;
@@ -380,7 +427,7 @@ int Menu::buildGraph(std::string locations, std::string distances) {
 
 Menu::Menu() {
     std::cout << "\n";
-    if (buildGraph("../data-set/Locations2.csv", "../data-set/Distances2.csv") == 1) {
+    if (buildGraph("../data-set/Locations.csv", "../data-set/Distances.csv") == 1) {
         return; // cannot read files
     }
     std::cout << "Graph built successfully.\n";

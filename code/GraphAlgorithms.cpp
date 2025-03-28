@@ -213,43 +213,32 @@ std::vector<LocationInfo> GraphAlgorithms::restrictedRoute(Graph<LocationInfo> *
 std::vector<std::pair<Vertex<LocationInfo> *, std::vector<LocationInfo>>>
 GraphAlgorithms::getParkingNodes(Graph<LocationInfo> *graph, int source, const std::vector<int> &avoidNodes,
                                  const std::vector<std::pair<int, int>> &avoidSegments) {
-    // Run full Dijkstra (for driving mode) from source to compute distances to all nodes.
-    MutablePriorityQueue<Vertex<LocationInfo>> pq;
 
-    // Initialize all vertices.
+    MutablePriorityQueue<Vertex<LocationInfo>> pq;
     for (auto &vertex : graph->getVertexSet()) {
         vertex->setDrivingDist(INF);
         vertex->setPath(nullptr);
         vertex->setQueueIndex(0);
     }
-
     auto sourceVertex = graph->findVertexById(source);
     if (!sourceVertex) {
         std::cerr << "[ERROR] Source node not found in the graph.\n";
         return {};
     }
-
     sourceVertex->setDrivingDist(0);
     pq.insert(sourceVertex);
 
-    // Process the queue until empty.
     while (!pq.empty()) {
         auto currentVertex = pq.extractMin();
-
-        // Do not process vertices that are in the avoid list.
         if (!avoidNodes.empty() && std::find(avoidNodes.begin(), avoidNodes.end(), currentVertex->getInfo().id) != avoidNodes.end()) {
             continue;
         }
-
         for (auto &edge : currentVertex->getAdj()) {
             auto neighbor = edge->getDest();
-
-            // Skip the edge if it is in the avoid segments.
             if (!avoidSegments.empty() && std::find(avoidSegments.begin(), avoidSegments.end(),
                                                     std::make_pair(currentVertex->getInfo().id, neighbor->getInfo().id)) != avoidSegments.end()) {
                 continue;
             }
-
             if (relax(edge, true)) {
                 if (neighbor->getQueueIndex() == 0) {
                     pq.insert(neighbor);
@@ -260,87 +249,106 @@ GraphAlgorithms::getParkingNodes(Graph<LocationInfo> *graph, int source, const s
         }
     }
 
-    // Now that every vertex has its driving distance from source,
-    // iterate over all vertices and select those that are parking nodes.
     std::vector<std::pair<Vertex<LocationInfo> *, std::vector<LocationInfo>>> parkingNodes;
     for (auto &vertex : graph->getVertexSet()) {
         if (vertex->getInfo().parking && vertex->getDrivingDist() != INF) {
-            // Reconstruct the driving path from source to this parking node.
             auto path = getPath(graph, source, vertex->getInfo().id, true);
             parkingNodes.push_back(std::make_pair(vertex, path));
         }
     }
-
     return parkingNodes;
 }
 
-EnvironmentalPath GraphAlgorithms::environmentalRoute(Graph<LocationInfo> *graph, int source, int dest, double maxWalkingTime,
-                                                      const std::vector<int> &avoidNodes, const std::vector<std::pair<int, int>> &avoidSegments) {
-    EnvironmentalPath res;
+std::vector<EnvironmentalPath> GraphAlgorithms::environmentalRoute(Graph<LocationInfo> *graph, int source, int dest, double maxWalkingTime,
+                                                                   const std::vector<int>                 &avoidNodes,
+                                                                   const std::vector<std::pair<int, int>> &avoidSegments) {
+
+    std::vector<EnvironmentalPath> results;
 
     Vertex<LocationInfo> *sourceVertex = graph->findVertexById(source);
     if (sourceVertex == nullptr) {
-        res.message = "Source node not found in the graph.";
-        return res;
+        EnvironmentalPath err;
+        err.message = "Source node not found in the graph.";
+        results.push_back(err);
+        return results;
     }
     Vertex<LocationInfo> *destVertex = graph->findVertexById(dest);
     if (destVertex == nullptr) {
-        res.message = "Destination node not found in the graph.";
-        return res;
+        EnvironmentalPath err;
+        err.message = "Destination node not found in the graph.";
+        results.push_back(err);
+        return results;
     }
-
     if (graph->findEdge(source, dest) != nullptr) {
-        res.message = "Source and destination cannot be adjacent.";
-        return res;
+        EnvironmentalPath err;
+        err.message = "Source and destination cannot be adjacent.";
+        results.push_back(err);
+        return results;
     }
-
     if (sourceVertex->getInfo().parking || destVertex->getInfo().parking) {
-        res.message = "Source or destination cannot be parking nodes.";
-        return res;
+        EnvironmentalPath err;
+        err.message = "Source or destination cannot be parking nodes.";
+        results.push_back(err);
+        return results;
     }
 
-    std::vector<std::pair<Vertex<LocationInfo> *, std::vector<LocationInfo>>> parkingNodes =
-            GraphAlgorithms::getParkingNodes(graph, source, avoidNodes, avoidSegments);
-
+    auto parkingNodes = GraphAlgorithms::getParkingNodes(graph, source, avoidNodes, avoidSegments);
     if (parkingNodes.empty()) {
-        res.message = "No suitable parking node found.";
-        return res;
+        EnvironmentalPath err;
+        err.message = "No suitable parking node found.";
+        results.push_back(err);
+        return results;
     }
 
     std::vector<EnvironmentalPath> validRoutes;
+    std::vector<EnvironmentalPath> approximateRoutes;
+
     for (auto &parkingPair : parkingNodes) {
         Vertex<LocationInfo>     *parkingVertex = parkingPair.first;
         std::vector<LocationInfo> drivingPath   = parkingPair.second;
 
         std::vector<LocationInfo> walkingPath = GraphAlgorithms::dijkstraWalking(graph, parkingVertex->getInfo().id, dest, avoidNodes, avoidSegments);
-
-        // If no walking route found or walking time exceeds max, skip this parking node.
-        if (walkingPath.empty() || destVertex->getWalkingDist() > maxWalkingTime) {
+        if (walkingPath.empty())
             continue;
-        }
 
-        EnvironmentalPath thisPath;
-        thisPath.parkingNode = parkingVertex;
-        thisPath.drivingPath = drivingPath;
-        thisPath.walkingPath = walkingPath;
-        thisPath.drivingTime = parkingVertex->getDrivingDist();
-        thisPath.walkingTime = destVertex->getWalkingDist();
-        thisPath.totalTime   = thisPath.drivingTime + thisPath.walkingTime;
-        validRoutes.push_back(thisPath);
+        EnvironmentalPath route;
+        route.parkingNode = parkingVertex;
+        route.drivingPath = drivingPath;
+        route.walkingPath = walkingPath;
+        route.drivingTime = parkingVertex->getDrivingDist();
+        route.walkingTime = graph->findVertexById(dest)->getWalkingDist();
+        route.totalTime   = route.drivingTime + route.walkingTime;
+
+        approximateRoutes.push_back(route);
+        if (route.walkingTime <= maxWalkingTime)
+            validRoutes.push_back(route);
     }
 
-    if (validRoutes.empty()) {
-        res.message = "No valid walking route within max walking time.";
-        return res;
-    }
-
-    std::sort(validRoutes.begin(), validRoutes.end(), [](const EnvironmentalPath &a, const EnvironmentalPath &b) {
-        if (a.totalTime != b.totalTime) {
-            return a.totalTime < b.totalTime;
+    if (!validRoutes.empty()) {
+        std::sort(validRoutes.begin(), validRoutes.end(), [](const EnvironmentalPath &a, const EnvironmentalPath &b) {
+            if (a.totalTime != b.totalTime)
+                return a.totalTime < b.totalTime;
+            return a.walkingTime > b.walkingTime;
+        });
+        results.push_back(validRoutes.front());
+    } else if (!approximateRoutes.empty()) {
+        std::sort(approximateRoutes.begin(), approximateRoutes.end(), [](const EnvironmentalPath &a, const EnvironmentalPath &b) {
+            if (a.totalTime != b.totalTime)
+                return a.totalTime < b.totalTime;
+            return a.walkingTime > b.walkingTime;
+        });
+        results.push_back(approximateRoutes.front());
+        if (approximateRoutes.size() > 1)
+            results.push_back(approximateRoutes[1]);
+        else {
+            EnvironmentalPath dummy;
+            dummy.message = "none";
+            results.push_back(dummy);
         }
-        return a.walkingTime > b.walkingTime;
-    });
-
-    res = validRoutes[0];
-    return res;
+    } else {
+        EnvironmentalPath err;
+        err.message = "No valid walking route within max walking time.";
+        results.push_back(err);
+    }
+    return results;
 }
