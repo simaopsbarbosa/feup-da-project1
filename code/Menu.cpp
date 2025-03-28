@@ -76,20 +76,13 @@ int Menu::independentRoutePlanning() {
     std::cout << "AlternativeDrivingRoute:";
 
     std::vector<int> nodesToAvoid;
-    for (int i = 1; i < primaryPath.size() - 1; ++i) { // Exclude the source and dest
+    for (int i = 1; i < primaryPath.size() - 1; ++i) {
         nodesToAvoid.push_back(primaryPath[i].id);
     }
-
-    std::cout << "AVOIDING NODES: ";
-    for (auto &node : nodesToAvoid) {
-        std::cout << node << ",";
-    }
-
-    std::vector<LocationInfo> altPath = GraphAlgorithms::dijkstraDriving(&graph, source, dest, {2, 4}, {}); // path = 0
+    std::vector<LocationInfo> altPath = GraphAlgorithms::dijkstraDriving(&graph, source, dest, nodesToAvoid, {});
 
     if (altPath.size() == 0 || (altPath.size() == 2 && primaryPath.size() == 2)) {
-        // altPath can be 2 , as long as primaryPath isnt 2 too (they would be the
-        // same)
+        // altPath can be 2 , as long as primaryPath isnt 2 too (they would be the same)
         std::cout << "none\n";
     } else {
         for (int i = 0; i < altPath.size(); ++i) {

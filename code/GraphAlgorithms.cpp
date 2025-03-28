@@ -24,8 +24,7 @@ bool GraphAlgorithms::relax(Edge<LocationInfo> *edge, bool isDriving) {
     return false;
 }
 
-std::vector<LocationInfo> GraphAlgorithms::dijkstraDriving(Graph<LocationInfo> *graph, int source, int dest,
-                                                           const std::vector<int>                 &avoidNodes,
+std::vector<LocationInfo> GraphAlgorithms::dijkstraDriving(Graph<LocationInfo> *graph, int source, int dest, const std::vector<int> &avoidNodes,
                                                            const std::vector<std::pair<int, int>> &avoidSegments) {
     MutablePriorityQueue<Vertex<LocationInfo>> pq;
     std::vector<LocationInfo>                  path;
@@ -33,6 +32,7 @@ std::vector<LocationInfo> GraphAlgorithms::dijkstraDriving(Graph<LocationInfo> *
     for (auto &vertex : graph->getVertexSet()) {
         vertex->setDrivingDist(INF);
         vertex->setPath(nullptr);
+        vertex->setQueueIndex(0);
     }
 
     auto sourceVertex = graph->findVertexById(source);
@@ -86,8 +86,7 @@ std::vector<LocationInfo> GraphAlgorithms::dijkstraDriving(Graph<LocationInfo> *
     return {};
 }
 
-std::vector<LocationInfo> GraphAlgorithms::dijkstraWalking(Graph<LocationInfo> *graph, int source, int dest,
-                                                           const std::vector<int>                 &avoidNodes,
+std::vector<LocationInfo> GraphAlgorithms::dijkstraWalking(Graph<LocationInfo> *graph, int source, int dest, const std::vector<int> &avoidNodes,
                                                            const std::vector<std::pair<int, int>> &avoidSegments) {
     MutablePriorityQueue<Vertex<LocationInfo>> pq;
     std::vector<LocationInfo>                  path;
@@ -95,6 +94,7 @@ std::vector<LocationInfo> GraphAlgorithms::dijkstraWalking(Graph<LocationInfo> *
     for (auto &vertex : graph->getVertexSet()) {
         vertex->setWalkingDist(INF);
         vertex->setPath(nullptr);
+        vertex->setQueueIndex(0);
     }
 
     auto sourceVertex = graph->findVertexById(source);

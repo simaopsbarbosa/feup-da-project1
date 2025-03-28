@@ -50,6 +50,7 @@ template <class T> class Vertex {
     void     setDrivingDist(double dd);
     void     setWalkingDist(double wd);
     void     setPath(Edge<T> *path);
+    void     setQueueIndex(int idx);
     Edge<T> *addEdge(Vertex<T> *dest, double dw, double ww);
     bool     removeEdge(T in);
     void     removeOutgoingEdges();
@@ -320,11 +321,14 @@ template <class T> int Vertex<T>::getQueueIndex() const {
     return this->queueIndex;
 }
 
+template <class T> void Vertex<T>::setQueueIndex(int idx) {
+    this->queueIndex = idx;
+}
+
 /********************** Edge  ****************************/
 
 template <class T>
-Edge<T>::Edge(Vertex<T> *orig, Vertex<T> *dest, double dw, double ww)
-    : orig(orig), dest(dest), drivingWeight(dw), walkingWeight(ww) {
+Edge<T>::Edge(Vertex<T> *orig, Vertex<T> *dest, double dw, double ww) : orig(orig), dest(dest), drivingWeight(dw), walkingWeight(ww) {
 }
 
 template <class T> Vertex<T> *Edge<T>::getDest() const {
@@ -490,8 +494,7 @@ template <class T> Edge<T> *Graph<T>::findEdge(int sourceId, int destId) {
     return nullptr;
 }
 
-template <class T>
-bool Graph<T>::addBidirectionalEdge(const T &sourc, const T &dest, double dw, double ww) {
+template <class T> bool Graph<T>::addBidirectionalEdge(const T &sourc, const T &dest, double dw, double ww) {
     auto v1 = findVertex(sourc);
     auto v2 = findVertex(dest);
     if (v1 == nullptr || v2 == nullptr)
