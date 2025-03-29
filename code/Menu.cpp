@@ -171,10 +171,10 @@ void Menu::displayInstructions() {
   std::cout << "You will be prompted to enter the source and destination "
                "locations.\n";
   std::cout << "Some prompts, like AvoidNodes, AvoidSegments and IncludeNode "
-               "may be left empty if desired.\n\n ";
+               "may be left empty if desired.\n\n";
   std::cout << "BATCH MODE:\n";
   std::cout << "To run the program in batch mode, provide the input file name "
-               "as the third argument.\n ";
+               "as the third argument.\n";
   std::cout << "You can also specify the output file name as the fourth "
                "argument.\n\n";
   getMenuOptions();
