@@ -285,7 +285,7 @@ int Menu::batchMode(std::string input, std::string output) {
         std::cerr << "[ERROR] Unable to open input file: " << input << "\n";
         return 1;
     }
-    
+
     if (output.empty()) {
         size_t pos = input.find_last_of("/\\");
         if (pos != std::string::npos) {
@@ -294,13 +294,13 @@ int Menu::batchMode(std::string input, std::string output) {
             output = "output.txt";
         }
     }
-    
+
     std::ofstream outputFile(output);
     if (!outputFile.is_open()) {
         std::cerr << "[ERROR] Unable to open or create output file: " << output << "\n";
         return 1;
     }
-    std::string   line;
+    std::string line;
 
     while (std::getline(inputFile, line)) {
         std::string mode = line.substr(line.find(':') + 1);
@@ -625,21 +625,10 @@ int Menu::buildGraph(std::string locations, std::string distances) {
             dw = stoi(dw_str);
         }
 
-        if (!graph.addEdge(graph.findVertexByCode(location1)->getInfo(), graph.findVertexByCode(location2)->getInfo(), dd, dw)) {
-            std::cerr << "[ERROR] Cannot build edge: from " << location1 << " to " << location2 << ", with dd " << dd << " and dw " << dw
-                      << std::endl;
-        }
-
-        else {
-            edgeCounter++;
-        }
-
-        if (!graph.addEdge(graph.findVertexByCode(location2)->getInfo(), graph.findVertexByCode(location1)->getInfo(), dd, dw)) {
-            std::cerr << "[ERROR] Cannot build edge: from " << location2 << " to " << location1 << ", with dd " << dd << " and dw " << dw
-                      << std::endl;
-        }
-
-        else {
+        if (!graph.addBidirectionalEdge(graph.findVertexByCode(location1)->getInfo(), graph.findVertexByCode(location2)->getInfo(), dd, dw)) {
+            std::cerr << "[ERROR] Cannot build bidirectional edge: from " << location1 << " to " << location2 << ", with dd " << dd << " and dw "
+                      << dw << std::endl;
+        } else {
             edgeCounter++;
         }
     }
