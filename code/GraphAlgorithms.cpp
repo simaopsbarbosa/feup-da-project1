@@ -27,6 +27,86 @@ bool GraphAlgorithms::relax(Edge<LocationInfo> *edge, bool isDriving) {
   return false;
 }
 
+std::vector<LocationInfo>
+GraphAlgorithms::dijkstra(Graph<LocationInfo> *graph, int source, int dest,
+                          const std::vector<int> &avoidNodes,
+                          const std::vector<std::pair<int, int>> &avoidSegments,
+                          bool isDriving) {
+  MutablePriorityQueue<Vertex<LocationInfo>> pq;
+  std::vector<LocationInfo> path;
+
+  for (auto &vertex : graph->getVertexSet()) {
+    if (isDriving) {
+      vertex->setDrivingDist(INF);
+    } else {
+      vertex->setWalkingDist(INF);
+    }
+    vertex->setPath(nullptr);
+    vertex->setQueueIndex(0);
+  }
+
+  auto sourceVertex = graph->findVertexById(source);
+  if (!sourceVertex) {
+    std::cerr << "[ERROR] Source node not found in the graph.\n";
+    return path;
+  }
+
+  if (isDriving) {
+    sourceVertex->setDrivingDist(0);
+  } else {
+    sourceVertex->setWalkingDist(0);
+  }
+  pq.insert(sourceVertex);
+
+  if (graph->findVertexById(dest) == nullptr) {
+    std::cerr << "[ERROR] Destination node not found in the graph.\n";
+    return {};
+  }
+
+  while (!pq.empty()) {
+    auto currentVertex = pq.extractMin();
+
+    if (currentVertex->getInfo().id == dest) {
+      while (currentVertex != nullptr) {
+        path.push_back(currentVertex->getInfo());
+        currentVertex = currentVertex->getPath()
+                            ? currentVertex->getPath()->getOrig()
+                            : nullptr;
+      }
+      std::reverse(path.begin(), path.end());
+      return path;
+    }
+
+    if (!avoidNodes.empty() &&
+        std::find(avoidNodes.begin(), avoidNodes.end(),
+                  currentVertex->getInfo().id) != avoidNodes.end()) {
+      continue;
+    }
+
+    for (auto &edge : currentVertex->getAdj()) {
+      auto neighbor = edge->getDest();
+
+      if (!avoidSegments.empty() &&
+          std::find(avoidSegments.begin(), avoidSegments.end(),
+                    std::make_pair(currentVertex->getInfo().id,
+                                   neighbor->getInfo().id)) !=
+              avoidSegments.end()) {
+        continue;
+      }
+
+      if (relax(edge, isDriving)) {
+        if (neighbor->getQueueIndex() == 0) {
+          pq.insert(neighbor);
+        } else {
+          pq.decreaseKey(neighbor);
+        }
+      }
+    }
+  }
+
+  return {};
+}
+
 std::vector<LocationInfo> GraphAlgorithms::getPath(Graph<LocationInfo> *g,
                                                    const int &origin,
                                                    const int &dest,
@@ -65,149 +145,7 @@ std::vector<LocationInfo> GraphAlgorithms::getPath(Graph<LocationInfo> *g,
   return res;
 }
 
-std::vector<LocationInfo> GraphAlgorithms::dijkstraDriving(
-    Graph<LocationInfo> *graph, int source, int dest,
-    const std::vector<int> &avoidNodes,
-    const std::vector<std::pair<int, int>> &avoidSegments) {
-  MutablePriorityQueue<Vertex<LocationInfo>> pq;
-  std::vector<LocationInfo> path;
-
-  for (auto &vertex : graph->getVertexSet()) {
-    vertex->setDrivingDist(INF);
-    vertex->setPath(nullptr);
-    vertex->setQueueIndex(0);
-  }
-
-  auto sourceVertex = graph->findVertexById(source);
-  if (!sourceVertex) {
-    std::cerr << "[ERROR] Source node not found in the graph.\n";
-    return path;
-  }
-
-  sourceVertex->setDrivingDist(0);
-  pq.insert(sourceVertex);
-
-  if (graph->findVertexById(dest) == nullptr) {
-    std::cerr << "[ERROR] Destination node not found in the graph.\n";
-    return {};
-  }
-
-  while (!pq.empty()) {
-    auto currentVertex = pq.extractMin();
-
-    if (currentVertex->getInfo().id == dest) {
-      while (currentVertex != nullptr) {
-        path.push_back(currentVertex->getInfo());
-        currentVertex = currentVertex->getPath()
-                            ? currentVertex->getPath()->getOrig()
-                            : nullptr;
-      }
-      std::reverse(path.begin(), path.end());
-      return path;
-    }
-
-    if (!avoidNodes.empty() &&
-        std::find(avoidNodes.begin(), avoidNodes.end(),
-                  currentVertex->getInfo().id) != avoidNodes.end()) {
-      continue;
-    }
-
-    for (auto &edge : currentVertex->getAdj()) {
-      auto neighbor = edge->getDest();
-
-      if (!avoidSegments.empty() &&
-          std::find(avoidSegments.begin(), avoidSegments.end(),
-                    std::make_pair(currentVertex->getInfo().id,
-                                   neighbor->getInfo().id)) !=
-              avoidSegments.end()) {
-        continue;
-      }
-
-      if (relax(edge, true)) {
-        if (neighbor->getQueueIndex() == 0) {
-          pq.insert(neighbor);
-        } else {
-          pq.decreaseKey(neighbor);
-        }
-      }
-    }
-  }
-
-  return {};
-}
-
-std::vector<LocationInfo> GraphAlgorithms::dijkstraWalking(
-    Graph<LocationInfo> *graph, int source, int dest,
-    const std::vector<int> &avoidNodes,
-    const std::vector<std::pair<int, int>> &avoidSegments) {
-  MutablePriorityQueue<Vertex<LocationInfo>> pq;
-  std::vector<LocationInfo> path;
-
-  for (auto &vertex : graph->getVertexSet()) {
-    vertex->setWalkingDist(INF);
-    vertex->setPath(nullptr);
-    vertex->setQueueIndex(0);
-  }
-
-  auto sourceVertex = graph->findVertexById(source);
-  if (!sourceVertex) {
-    std::cerr << "[ERROR] Source node not found in the graph.\n";
-    return path;
-  }
-
-  sourceVertex->setWalkingDist(0);
-  pq.insert(sourceVertex);
-
-  if (graph->findVertexById(dest) == nullptr) {
-    std::cerr << "[ERROR] Destination node not found in the graph.\n";
-    return {};
-  }
-
-  while (!pq.empty()) {
-    auto currentVertex = pq.extractMin();
-
-    if (currentVertex->getInfo().id == dest) {
-      while (currentVertex != nullptr) {
-        path.push_back(currentVertex->getInfo());
-        currentVertex = currentVertex->getPath()
-                            ? currentVertex->getPath()->getOrig()
-                            : nullptr;
-      }
-      std::reverse(path.begin(), path.end());
-      return path;
-    }
-
-    if (!avoidNodes.empty() &&
-        std::find(avoidNodes.begin(), avoidNodes.end(),
-                  currentVertex->getInfo().id) != avoidNodes.end()) {
-      continue;
-    }
-
-    for (auto &edge : currentVertex->getAdj()) {
-      auto neighbor = edge->getDest();
-
-      if (!avoidSegments.empty() &&
-          std::find(avoidSegments.begin(), avoidSegments.end(),
-                    std::make_pair(currentVertex->getInfo().id,
-                                   neighbor->getInfo().id)) !=
-              avoidSegments.end()) {
-        continue;
-      }
-
-      if (relax(edge, false)) {
-        if (neighbor->getQueueIndex() == 0) {
-          pq.insert(neighbor);
-        } else {
-          pq.decreaseKey(neighbor);
-        }
-      }
-    }
-  }
-
-  return {};
-}
-
-std::vector<LocationInfo> GraphAlgorithms::normalRoute(
+std::vector<LocationInfo> GraphAlgorithms::drivingRoute(
     Graph<LocationInfo> *graph, int source, int dest,
     const std::vector<int> &avoidNodes,
     const std::vector<std::pair<int, int>> &avoidSegments, int includeNode) {
@@ -220,12 +158,12 @@ std::vector<LocationInfo> GraphAlgorithms::normalRoute(
   std::vector<LocationInfo> fullPath;
   if (includeNode != -1) {
     std::vector<LocationInfo> pathToInclude =
-        dijkstraDriving(graph, source, includeNode, avoidNodes, avoidSegments);
+        dijkstra(graph, source, includeNode, avoidNodes, avoidSegments, true);
     if (pathToInclude.empty()) {
       return {};
     }
     std::vector<LocationInfo> pathToDestination =
-        dijkstraDriving(graph, includeNode, dest, avoidNodes, avoidSegments);
+        dijkstra(graph, includeNode, dest, avoidNodes, avoidSegments, true);
     if (pathToDestination.empty()) {
       return {};
     }
@@ -234,7 +172,7 @@ std::vector<LocationInfo> GraphAlgorithms::normalRoute(
     fullPath.insert(fullPath.end(), pathToDestination.begin(),
                     pathToDestination.end());
   } else {
-    fullPath = dijkstraDriving(graph, source, dest, avoidNodes, avoidSegments);
+    fullPath = dijkstra(graph, source, dest, avoidNodes, avoidSegments, true);
   }
 
   return fullPath;
@@ -352,8 +290,9 @@ std::vector<EnvironmentalPath> GraphAlgorithms::environmentalRoute(
     Vertex<LocationInfo> *parkingVertex = parkingPair.first;
     std::vector<LocationInfo> drivingPath = parkingPair.second;
 
-    std::vector<LocationInfo> walkingPath = GraphAlgorithms::dijkstraWalking(
-        graph, parkingVertex->getInfo().id, dest, avoidNodes, avoidSegments);
+    std::vector<LocationInfo> walkingPath =
+        dijkstra(graph, parkingVertex->getInfo().id, dest, avoidNodes,
+                 avoidSegments, false);
     if (walkingPath.empty())
       continue;
 

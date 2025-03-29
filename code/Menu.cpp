@@ -1,5 +1,123 @@
 #include "Menu.h"
 
+Menu::Menu(std::string locations, std::string distances, std::string inputFile,
+           std::string outputFile)
+    : parser() {
+  std::cout << "\n";
+  if (buildGraph(locations, distances) == 1) {
+    return; // cannot read files
+  }
+  std::cout << "Graph built successfully.\n\n";
+
+  if (!inputFile.empty()) {
+    std::cout << "Batch mode activated.\n";
+    batchMode(inputFile, outputFile);
+  } else {
+    getMenuOptions();
+  }
+}
+
+int Menu::buildGraph(std::string locations, std::string distances) {
+
+  // ####################### PARSE LOCATIONS #######################
+
+  std::ifstream locationsFile(locations);
+
+  if (!locationsFile.is_open()) {
+    std::cerr << "[ERROR] Error opening file: " << locations << std::endl;
+    return 1;
+  }
+
+  std::string locationLine;
+
+  // read and check first line
+  if (!std::getline(locationsFile, locationLine)) {
+    std::cerr << "[ERROR] Empty file: " << locations << std::endl;
+    return 1;
+  }
+
+  while (std::getline(locationsFile, locationLine)) {
+    std::stringstream ss(locationLine);
+    std::string location, code, id_str, parking_str;
+    int id;
+    bool parking;
+
+    // extract values from line
+    std::getline(ss, location, ',');
+    std::getline(ss, id_str, ',');
+    id = stoi(id_str);
+    std::getline(ss, code, ',');
+    std::getline(ss, parking_str, ',');
+    parking = stoi(parking_str) == 1;
+
+    const LocationInfo locInfo{id, location, code, parking};
+
+    if (!graph.addVertex(locInfo)) {
+      std::cerr << "[ERROR] Cannot build location: " << locInfo << std::endl;
+    }
+  }
+
+  locationsFile.close();
+
+  std::cout << "Success, " << graph.getNumVertex() << " locations detected.\n";
+
+  // ####################### PARSE DISTANCES #######################
+
+  std::ifstream distancesFile(distances);
+
+  if (!distancesFile.is_open()) {
+    std::cerr << "[ERROR] Error opening file: " << distances << std::endl;
+    return 1;
+  }
+
+  std::string distancesLine;
+
+  // read and check first line
+  if (!std::getline(distancesFile, distancesLine)) {
+    std::cerr << "[ERROR] Empty file: " << distances << std::endl;
+    return 1;
+  }
+
+  int edgeCounter = 0;
+  while (std::getline(distancesFile, distancesLine)) {
+    std::stringstream ss(distancesLine);
+    std::string location1, location2, dd_str, dw_str;
+    double dd, dw;
+
+    // extract values from line
+    std::getline(ss, location1, ',');
+    std::getline(ss, location2, ',');
+    std::getline(ss, dd_str, ',');
+    if (dd_str == "X") {
+      dd = INF;
+    } else {
+      dd = stoi(dd_str);
+    }
+    std::getline(ss, dw_str, ',');
+    if (dw_str == "X") {
+      dw = INF;
+    } else {
+      dw = stoi(dw_str);
+    }
+
+    if (!graph.addBidirectionalEdge(
+            graph.findVertexByCode(location1)->getInfo(),
+            graph.findVertexByCode(location2)->getInfo(), dd, dw)) {
+      std::cerr << "[ERROR] Cannot build bidirectional edge: from " << location1
+                << " to " << location2 << ", with dd " << dd << " and dw " << dw
+                << std::endl;
+    } else {
+      edgeCounter++;
+    }
+  }
+
+  distancesFile.close();
+
+  std::cout << "Success, " << edgeCounter << " distances detected.\n";
+
+  return 0;
+}
+
 void Menu::getMenuOptions() {
   std::cout << "--------------------ROUTE PLANNING--------------------\n";
   std::cout << "1. Independent Route Planning\n";
@@ -75,7 +193,7 @@ int Menu::independentRoutePlanning() {
 
   std::cout << "BestDrivingRoute:";
   std::vector<LocationInfo> primaryPath =
-      GraphAlgorithms::normalRoute(&graph, source, dest, {}, {});
+      GraphAlgorithms::drivingRoute(&graph, source, dest, {}, {});
 
   if (primaryPath.empty()) {
     std::cout << "none\n";
@@ -99,7 +217,7 @@ int Menu::independentRoutePlanning() {
     nodesToAvoid.push_back(primaryPath[i].id);
   }
   std::vector<LocationInfo> altPath =
-      GraphAlgorithms::normalRoute(&graph, source, dest, nodesToAvoid, {});
+      GraphAlgorithms::drivingRoute(&graph, source, dest, nodesToAvoid, {});
 
   if (altPath.size() == 0 || (altPath.size() == 2 && primaryPath.size() == 2)) {
     std::cout << "none\n";
@@ -144,7 +262,7 @@ int Menu::restrictedRoutePlanning() {
 
   std::cout << "------------------------OUTPUT------------------------\n";
   std::cout << "RestrictedDrivingRoute:";
-  std::vector<LocationInfo> restrictedPath = GraphAlgorithms::normalRoute(
+  std::vector<LocationInfo> restrictedPath = GraphAlgorithms::drivingRoute(
       &graph, source, dest, avoidNodes, avoidSegments, includeNode);
 
   if (restrictedPath.empty()) {
@@ -170,6 +288,7 @@ int Menu::restrictedRoutePlanning() {
 
   return 0;
 }
+
 int Menu::environmentallyFriendlyRoutePlanning() {
   std::cout << "------------------------INPUT-------------------------\n";
   int source, dest, includeNode;
@@ -511,7 +630,7 @@ int Menu::batchMode(std::string input, std::string output) {
       if (avoidNodes.empty() && avoidSegments.empty() && includeNode <= 0) {
         outputFile << "BestDrivingRoute:";
         std::vector<LocationInfo> primaryPath =
-            GraphAlgorithms::normalRoute(&graph, source, dest, {}, {});
+            GraphAlgorithms::drivingRoute(&graph, source, dest, {}, {});
         if (primaryPath.empty()) {
           outputFile << "none\n";
           outputFile << "AlternativeDrivingRoute:none\n";
@@ -528,7 +647,7 @@ int Menu::batchMode(std::string input, std::string output) {
           for (size_t i = 1; i < primaryPath.size() - 1; ++i) {
             nodesToAvoid.push_back(primaryPath[i].id);
           }
-          std::vector<LocationInfo> altPath = GraphAlgorithms::normalRoute(
+          std::vector<LocationInfo> altPath = GraphAlgorithms::drivingRoute(
               &graph, source, dest, nodesToAvoid, {});
           if (altPath.empty() ||
               (altPath.size() == 2 && primaryPath.size() == 2)) {
@@ -545,8 +664,9 @@ int Menu::batchMode(std::string input, std::string output) {
         }
       } else {
         outputFile << "RestrictedDrivingRoute:";
-        std::vector<LocationInfo> restrictedPath = GraphAlgorithms::normalRoute(
-            &graph, source, dest, avoidNodes, avoidSegments, includeNode);
+        std::vector<LocationInfo> restrictedPath =
+            GraphAlgorithms::drivingRoute(&graph, source, dest, avoidNodes,
+                                          avoidSegments, includeNode);
         if (restrictedPath.empty()) {
           outputFile << "none\n";
         } else {
@@ -570,122 +690,4 @@ int Menu::batchMode(std::string input, std::string output) {
   inputFile.close();
   outputFile.close();
   return 0;
-}
-
-int Menu::buildGraph(std::string locations, std::string distances) {
-
-  // ####################### PARSE LOCATIONS #######################
-
-  std::ifstream locationsFile(locations);
-
-  if (!locationsFile.is_open()) {
-    std::cerr << "[ERROR] Error opening file: " << locations << std::endl;
-    return 1;
-  }
-
-  std::string locationLine;
-
-  // read and check first line
-  if (!std::getline(locationsFile, locationLine)) {
-    std::cerr << "[ERROR] Empty file: " << locations << std::endl;
-    return 1;
-  }
-
-  while (std::getline(locationsFile, locationLine)) {
-    std::stringstream ss(locationLine);
-    std::string location, code, id_str, parking_str;
-    int id;
-    bool parking;
-
-    // extract values from line
-    std::getline(ss, location, ',');
-    std::getline(ss, id_str, ',');
-    id = stoi(id_str);
-    std::getline(ss, code, ',');
-    std::getline(ss, parking_str, ',');
-    parking = stoi(parking_str) == 1;
-
-    const LocationInfo locInfo{id, location, code, parking};
-
-    if (!graph.addVertex(locInfo)) {
-      std::cerr << "[ERROR] Cannot build location: " << locInfo << std::endl;
-    }
-  }
-
-  locationsFile.close();
-
-  std::cout << "Success, " << graph.getNumVertex() << " locations detected.\n";
-
-  // ####################### PARSE DISTANCES #######################
-
-  std::ifstream distancesFile(distances);
-
-  if (!distancesFile.is_open()) {
-    std::cerr << "[ERROR] Error opening file: " << distances << std::endl;
-    return 1;
-  }
-
-  std::string distancesLine;
-
-  // read and check first line
-  if (!std::getline(distancesFile, distancesLine)) {
-    std::cerr << "[ERROR] Empty file: " << distances << std::endl;
-    return 1;
-  }
-
-  int edgeCounter = 0;
-  while (std::getline(distancesFile, distancesLine)) {
-    std::stringstream ss(distancesLine);
-    std::string location1, location2, dd_str, dw_str;
-    double dd, dw;
-
-    // extract values from line
-    std::getline(ss, location1, ',');
-    std::getline(ss, location2, ',');
-    std::getline(ss, dd_str, ',');
-    if (dd_str == "X") {
-      dd = INF;
-    } else {
-      dd = stoi(dd_str);
-    }
-    std::getline(ss, dw_str, ',');
-    if (dw_str == "X") {
-      dw = INF;
-    } else {
-      dw = stoi(dw_str);
-    }
-
-    if (!graph.addBidirectionalEdge(
-            graph.findVertexByCode(location1)->getInfo(),
-            graph.findVertexByCode(location2)->getInfo(), dd, dw)) {
-      std::cerr << "[ERROR] Cannot build bidirectional edge: from " << location1
-                << " to " << location2 << ", with dd " << dd << " and dw " << dw
-                << std::endl;
-    } else {
-      edgeCounter++;
-    }
-  }
-
-  distancesFile.close();
-
-  std::cout << "Success, " << edgeCounter << " distances detected.\n";
-
-  return 0;
-}
-
-Menu::Menu(std::string locations, std::string distances, std::string inputFile,
-           std::string outputFile)
-    : parser() {
-  std::cout << "\n";
-  if (buildGraph(locations, distances) == 1) {
-    return; // cannot read files
-  }
-  std::cout << "Graph built successfully.\n\n";
-
-  if (!inputFile.empty()) {
-    std::cout << "Batch mode activated.\n";
-    batchMode(inputFile, outputFile);
-  } else {
-    getMenuOptions();
-  }
 }

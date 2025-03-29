@@ -15,14 +15,19 @@ class Menu {
 public:
   Menu(std::string locations, std::string distances, std::string inputFile = "",
        std::string outputFile = "");
-  int buildGraph(std::string locations, std::string distances);
+
   void getMenuOptions();
-  void displayInstructions();
   void processOption(int option);
+
   int independentRoutePlanning();
   int restrictedRoutePlanning();
   int environmentallyFriendlyRoutePlanning();
+
   int batchMode(std::string inputFile, std::string outputFile = "");
+
+  int buildGraph(std::string locations, std::string distances);
+
+  void displayInstructions();
 
 private:
   Graph<LocationInfo> graph;
