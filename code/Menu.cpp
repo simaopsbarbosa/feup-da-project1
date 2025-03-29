@@ -1,11 +1,11 @@
 #include "Menu.h"
 
 void Menu::getMenuOptions() {
-    std::cout << "\n--------------------ROUTE PLANNING--------------------\n";
+    std::cout << "--------------------ROUTE PLANNING--------------------\n";
     std::cout << "1. Independent Route Planning\n";
     std::cout << "2. Restricted Route Planning\n";
     std::cout << "3. Environmentally-Friendly Route Planning\n";
-    std::cout << "4. Batch mode\n";
+    std::cout << "4. Instructions\n";
     std::cout << "5. Leave\n";
     std::cout << "------------------------------------------------------\n";
     std::cout << "Choose an option: ";
@@ -32,7 +32,7 @@ void Menu::processOption(int option) {
         break;
 
     case 4:
-        batchMode();
+        displayInstructions();
         break;
 
     case 5:
@@ -43,6 +43,18 @@ void Menu::processOption(int option) {
         std::cout << "\nInvalid option. Try again.\n";
         getMenuOptions();
     }
+}
+
+void Menu::displayInstructions() {
+    std::cout << "--------------------INSTRUCTIONS----------------------\n";
+    std::cout << "MODES 1-3:\n";
+    std::cout << "To run the program in interactive mode, select one of the first three options.\n";
+    std::cout << "You will be prompted to enter the source and destination locations.\n";
+    std::cout << "Some prompts, like AvoidNodes, AvoidSegments and IncludeNode may be left empty if desired.\n\n";
+    std::cout << "BATCH MODE:\n";
+    std::cout << "To run the program in batch mode, provide the input file name as the third argument.\n";
+    std::cout << "You can also specify the output file name as the fourth argument.\n\n";
+    getMenuOptions();
 }
 
 int Menu::independentRoutePlanning() {
@@ -61,6 +73,7 @@ int Menu::independentRoutePlanning() {
 
     if (primaryPath.empty()) {
         std::cout << "none\n";
+        std::cout << "AlternativeDrivingRoute:none\n";
         std::cout << "------------------------------------------------------\n";
         return 0;
     }
@@ -82,8 +95,6 @@ int Menu::independentRoutePlanning() {
     std::vector<LocationInfo> altPath = GraphAlgorithms::normalRoute(&graph, source, dest, nodesToAvoid, {});
 
     if (altPath.size() == 0 || (altPath.size() == 2 && primaryPath.size() == 2)) {
-        // altPath can be 2 , as long as primaryPath isnt 2 too (they would be the
-        // same)
         std::cout << "none\n";
     } else {
         for (int i = 0; i < altPath.size(); ++i) {
@@ -268,15 +279,28 @@ int Menu::environmentallyFriendlyRoutePlanning() {
     return 0;
 }
 
-int Menu::batchMode() {
-    std::ifstream inputFile("../data-set/input.txt");
-    std::ofstream outputFile("../data-set/output.txt");
-    std::string   line;
-
-    if (!inputFile.is_open() || !outputFile.is_open()) {
-        std::cerr << "[ERROR] Unable to open batch input or output file.\n";
+int Menu::batchMode(std::string input, std::string output) {
+    std::ifstream inputFile(input);
+    if (!inputFile.is_open()) {
+        std::cerr << "[ERROR] Unable to open input file: " << input << "\n";
         return 1;
     }
+    
+    if (output.empty()) {
+        size_t pos = input.find_last_of("/\\");
+        if (pos != std::string::npos) {
+            output = input.substr(0, pos + 1) + "output.txt";
+        } else {
+            output = "output.txt";
+        }
+    }
+    
+    std::ofstream outputFile(output);
+    if (!outputFile.is_open()) {
+        std::cerr << "[ERROR] Unable to open or create output file: " << output << "\n";
+        return 1;
+    }
+    std::string   line;
 
     while (std::getline(inputFile, line)) {
         std::string mode = line.substr(line.find(':') + 1);
@@ -425,6 +449,7 @@ int Menu::batchMode() {
                 std::vector<LocationInfo> primaryPath = GraphAlgorithms::normalRoute(&graph, source, dest, {}, {});
                 if (primaryPath.empty()) {
                     outputFile << "none\n";
+                    outputFile << "AlternativeDrivingRoute:none\n";
                 } else {
                     for (size_t i = 0; i < primaryPath.size(); ++i) {
                         outputFile << primaryPath[i].id;
@@ -432,23 +457,22 @@ int Menu::batchMode() {
                             outputFile << ",";
                     }
                     outputFile << "(" << graph.findVertexById(dest)->getDrivingDist() << ")\n";
-                }
-
-                outputFile << "AlternativeDrivingRoute:";
-                std::vector<int> nodesToAvoid;
-                for (size_t i = 1; i < primaryPath.size() - 1; ++i) {
-                    nodesToAvoid.push_back(primaryPath[i].id);
-                }
-                std::vector<LocationInfo> altPath = GraphAlgorithms::normalRoute(&graph, source, dest, nodesToAvoid, {});
-                if (altPath.empty() || (altPath.size() == 2 && primaryPath.size() == 2)) {
-                    outputFile << "none\n";
-                } else {
-                    for (size_t i = 0; i < altPath.size(); ++i) {
-                        outputFile << altPath[i].id;
-                        if (i < altPath.size() - 1)
-                            outputFile << ",";
+                    outputFile << "AlternativeDrivingRoute:";
+                    std::vector<int> nodesToAvoid;
+                    for (size_t i = 1; i < primaryPath.size() - 1; ++i) {
+                        nodesToAvoid.push_back(primaryPath[i].id);
                     }
-                    outputFile << "(" << graph.findVertexById(dest)->getDrivingDist() << ")\n";
+                    std::vector<LocationInfo> altPath = GraphAlgorithms::normalRoute(&graph, source, dest, nodesToAvoid, {});
+                    if (altPath.empty() || (altPath.size() == 2 && primaryPath.size() == 2)) {
+                        outputFile << "none\n";
+                    } else {
+                        for (size_t i = 0; i < altPath.size(); ++i) {
+                            outputFile << altPath[i].id;
+                            if (i < altPath.size() - 1)
+                                outputFile << ",";
+                        }
+                        outputFile << "(" << graph.findVertexById(dest)->getDrivingDist() << ")\n";
+                    }
                 }
             } else {
                 outputFile << "RestrictedDrivingRoute:";
@@ -627,12 +651,17 @@ int Menu::buildGraph(std::string locations, std::string distances) {
     return 0;
 }
 
-Menu::Menu() {
+Menu::Menu(std::string locations, std::string distances, std::string inputFile, std::string outputFile) {
     std::cout << "\n";
-    if (buildGraph("../data-set/Locations2.csv", "../data-set/Distances2.csv") == 1) {
+    if (buildGraph(locations, distances) == 1) {
         return; // cannot read files
     }
-    std::cout << "Graph built successfully.\n";
+    std::cout << "Graph built successfully.\n\n";
 
-    getMenuOptions();
+    if (!inputFile.empty()) {
+        std::cout << "Batch mode activated.\n";
+        batchMode(inputFile, outputFile);
+    } else {
+        getMenuOptions();
+    }
 }
