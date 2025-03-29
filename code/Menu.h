@@ -2,6 +2,7 @@
 #define MENU_HPP
 
 #include "GraphAlgorithms.h"
+#include "InputParser.h"
 #include "data-structures/Graph.h"
 
 #include <fstream>
@@ -18,16 +19,14 @@ public:
   void getMenuOptions();
   void displayInstructions();
   void processOption(int option);
-
   int independentRoutePlanning();
   int restrictedRoutePlanning();
   int environmentallyFriendlyRoutePlanning();
   int batchMode(std::string inputFile, std::string outputFile = "");
-  std::vector<int> parseNodes(const std::string &input);
-  std::vector<std::pair<int, int>> parseSegments(const std::string &input);
 
 private:
   Graph<LocationInfo> graph;
+  InputParser parser;
 };
 
 #endif // MENU_HPP

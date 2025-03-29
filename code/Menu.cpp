@@ -130,12 +130,12 @@ int Menu::restrictedRoutePlanning() {
 
   std::cout << "AvoidNodes: ";
   std::getline(std::cin, avoidNodesInput);
-  std::vector<int> avoidNodes = parseNodes(avoidNodesInput);
+  std::vector<int> avoidNodes = parser.parseNodes(avoidNodesInput);
 
   std::cout << "AvoidSegments: ";
   std::getline(std::cin, avoidSegmentsInput);
   std::vector<std::pair<int, int>> avoidSegments =
-      parseSegments(avoidSegmentsInput);
+      parser.parseSegments(avoidSegmentsInput);
 
   std::cout << "IncludeNode: ";
   std::getline(std::cin, includeNodeInput);
@@ -187,12 +187,12 @@ int Menu::environmentallyFriendlyRoutePlanning() {
 
   std::cout << "AvoidNodes: ";
   std::getline(std::cin, avoidNodesInput);
-  std::vector<int> avoidNodes = parseNodes(avoidNodesInput);
+  std::vector<int> avoidNodes = parser.parseNodes(avoidNodesInput);
 
   std::cout << "AvoidSegments: ";
   std::getline(std::cin, avoidSegmentsInput);
   std::vector<std::pair<int, int>> avoidSegments =
-      parseSegments(avoidSegmentsInput);
+      parser.parseSegments(avoidSegmentsInput);
 
   std::cout << "IncludeNode: ";
   std::getline(std::cin, includeNodeInput);
@@ -355,12 +355,12 @@ int Menu::batchMode(std::string input, std::string output) {
 
       std::getline(inputFile, line);
       std::string avoidNodesStr = line.substr(line.find(':') + 1);
-      std::vector<int> avoidNodes = parseNodes(avoidNodesStr);
+      std::vector<int> avoidNodes = parser.parseNodes(avoidNodesStr);
 
       std::getline(inputFile, line);
       std::string avoidSegmentsStr = line.substr(line.find(':') + 1);
       std::vector<std::pair<int, int>> avoidSegments =
-          parseSegments(avoidSegmentsStr);
+          parser.parseSegments(avoidSegmentsStr);
 
       std::vector<EnvironmentalPath> paths =
           GraphAlgorithms::environmentalRoute(
@@ -490,12 +490,12 @@ int Menu::batchMode(std::string input, std::string output) {
       if (inputFile.peek() != EOF) {
         std::getline(inputFile, line);
         if (line.find("AvoidNodes:") != std::string::npos)
-          avoidNodes = parseNodes(line.substr(line.find(':') + 1));
+          avoidNodes = parser.parseNodes(line.substr(line.find(':') + 1));
       }
       if (inputFile.peek() != EOF) {
         std::getline(inputFile, line);
         if (line.find("AvoidSegments:") != std::string::npos)
-          avoidSegments = parseSegments(line.substr(line.find(':') + 1));
+          avoidSegments = parser.parseSegments(line.substr(line.find(':') + 1));
       }
       if (inputFile.peek() != EOF) {
         std::getline(inputFile, line);
@@ -570,48 +570,6 @@ int Menu::batchMode(std::string input, std::string output) {
   inputFile.close();
   outputFile.close();
   return 0;
-}
-
-std::vector<int> Menu::parseNodes(const std::string &input) {
-  std::vector<int> nodes;
-  if (!input.empty()) {
-    std::stringstream ss(input);
-    std::string node;
-    while (std::getline(ss, node, ',')) {
-      nodes.push_back(std::stoi(node));
-    }
-  }
-  return nodes;
-}
-
-std::vector<std::pair<int, int>> Menu::parseSegments(const std::string &input) {
-  std::vector<std::pair<int, int>> segments;
-  if (!input.empty()) {
-    std::stringstream ss(input);
-    std::string segment;
-
-    while (std::getline(ss, segment, ')')) {
-      segment.erase(std::remove(segment.begin(), segment.end(), ' '),
-                    segment.end());
-
-      size_t startPos = segment.find('(');
-      if (startPos != std::string::npos) {
-        segment = segment.substr(startPos + 1);
-
-        size_t separatorPos = segment.find(',');
-        if (separatorPos != std::string::npos) {
-          int node1 = std::stoi(segment.substr(0, separatorPos));
-          int node2 = std::stoi(segment.substr(separatorPos + 1));
-          segments.emplace_back(node1, node2);
-        } else {
-          std::cerr << "[ERROR] Invalid segment format: " << segment << "\n";
-        }
-      } else {
-        std::cerr << "[ERROR] Invalid segment format: " << segment << "\n";
-      }
-    }
-  }
-  return segments;
 }
 
 int Menu::buildGraph(std::string locations, std::string distances) {
@@ -716,7 +674,8 @@ int Menu::buildGraph(std::string locations, std::string distances) {
 }
 
 Menu::Menu(std::string locations, std::string distances, std::string inputFile,
-           std::string outputFile) {
+           std::string outputFile)
+    : parser() {
   std::cout << "\n";
   if (buildGraph(locations, distances) == 1) {
     return; // cannot read files
