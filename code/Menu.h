@@ -11,22 +11,23 @@
 #include <vector>
 
 class Menu {
-  public:
-    Menu(std::string locations, std::string distances, std::string inputFile = "", std::string outputFile = "");
-    int  buildGraph(std::string locations, std::string distances);
-    void getMenuOptions();
-    void displayInstructions();
-    void processOption(int option);
+public:
+  Menu(std::string locations, std::string distances, std::string inputFile = "",
+       std::string outputFile = "");
+  int buildGraph(std::string locations, std::string distances);
+  void getMenuOptions();
+  void displayInstructions();
+  void processOption(int option);
 
-    int                              independentRoutePlanning();
-    int                              restrictedRoutePlanning();
-    int                              environmentallyFriendlyRoutePlanning();
-    int                              batchMode(std::string inputFile, std::string outputFile = "");
-    std::vector<int>                 parseNodes(const std::string &input);
-    std::vector<std::pair<int, int>> parseSegments(const std::string &input);
+  int independentRoutePlanning();
+  int restrictedRoutePlanning();
+  int environmentallyFriendlyRoutePlanning();
+  int batchMode(std::string inputFile, std::string outputFile = "");
+  std::vector<int> parseNodes(const std::string &input);
+  std::vector<std::pair<int, int>> parseSegments(const std::string &input);
 
-  private:
-    Graph<LocationInfo> graph;
+private:
+  Graph<LocationInfo> graph;
 };
 
 #endif // MENU_HPP
