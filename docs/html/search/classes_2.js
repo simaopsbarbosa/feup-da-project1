@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['locationinfo_0',['LocationInfo',['../struct_location_info.html',1,'']]]
+  ['inputparser_0',['InputParser',['../class_input_parser.html',1,'']]]
 ];

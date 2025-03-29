@@ -114,32 +114,13 @@ protected:
 template <class T> class Graph {
 public:
   ~Graph();
-  /*
-   * Auxiliary function to find a vertex with a given the content.
-   */
   Vertex<T> *findVertex(const T &in) const;
-  /*
-   * Auxiliary function to find a vertex with a given code.
-   */
   Vertex<T> *findVertexByCode(const std::string code) const;
-  /*
-   * Auxiliary function to find a vertex with a given id.
-   */
   Vertex<T> *findVertexById(const int id) const;
-  /*
-   *  Adds a vertex with a given content or info (in) to a graph (this).
-   *  Returns true if successful, and false if a vertex with that content
-   * already exists.
-   */
+
   bool addVertex(const T &in);
   bool removeVertex(const T &in);
 
-  /*
-   * Adds an edge to a graph (this), given the contents of the source and
-   * destination vertices and the edge weight (w).
-   * Returns true if successful, and false if the source or destination vertex
-   * does not exist.
-   */
   bool addEdge(const T &sourc, const T &dest, double dw, double ww);
   bool removeEdge(const T &source, const T &dest);
   bool addBidirectionalEdge(const T &sourc, const T &dest, double dw,
@@ -156,13 +137,7 @@ protected:
   double **distMatrix = nullptr; // dist matrix for Floyd-Warshall
   int **pathMatrix = nullptr;    // path matrix for Floyd-Warshall
 
-  /*
-   * Finds the index of the vertex with a given content.
-   */
   int findVertexIdx(const T &in) const;
-  /**
-   * Auxiliary function to set the "path" field to make a spanning tree.
-   */
 };
 
 void deleteMatrix(int **m, int n);
@@ -170,10 +145,19 @@ void deleteMatrix(double **m, int n);
 
 /************************* Vertex  **************************/
 
+/**
+ * @brief Constructor for the Vertex class.
+ * @param in Information to store in the vertex.
+ */
 template <class T> Vertex<T>::Vertex(T in) : info(in) {}
-/*
- * Auxiliary function to add an outgoing edge to a vertex (this),
- * with a given destination vertex (d) and edge weight (w).
+
+/**
+ * @brief Adds an edge from this vertex to the destination vertex.
+ * This operation has constant time complexity.
+ * @param d Destination vertex.
+ * @param dw Driving weight of the edge.
+ * @param ww Walking weight of the edge.
+ * @return Pointer to the created edge.
  */
 template <class T>
 Edge<T> *Vertex<T>::addEdge(Vertex<T> *d, double dw, double ww) {
@@ -183,10 +167,12 @@ Edge<T> *Vertex<T>::addEdge(Vertex<T> *d, double dw, double ww) {
   return newEdge;
 }
 
-/*
- * Auxiliary function to remove an outgoing edge (with a given destination (d))
- * from a vertex (this).
- * Returns true if successful, and false if such edge does not exist.
+/**
+ * @brief Removes an edge from this vertex to a vertex with the given info.
+ * This operation has a time complexity of O(E), where E is the number of edges
+ * in the adjacency list.
+ * @param in Info of the destination vertex.
+ * @return True if the edge was removed, false otherwise.
  */
 template <class T> bool Vertex<T>::removeEdge(T in) {
   bool removedEdge = false;
@@ -206,12 +192,20 @@ template <class T> bool Vertex<T>::removeEdge(T in) {
   return removedEdge;
 }
 
+/**
+ * @brief Compares two vertices based on their driving distance.
+ * @param vertex Vertex to compare with.
+ * @return True if this vertex has a smaller driving distance, false otherwise.
+ * @complexity O(1)
+ */
 template <class T> bool Vertex<T>::operator<(Vertex<T> &vertex) const {
   return this->drivingDist < vertex.drivingDist;
 }
 
-/*
- * Auxiliary function to remove an outgoing edge of a vertex.
+/**
+ * @brief Removes all outgoing edges from this vertex.
+ * This operation has a time complexity of O(E), where E is the number of
+ * outgoing edges.
  */
 template <class T> void Vertex<T>::removeOutgoingEdges() {
   auto it = adj.begin();
@@ -222,71 +216,156 @@ template <class T> void Vertex<T>::removeOutgoingEdges() {
   }
 }
 
+/**
+ * @brief Gets the information stored in the vertex.
+ * @return Information stored in the vertex.
+ */
 template <class T> T Vertex<T>::getInfo() const { return this->info; }
 
+/**
+ * @brief Gets the low value of the vertex.
+ * @return Low value of the vertex.
+ */
 template <class T> int Vertex<T>::getLow() const { return this->low; }
 
+/**
+ * @brief Sets the low value of the vertex.
+ * @param value Low value to set.
+ */
 template <class T> void Vertex<T>::setLow(int value) { this->low = value; }
 
+/**
+ * @brief Gets the num value of the vertex.
+ * @return Num value of the vertex.
+ */
 template <class T> int Vertex<T>::getNum() const { return this->num; }
 
+/**
+ * @brief Sets the num value of the vertex.
+ * @param value Num value to set.
+ */
 template <class T> void Vertex<T>::setNum(int value) { this->num = value; }
 
+/**
+ * @brief Gets the adjacency list of the vertex.
+ * @return Adjacency list of the vertex.
+ */
 template <class T> std::vector<Edge<T> *> Vertex<T>::getAdj() const {
   return this->adj;
 }
 
+/**
+ * @brief Checks if the vertex has been visited.
+ * @return True if the vertex has been visited, false otherwise.
+ */
 template <class T> bool Vertex<T>::isVisited() const { return this->visited; }
 
+/**
+ * @brief Checks if the vertex is being processed.
+ * @return True if the vertex is being processed, false otherwise.
+ */
 template <class T> bool Vertex<T>::isProcessing() const {
   return this->processing;
 }
 
+/**
+ * @brief Gets the indegree of the vertex.
+ * @return Indegree of the vertex.
+ */
 template <class T> unsigned int Vertex<T>::getIndegree() const {
   return this->indegree;
 }
 
+/**
+ * @brief Gets the walking distance of the vertex.
+ * @return Walking distance of the vertex.
+ */
 template <class T> double Vertex<T>::getWalkingDist() const {
   return this->walkingDist;
 }
 
+/**
+ * @brief Gets the driving distance of the vertex.
+ * @return Driving distance of the vertex.
+ */
 template <class T> double Vertex<T>::getDrivingDist() const {
   return this->drivingDist;
 }
 
+/**
+ * @brief Gets the path edge of the vertex.
+ * @return Path edge of the vertex.
+ */
 template <class T> Edge<T> *Vertex<T>::getPath() const { return this->path; }
 
+/**
+ * @brief Gets the incoming edges of the vertex.
+ * @return Incoming edges of the vertex.
+ */
 template <class T> std::vector<Edge<T> *> Vertex<T>::getIncoming() const {
   return this->incoming;
 }
 
+/**
+ * @brief Sets the information stored in the vertex.
+ * @param in Information to store in the vertex.
+ */
 template <class T> void Vertex<T>::setInfo(T in) { this->info = in; }
 
+/**
+ * @brief Sets the visited status of the vertex.
+ * @param visited Visited status to set.
+ */
 template <class T> void Vertex<T>::setVisited(bool visited) {
   this->visited = visited;
 }
 
+/**
+ * @brief Sets the processing status of the vertex.
+ * @param processing Processing status to set.
+ */
 template <class T> void Vertex<T>::setProcessing(bool processing) {
   this->processing = processing;
 }
 
+/**
+ * @brief Sets the indegree of the vertex.
+ * @param indegree Indegree to set.
+ */
 template <class T> void Vertex<T>::setIndegree(unsigned int indegree) {
   this->indegree = indegree;
 }
 
+/**
+ * @brief Sets the driving distance of the vertex.
+ * @param dd Driving distance to set.
+ */
 template <class T> void Vertex<T>::setDrivingDist(double dd) {
   this->drivingDist = dd;
 }
 
+/**
+ * @brief Sets the walking distance of the vertex.
+ * @param wd Walking distance to set.
+ */
 template <class T> void Vertex<T>::setWalkingDist(double wd) {
   this->walkingDist = wd;
 }
 
+/**
+ * @brief Sets the path edge of the vertex.
+ * @param path Path edge to set.
+ */
 template <class T> void Vertex<T>::setPath(Edge<T> *path) { this->path = path; }
 
+/**
+ * @brief Deletes an edge from the vertex.
+ * This operation has a time complexity of O(E), where E is the number of
+ * incoming edges of the destination vertex.
+ * @param edge Edge to delete.
+ */
 template <class T> void Vertex<T>::deleteEdge(Edge<T> *edge) {
   Vertex<T> *dest = edge->getDest();
-  // Remove the corresponding edge from the incoming list
   auto it = dest->incoming.begin();
   while (it != dest->incoming.end()) {
     if ((*it)->getOrig()->getInfo() == info) {
@@ -298,62 +377,129 @@ template <class T> void Vertex<T>::deleteEdge(Edge<T> *edge) {
   delete edge;
 }
 
+/**
+ * @brief Gets the queue index of the vertex.
+ * @return Queue index of the vertex.
+ */
 template <class T> int Vertex<T>::getQueueIndex() const {
   return this->queueIndex;
 }
 
+/**
+ * @brief Sets the queue index of the vertex.
+ * @param idx Queue index to set.
+ */
 template <class T> void Vertex<T>::setQueueIndex(int idx) {
   this->queueIndex = idx;
 }
 
 /********************** Edge  ****************************/
 
+/**
+ * @brief Constructor for the Edge class.
+ * @param orig Origin vertex of the edge.
+ * @param dest Destination vertex of the edge.
+ * @param dw Driving weight of the edge.
+ * @param ww Walking weight of the edge.
+ */
 template <class T>
 Edge<T>::Edge(Vertex<T> *orig, Vertex<T> *dest, double dw, double ww)
     : orig(orig), dest(dest), drivingWeight(dw), walkingWeight(ww) {}
 
+/**
+ * @brief Gets the destination vertex of the edge.
+ * @return Destination vertex of the edge.
+ */
 template <class T> Vertex<T> *Edge<T>::getDest() const { return this->dest; }
 
+/**
+ * @brief Gets the walking weight of the edge.
+ * @return Walking weight of the edge.
+ */
 template <class T> double Edge<T>::getWalkingWeight() const {
   return this->walkingWeight;
 }
 
+/**
+ * @brief Gets the driving weight of the edge.
+ * @return Driving weight of the edge.
+ */
 template <class T> double Edge<T>::getDrivingWeight() const {
   return this->drivingWeight;
 }
 
+/**
+ * @brief Gets the origin vertex of the edge.
+ * @return Origin vertex of the edge.
+ */
 template <class T> Vertex<T> *Edge<T>::getOrig() const { return this->orig; }
 
+/**
+ * @brief Gets the reverse edge of the edge.
+ * @return Reverse edge of the edge.
+ */
 template <class T> Edge<T> *Edge<T>::getReverse() const {
   return this->reverse;
 }
 
+/**
+ * @brief Checks if the edge is selected.
+ * @return True if the edge is selected, false otherwise.
+ */
 template <class T> bool Edge<T>::isSelected() const { return this->selected; }
 
+/**
+ * @brief Gets the flow of the edge.
+ * @return Flow of the edge.
+ */
 template <class T> double Edge<T>::getFlow() const { return flow; }
 
+/**
+ * @brief Sets the selected status of the edge.
+ * @param selected Selected status to set.
+ */
 template <class T> void Edge<T>::setSelected(bool selected) {
   this->selected = selected;
 }
 
+/**
+ * @brief Sets the reverse edge of the edge.
+ * @param reverse Reverse edge to set.
+ */
 template <class T> void Edge<T>::setReverse(Edge<T> *reverse) {
   this->reverse = reverse;
 }
 
+/**
+ * @brief Sets the flow of the edge.
+ * @param flow Flow to set.
+ */
 template <class T> void Edge<T>::setFlow(double flow) { this->flow = flow; }
 
 /********************** Graph  ****************************/
 
+/**
+ * @brief Gets the number of vertices in the graph.
+ * @return Number of vertices in the graph.
+ */
 template <class T> int Graph<T>::getNumVertex() const {
   return vertexSet.size();
 }
 
+/**
+ * @brief Gets the vertex set of the graph.
+ * @return Vertex set of the graph.
+ */
 template <class T> std::vector<Vertex<T> *> Graph<T>::getVertexSet() const {
   return vertexSet;
 }
 
-/*
- * Auxiliary function to find a vertex with a given content.
+/**
+ * @brief Finds a vertex in the graph by its info.
+ * This operation has a time complexity of O(V), where V is the number of
+ * vertices in the graph.
+ * @param in Info of the vertex to find.
+ * @return Pointer to the vertex if found, nullptr otherwise.
  */
 template <class T> Vertex<T> *Graph<T>::findVertex(const T &in) const {
   for (auto v : vertexSet)
@@ -362,8 +508,12 @@ template <class T> Vertex<T> *Graph<T>::findVertex(const T &in) const {
   return nullptr;
 }
 
-/*
- * Auxiliary function to find a vertex with a given code.
+/**
+ * @brief Finds a vertex in the graph by its code.
+ * This operation has a time complexity of O(V), where V is the number of
+ * vertices in the graph.
+ * @param code Code of the vertex to find.
+ * @return Pointer to the vertex if found, nullptr otherwise.
  */
 template <class T>
 Vertex<T> *Graph<T>::findVertexByCode(const std::string code) const {
@@ -373,8 +523,12 @@ Vertex<T> *Graph<T>::findVertexByCode(const std::string code) const {
   return nullptr;
 }
 
-/*
- * Auxiliary function to find a vertex with a given id.
+/**
+ * @brief Finds a vertex in the graph by its ID.
+ * This operation has a time complexity of O(V), where V is the number of
+ * vertices in the graph.
+ * @param id ID of the vertex to find.
+ * @return Pointer to the vertex if found, nullptr otherwise.
  */
 template <class T> Vertex<T> *Graph<T>::findVertexById(const int id) const {
   for (auto v : vertexSet)
@@ -383,8 +537,12 @@ template <class T> Vertex<T> *Graph<T>::findVertexById(const int id) const {
   return nullptr;
 }
 
-/*
- * Finds the index of the vertex with a given content.
+/**
+ * @brief Finds the index of a vertex in the graph by its info.
+ * This operation has a time complexity of O(V), where V is the number of
+ * vertices in the graph.
+ * @param in Info of the vertex to find.
+ * @return Index of the vertex if found, -1 otherwise.
  */
 template <class T> int Graph<T>::findVertexIdx(const T &in) const {
   for (unsigned i = 0; i < vertexSet.size(); i++)
@@ -392,10 +550,13 @@ template <class T> int Graph<T>::findVertexIdx(const T &in) const {
       return i;
   return -1;
 }
-/*
- *  Adds a vertex with a given content or info (in) to a graph (this).
- *  Returns true if successful, and false if a vertex with that content already
- * exists.
+
+/**
+ * @brief Adds a vertex to the graph.
+ * This operation has a time complexity of O(V), where V is the number of
+ * vertices in the graph.
+ * @param in Info of the vertex to add.
+ * @return True if the vertex was added, false if it already exists.
  */
 template <class T> bool Graph<T>::addVertex(const T &in) {
   if (findVertex(in) != nullptr)
@@ -404,10 +565,12 @@ template <class T> bool Graph<T>::addVertex(const T &in) {
   return true;
 }
 
-/*
- *  Removes a vertex with a given content (in) from a graph (this), and
- *  all outgoing and incoming edges.
- *  Returns true if successful, and false if such vertex does not exist.
+/**
+ * @brief Removes a vertex from the graph.
+ * This operation has a time complexity of O(V + E), where V is the number of
+ * vertices and E is the number of edges.
+ * @param in Info of the vertex to remove.
+ * @return True if the vertex was removed, false otherwise.
  */
 template <class T> bool Graph<T>::removeVertex(const T &in) {
   for (auto it = vertexSet.begin(); it != vertexSet.end(); it++) {
@@ -425,11 +588,15 @@ template <class T> bool Graph<T>::removeVertex(const T &in) {
   return false;
 }
 
-/*
- * Adds an edge to a graph (this), given the contents of the source and
- * destination vertices and the edge weight (w).
- * Returns true if successful, and false if the source or destination vertex
- * does not exist.
+/**
+ * @brief Adds a directed edge between two vertices.
+ * This operation has a time complexity of O(V), where V is the number of
+ * vertices in the graph.
+ * @param sourc Info of the source vertex.
+ * @param dest Info of the destination vertex.
+ * @param dw Driving weight of the edge.
+ * @param ww Walking weight of the edge.
+ * @return True if the edge was added, false otherwise.
  */
 template <class T>
 bool Graph<T>::addEdge(const T &sourc, const T &dest, double dw, double ww) {
@@ -441,10 +608,13 @@ bool Graph<T>::addEdge(const T &sourc, const T &dest, double dw, double ww) {
   return true;
 }
 
-/*
- * Removes an edge from a graph (this).
- * The edge is identified by the source (sourc) and destination (dest) contents.
- * Returns true if successful, and false if such edge does not exist.
+/**
+ * @brief Removes a directed edge between two vertices.
+ * This operation has a time complexity of O(E), where E is the number of edges
+ * in the adjacency list of the source vertex.
+ * @param sourc Info of the source vertex.
+ * @param dest Info of the destination vertex.
+ * @return True if the edge was removed, false otherwise.
  */
 template <class T> bool Graph<T>::removeEdge(const T &sourc, const T &dest) {
   Vertex<T> *srcVertex = findVertex(sourc);
@@ -454,6 +624,14 @@ template <class T> bool Graph<T>::removeEdge(const T &sourc, const T &dest) {
   return srcVertex->removeEdge(dest);
 }
 
+/**
+ * @brief Finds an edge between two vertices by their IDs.
+ * This operation has a time complexity of O(E), where E is the number of edges
+ * in the adjacency list of the source vertex.
+ * @param sourceId ID of the source vertex.
+ * @param destId ID of the destination vertex.
+ * @return Pointer to the edge if found, nullptr otherwise.
+ */
 template <class T> Edge<T> *Graph<T>::findEdge(int sourceId, int destId) {
   auto sourceVertex = findVertexById(sourceId);
   if (!sourceVertex)
@@ -467,6 +645,16 @@ template <class T> Edge<T> *Graph<T>::findEdge(int sourceId, int destId) {
   return nullptr;
 }
 
+/**
+ * @brief Adds a bidirectional edge between two vertices.
+ * This operation has a time complexity of O(V), where V is the number of
+ * vertices in the graph.
+ * @param sourc Info of the source vertex.
+ * @param dest Info of the destination vertex.
+ * @param dw Driving weight of the edge.
+ * @param ww Walking weight of the edge.
+ * @return True if the edge was added, false otherwise.
+ */
 template <class T>
 bool Graph<T>::addBidirectionalEdge(const T &sourc, const T &dest, double dw,
                                     double ww) {
@@ -481,6 +669,13 @@ bool Graph<T>::addBidirectionalEdge(const T &sourc, const T &dest, double dw,
   return true;
 }
 
+/**
+ * @brief Deletes a dynamically allocated matrix.
+ * This operation has a time complexity of O(n), where n is the number of rows
+ * in the matrix.
+ * @param m Pointer to the matrix.
+ * @param n Number of rows in the matrix.
+ */
 inline void deleteMatrix(int **m, int n) {
   if (m != nullptr) {
     for (int i = 0; i < n; i++)
@@ -490,6 +685,13 @@ inline void deleteMatrix(int **m, int n) {
   }
 }
 
+/**
+ * @brief Deletes a dynamically allocated matrix.
+ * This operation has a time complexity of O(n), where n is the number of rows
+ * in the matrix.
+ * @param m Pointer to the matrix.
+ * @param n Number of rows in the matrix.
+ */
 inline void deleteMatrix(double **m, int n) {
   if (m != nullptr) {
     for (int i = 0; i < n; i++)
@@ -499,6 +701,11 @@ inline void deleteMatrix(double **m, int n) {
   }
 }
 
+/**
+ * @brief Destructor for the Graph class. Frees allocated memory.
+ * This operation has a time complexity of O(V + n), where V is the number of
+ * vertices and n is the size of the matrices.
+ */
 template <class T> Graph<T>::~Graph() {
   deleteMatrix(distMatrix, vertexSet.size());
   deleteMatrix(pathMatrix, vertexSet.size());

@@ -2,13 +2,18 @@
 \hypertarget{struct_environmental_path}{}\label{struct_environmental_path}\index{EnvironmentalPath@{EnvironmentalPath}}
 
 
+Represents a path with both driving and walking segments, along with associated metadata.  
+
+
+
+
 {\ttfamily \#include $<$Environmental\+Path.\+h$>$}
 
 \doxysubsubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
 \mbox{\hyperlink{struct_environmental_path_a8108cb507b116087908635c43a1ac50b}{Environmental\+Path}} ()
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Default constructor for \doxylink{struct_environmental_path}{Environmental\+Path}. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsubsection*{Public Attributes}
 \begin{DoxyCompactItemize}
 \item 
@@ -28,6 +33,18 @@ std\+::string \mbox{\hyperlink{struct_environmental_path_a7c19aa5c4b996686c03017
 \end{DoxyCompactItemize}
 
 
+\doxysubsection{Detailed Description}
+Represents a path with both driving and walking segments, along with associated metadata. 
+
+This structure is used to store information about a route that includes\+:
+\begin{DoxyItemize}
+\item A driving path with its duration.
+\item A parking node where the driving ends.
+\item A walking path with its duration.
+\item The total time for the entire route.
+\item A message providing additional details about the path. 
+\end{DoxyItemize}
+
 \doxysubsection{Constructor \& Destructor Documentation}
 \Hypertarget{struct_environmental_path_a8108cb507b116087908635c43a1ac50b}\index{EnvironmentalPath@{EnvironmentalPath}!EnvironmentalPath@{EnvironmentalPath}}
 \index{EnvironmentalPath@{EnvironmentalPath}!EnvironmentalPath@{EnvironmentalPath}}
@@ -37,6 +54,19 @@ Environmental\+Path\+::\+Environmental\+Path (\begin{DoxyParamCaption}{}{}\end{D
 
 
 
+Default constructor for \doxylink{struct_environmental_path}{Environmental\+Path}. 
+
+Initializes all members to their default values\+:
+\begin{DoxyItemize}
+\item Empty driving and walking paths.
+\item Driving and walking times set to 0.\+0.
+\item Parking node set to nullptr.
+\item Total time set to 0.\+0.
+\item Message set to an empty string.
+\end{DoxyItemize}
+
+This constructor runs in constant time. 
+
 \doxysubsection{Member Data Documentation}
 \Hypertarget{struct_environmental_path_a9f6f49ad75c85811ae37742d515eb3f5}\index{EnvironmentalPath@{EnvironmentalPath}!drivingPath@{drivingPath}}
 \index{drivingPath@{drivingPath}!EnvironmentalPath@{EnvironmentalPath}}
@@ -44,43 +74,43 @@ Environmental\+Path\+::\+Environmental\+Path (\begin{DoxyParamCaption}{}{}\end{D
 {\footnotesize\ttfamily \label{struct_environmental_path_a9f6f49ad75c85811ae37742d515eb3f5} 
 std\+::vector$<$\mbox{\hyperlink{struct_location_info}{Location\+Info}}$>$ Environmental\+Path\+::driving\+Path}
 
-\Hypertarget{struct_environmental_path_ad8839d4bfe9665517ff1db366a1ef754}\index{EnvironmentalPath@{EnvironmentalPath}!drivingTime@{drivingTime}}
+The sequence of locations for the driving segment. \Hypertarget{struct_environmental_path_ad8839d4bfe9665517ff1db366a1ef754}\index{EnvironmentalPath@{EnvironmentalPath}!drivingTime@{drivingTime}}
 \index{drivingTime@{drivingTime}!EnvironmentalPath@{EnvironmentalPath}}
 \doxysubsubsection{\texorpdfstring{drivingTime}{drivingTime}}
 {\footnotesize\ttfamily \label{struct_environmental_path_ad8839d4bfe9665517ff1db366a1ef754} 
 double Environmental\+Path\+::driving\+Time}
 
-\Hypertarget{struct_environmental_path_a7c19aa5c4b996686c030178f5d3f143a}\index{EnvironmentalPath@{EnvironmentalPath}!message@{message}}
+The time required for the driving segment. \Hypertarget{struct_environmental_path_a7c19aa5c4b996686c030178f5d3f143a}\index{EnvironmentalPath@{EnvironmentalPath}!message@{message}}
 \index{message@{message}!EnvironmentalPath@{EnvironmentalPath}}
 \doxysubsubsection{\texorpdfstring{message}{message}}
 {\footnotesize\ttfamily \label{struct_environmental_path_a7c19aa5c4b996686c030178f5d3f143a} 
 std\+::string Environmental\+Path\+::message}
 
-\Hypertarget{struct_environmental_path_a3c62db974953f73f10feefb7ce4cc3fe}\index{EnvironmentalPath@{EnvironmentalPath}!parkingNode@{parkingNode}}
+Additional information or status about the path. \Hypertarget{struct_environmental_path_a3c62db974953f73f10feefb7ce4cc3fe}\index{EnvironmentalPath@{EnvironmentalPath}!parkingNode@{parkingNode}}
 \index{parkingNode@{parkingNode}!EnvironmentalPath@{EnvironmentalPath}}
 \doxysubsubsection{\texorpdfstring{parkingNode}{parkingNode}}
 {\footnotesize\ttfamily \label{struct_environmental_path_a3c62db974953f73f10feefb7ce4cc3fe} 
 \mbox{\hyperlink{class_vertex}{Vertex}}$<$\mbox{\hyperlink{struct_location_info}{Location\+Info}}$>$\texorpdfstring{$\ast$}{*} Environmental\+Path\+::parking\+Node}
 
-\Hypertarget{struct_environmental_path_a6c15aa27c760c25dfcee9bbbecfa9a32}\index{EnvironmentalPath@{EnvironmentalPath}!totalTime@{totalTime}}
+The parking node where the driving segment ends. \Hypertarget{struct_environmental_path_a6c15aa27c760c25dfcee9bbbecfa9a32}\index{EnvironmentalPath@{EnvironmentalPath}!totalTime@{totalTime}}
 \index{totalTime@{totalTime}!EnvironmentalPath@{EnvironmentalPath}}
 \doxysubsubsection{\texorpdfstring{totalTime}{totalTime}}
 {\footnotesize\ttfamily \label{struct_environmental_path_a6c15aa27c760c25dfcee9bbbecfa9a32} 
 double Environmental\+Path\+::total\+Time}
 
-\Hypertarget{struct_environmental_path_a88056ac9ab6396a1ed1134b974d77f3d}\index{EnvironmentalPath@{EnvironmentalPath}!walkingPath@{walkingPath}}
+The total time for the entire route (driving + walking). \Hypertarget{struct_environmental_path_a88056ac9ab6396a1ed1134b974d77f3d}\index{EnvironmentalPath@{EnvironmentalPath}!walkingPath@{walkingPath}}
 \index{walkingPath@{walkingPath}!EnvironmentalPath@{EnvironmentalPath}}
 \doxysubsubsection{\texorpdfstring{walkingPath}{walkingPath}}
 {\footnotesize\ttfamily \label{struct_environmental_path_a88056ac9ab6396a1ed1134b974d77f3d} 
 std\+::vector$<$\mbox{\hyperlink{struct_location_info}{Location\+Info}}$>$ Environmental\+Path\+::walking\+Path}
 
-\Hypertarget{struct_environmental_path_a8ab76097bfcf91a7508d7194a9224330}\index{EnvironmentalPath@{EnvironmentalPath}!walkingTime@{walkingTime}}
+The sequence of locations for the walking segment. \Hypertarget{struct_environmental_path_a8ab76097bfcf91a7508d7194a9224330}\index{EnvironmentalPath@{EnvironmentalPath}!walkingTime@{walkingTime}}
 \index{walkingTime@{walkingTime}!EnvironmentalPath@{EnvironmentalPath}}
 \doxysubsubsection{\texorpdfstring{walkingTime}{walkingTime}}
 {\footnotesize\ttfamily \label{struct_environmental_path_a8ab76097bfcf91a7508d7194a9224330} 
 double Environmental\+Path\+::walking\+Time}
 
-
+The time required for the walking segment. 
 
 The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
 \item 

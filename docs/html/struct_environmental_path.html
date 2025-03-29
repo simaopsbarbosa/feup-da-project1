@@ -110,11 +110,15 @@ $(function(){initNavTree('struct_environmental_path.html',''); initResizable(tru
 </div><!--header-->
 <div class="contents">
 
+<p>Represents a path with both driving and walking segments, along with associated metadata.  
+ <a href="#details">More...</a></p>
+
 <p><code>#include &lt;<a class="el" href="_environmental_path_8h_source.html">EnvironmentalPath.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a8108cb507b116087908635c43a1ac50b" id="r_a8108cb507b116087908635c43a1ac50b"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a8108cb507b116087908635c43a1ac50b">EnvironmentalPath</a> ()</td></tr>
+<tr class="memdesc:a8108cb507b116087908635c43a1ac50b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default constructor for <a class="el" href="struct_environmental_path.html" title="Represents a path with both driving and walking segments, along with associated metadata.">EnvironmentalPath</a>.  <br /></td></tr>
 <tr class="separator:a8108cb507b116087908635c43a1ac50b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
@@ -134,7 +138,16 @@ Public Attributes</h2></td></tr>
 <tr class="memitem:a7c19aa5c4b996686c030178f5d3f143a" id="r_a7c19aa5c4b996686c030178f5d3f143a"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a7c19aa5c4b996686c030178f5d3f143a">message</a></td></tr>
 <tr class="separator:a7c19aa5c4b996686c030178f5d3f143a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Represents a path with both driving and walking segments, along with associated metadata. </p>
+<p>This structure is used to store information about a route that includes:</p><ul>
+<li>A driving path with its duration.</li>
+<li>A parking node where the driving ends.</li>
+<li>A walking path with its duration.</li>
+<li>The total time for the entire route.</li>
+<li>A message providing additional details about the path. </li>
+</ul>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a8108cb507b116087908635c43a1ac50b" name="a8108cb507b116087908635c43a1ac50b"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a8108cb507b116087908635c43a1ac50b">&#9670;&#160;</a></span>EnvironmentalPath()</h2>
 
@@ -158,6 +171,16 @@ Public Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
+<p>Default constructor for <a class="el" href="struct_environmental_path.html" title="Represents a path with both driving and walking segments, along with associated metadata.">EnvironmentalPath</a>. </p>
+<p>Initializes all members to their default values:</p><ul>
+<li>Empty driving and walking paths.</li>
+<li>Driving and walking times set to 0.0.</li>
+<li>Parking node set to nullptr.</li>
+<li>Total time set to 0.0.</li>
+<li>Message set to an empty string.</li>
+</ul>
+<p>This constructor runs in constant time. </p>
+
 </div>
 </div>
 <h2 class="groupheader">Member Data Documentation</h2>
@@ -172,6 +195,7 @@ Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>The sequence of locations for the driving segment. </p>
 
 </div>
 </div>
@@ -186,6 +210,7 @@ Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>The time required for the driving segment. </p>
 
 </div>
 </div>
@@ -200,6 +225,7 @@ Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Additional information or status about the path. </p>
 
 </div>
 </div>
@@ -214,6 +240,7 @@ Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>The parking node where the driving segment ends. </p>
 
 </div>
 </div>
@@ -228,6 +255,7 @@ Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>The total time for the entire route (driving + walking). </p>
 
 </div>
 </div>
@@ -242,6 +270,7 @@ Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>The sequence of locations for the walking segment. </p>
 
 </div>
 </div>
@@ -256,6 +285,7 @@ Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>The time required for the walking segment. </p>
 
 </div>
 </div>

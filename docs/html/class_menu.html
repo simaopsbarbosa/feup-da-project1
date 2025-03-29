@@ -110,39 +110,55 @@ $(function(){initNavTree('class_menu.html',''); initResizable(true); });
 </div><!--header-->
 <div class="contents">
 
+<p>Handles the user interface and interaction for route planning.  
+ <a href="#details">More...</a></p>
+
 <p><code>#include &lt;<a class="el" href="_menu_8h_source.html">Menu.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:ad466dd83355124a6ed958430450bfe94" id="r_ad466dd83355124a6ed958430450bfe94"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ad466dd83355124a6ed958430450bfe94">Menu</a> ()</td></tr>
-<tr class="separator:ad466dd83355124a6ed958430450bfe94"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4002a6f96dc9a5f4843c9b9026a78ca4" id="r_a4002a6f96dc9a5f4843c9b9026a78ca4"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a4002a6f96dc9a5f4843c9b9026a78ca4">buildGraph</a> (std::string locations, std::string distances)</td></tr>
-<tr class="separator:a4002a6f96dc9a5f4843c9b9026a78ca4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1330d001064fef628407352104fccf9f" id="r_a1330d001064fef628407352104fccf9f"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a1330d001064fef628407352104fccf9f">Menu</a> (std::string locations, std::string distances, std::string inputFile=&quot;&quot;, std::string outputFile=&quot;&quot;)</td></tr>
+<tr class="memdesc:a1330d001064fef628407352104fccf9f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs a <a class="el" href="class_menu.html" title="Handles the user interface and interaction for route planning.">Menu</a> object and initializes the graph.  <br /></td></tr>
+<tr class="separator:a1330d001064fef628407352104fccf9f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6835ee888636371b6c7aaa5cfb402aa7" id="r_a6835ee888636371b6c7aaa5cfb402aa7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a6835ee888636371b6c7aaa5cfb402aa7">getMenuOptions</a> ()</td></tr>
+<tr class="memdesc:a6835ee888636371b6c7aaa5cfb402aa7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Displays the menu options to the user.  <br /></td></tr>
 <tr class="separator:a6835ee888636371b6c7aaa5cfb402aa7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a205ea3b1690a51fceb1e253e7fee2ee2" id="r_a205ea3b1690a51fceb1e253e7fee2ee2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a205ea3b1690a51fceb1e253e7fee2ee2">processOption</a> (int option)</td></tr>
+<tr class="memdesc:a205ea3b1690a51fceb1e253e7fee2ee2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Processes the selected menu option.  <br /></td></tr>
 <tr class="separator:a205ea3b1690a51fceb1e253e7fee2ee2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0483fd97d8d4182a2c4acc26c0020e76" id="r_a0483fd97d8d4182a2c4acc26c0020e76"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a0483fd97d8d4182a2c4acc26c0020e76">independentRoutePlanning</a> ()</td></tr>
+<tr class="memdesc:a0483fd97d8d4182a2c4acc26c0020e76"><td class="mdescLeft">&#160;</td><td class="mdescRight">Handles independent route planning.  <br /></td></tr>
 <tr class="separator:a0483fd97d8d4182a2c4acc26c0020e76"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2c3f8e163b1562d2e41980bd7568abeb" id="r_a2c3f8e163b1562d2e41980bd7568abeb"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a2c3f8e163b1562d2e41980bd7568abeb">restrictedRoutePlanning</a> ()</td></tr>
+<tr class="memdesc:a2c3f8e163b1562d2e41980bd7568abeb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Handles restricted route planning with constraints.  <br /></td></tr>
 <tr class="separator:a2c3f8e163b1562d2e41980bd7568abeb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5373365a076c91741b7bff05d133962e" id="r_a5373365a076c91741b7bff05d133962e"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a5373365a076c91741b7bff05d133962e">environmentallyFriendlyRoutePlanning</a> ()</td></tr>
+<tr class="memdesc:a5373365a076c91741b7bff05d133962e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Handles environmentally-friendly route planning.  <br /></td></tr>
 <tr class="separator:a5373365a076c91741b7bff05d133962e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a06ceeac8c20fc509b58bb9aae6d5a15a" id="r_a06ceeac8c20fc509b58bb9aae6d5a15a"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a06ceeac8c20fc509b58bb9aae6d5a15a">batchMode</a> ()</td></tr>
-<tr class="separator:a06ceeac8c20fc509b58bb9aae6d5a15a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7e103a0b6b75b698769d736f3153bb0c" id="r_a7e103a0b6b75b698769d736f3153bb0c"><td class="memItemLeft" align="right" valign="top">std::vector&lt; int &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a7e103a0b6b75b698769d736f3153bb0c">parseNodes</a> (const std::string &amp;input)</td></tr>
-<tr class="separator:a7e103a0b6b75b698769d736f3153bb0c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7aa268b8b5e5eee880a64695f4e78c60" id="r_a7aa268b8b5e5eee880a64695f4e78c60"><td class="memItemLeft" align="right" valign="top">std::vector&lt; std::pair&lt; int, int &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a7aa268b8b5e5eee880a64695f4e78c60">parseSegments</a> (const std::string &amp;input)</td></tr>
-<tr class="separator:a7aa268b8b5e5eee880a64695f4e78c60"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afce0f3241d4c7093d090093e017c6900" id="r_afce0f3241d4c7093d090093e017c6900"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#afce0f3241d4c7093d090093e017c6900">batchMode</a> (std::string inputFile, std::string outputFile=&quot;&quot;)</td></tr>
+<tr class="memdesc:afce0f3241d4c7093d090093e017c6900"><td class="mdescLeft">&#160;</td><td class="mdescRight">Executes batch mode operations based on input and output files.  <br /></td></tr>
+<tr class="separator:afce0f3241d4c7093d090093e017c6900"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4002a6f96dc9a5f4843c9b9026a78ca4" id="r_a4002a6f96dc9a5f4843c9b9026a78ca4"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a4002a6f96dc9a5f4843c9b9026a78ca4">buildGraph</a> (std::string locations, std::string distances)</td></tr>
+<tr class="memdesc:a4002a6f96dc9a5f4843c9b9026a78ca4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Builds the graph from the provided locations and distances files.  <br /></td></tr>
+<tr class="separator:a4002a6f96dc9a5f4843c9b9026a78ca4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4415aab594fd4affce0f79deac6fa04e" id="r_a4415aab594fd4affce0f79deac6fa04e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a4415aab594fd4affce0f79deac6fa04e">displayInstructions</a> ()</td></tr>
+<tr class="memdesc:a4415aab594fd4affce0f79deac6fa04e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Displays instructions for using the program.  <br /></td></tr>
+<tr class="separator:a4415aab594fd4affce0f79deac6fa04e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-attribs" name="pri-attribs"></a>
 Private Attributes</h2></td></tr>
 <tr class="memitem:adcab1dd78a2c57d57ff0806be14feff0" id="r_adcab1dd78a2c57d57ff0806be14feff0"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_graph.html">Graph</a>&lt; <a class="el" href="struct_location_info.html">LocationInfo</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#adcab1dd78a2c57d57ff0806be14feff0">graph</a></td></tr>
+<tr class="memdesc:adcab1dd78a2c57d57ff0806be14feff0"><td class="mdescLeft">&#160;</td><td class="mdescRight">The graph representing the locations and distances.  <br /></td></tr>
 <tr class="separator:adcab1dd78a2c57d57ff0806be14feff0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0d4f28ad619f688a30770a09763ed4b9" id="r_a0d4f28ad619f688a30770a09763ed4b9"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_input_parser.html">InputParser</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a0d4f28ad619f688a30770a09763ed4b9">parser</a></td></tr>
+<tr class="memdesc:a0d4f28ad619f688a30770a09763ed4b9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Utility for parsing input data.  <br /></td></tr>
+<tr class="separator:a0d4f28ad619f688a30770a09763ed4b9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="ad466dd83355124a6ed958430450bfe94" name="ad466dd83355124a6ed958430450bfe94"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad466dd83355124a6ed958430450bfe94">&#9670;&#160;</a></span>Menu()</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Handles the user interface and interaction for route planning. </p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="a1330d001064fef628407352104fccf9f" name="a1330d001064fef628407352104fccf9f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1330d001064fef628407352104fccf9f">&#9670;&#160;</a></span>Menu()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -150,17 +166,43 @@ Private Attributes</h2></td></tr>
         <tr>
           <td class="memname">Menu::Menu </td>
           <td>(</td>
-          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td class="paramtype">std::string</td>          <td class="paramname"><span class="paramname"><em>locations</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype">std::string</td>          <td class="paramname"><span class="paramname"><em>distances</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::string</td>          <td class="paramname"><span class="paramname"><em>inputFile</em></span><span class="paramdefsep"> = </span><span class="paramdefval">&quot;&quot;</span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::string</td>          <td class="paramname"><span class="paramname"><em>outputFile</em></span><span class="paramdefsep"> = </span><span class="paramdefval">&quot;&quot;</span>&#160;)</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
+<p>Constructs a <a class="el" href="class_menu.html" title="Handles the user interface and interaction for route planning.">Menu</a> object and initializes the graph. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">locations</td><td>Path to the locations file. </td></tr>
+    <tr><td class="paramname">distances</td><td>Path to the distances file. </td></tr>
+    <tr><td class="paramname">inputFile</td><td>Path to the batch mode input file (optional). </td></tr>
+    <tr><td class="paramname">outputFile</td><td>Path to the batch mode output file (optional).</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>Complexity: O(V + E), where V is the number of vertices and E is the number of edges. </p>
+
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="a06ceeac8c20fc509b58bb9aae6d5a15a" name="a06ceeac8c20fc509b58bb9aae6d5a15a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a06ceeac8c20fc509b58bb9aae6d5a15a">&#9670;&#160;</a></span>batchMode()</h2>
+<a id="afce0f3241d4c7093d090093e017c6900" name="afce0f3241d4c7093d090093e017c6900"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afce0f3241d4c7093d090093e017c6900">&#9670;&#160;</a></span>batchMode()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -168,11 +210,25 @@ Private Attributes</h2></td></tr>
         <tr>
           <td class="memname">int Menu::batchMode </td>
           <td>(</td>
-          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td class="paramtype">std::string</td>          <td class="paramname"><span class="paramname"><em>inputFile</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype">std::string</td>          <td class="paramname"><span class="paramname"><em>outputFile</em></span><span class="paramdefsep"> = </span><span class="paramdefval">&quot;&quot;</span>&#160;)</td>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Executes batch mode operations based on input and output files. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">inputFile</td><td>Path to the batch mode input file. </td></tr>
+    <tr><td class="paramname">outputFile</td><td>Path to the batch mode output file (optional).</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>Complexity: O(V + E), where V is the number of vertices and E is the number of edges. </p><dl class="section return"><dt>Returns</dt><dd>Status code (0 for success). </dd></dl>
 
 </div>
 </div>
@@ -195,6 +251,36 @@ Private Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Builds the graph from the provided locations and distances files. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">locations</td><td>Path to the locations file. </td></tr>
+    <tr><td class="paramname">distances</td><td>Path to the distances file.</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>Complexity: O(V + E), where V is the number of vertices and E is the number of edges. </p><dl class="section return"><dt>Returns</dt><dd>Status code (0 for success, 1 for failure). </dd></dl>
+
+</div>
+</div>
+<a id="a4415aab594fd4affce0f79deac6fa04e" name="a4415aab594fd4affce0f79deac6fa04e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4415aab594fd4affce0f79deac6fa04e">&#9670;&#160;</a></span>displayInstructions()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Menu::displayInstructions </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Displays instructions for using the program. </p>
+<p>Complexity: O(1). </p>
+
 </div>
 </div>
 <a id="a5373365a076c91741b7bff05d133962e" name="a5373365a076c91741b7bff05d133962e"></a>
@@ -211,6 +297,9 @@ Private Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Handles environmentally-friendly route planning. </p>
+<p>Complexity: O(V + E), where V is the number of vertices and E is the number of edges. </p><dl class="section return"><dt>Returns</dt><dd>Status code (0 for success). </dd></dl>
 
 </div>
 </div>
@@ -229,6 +318,9 @@ Private Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Displays the menu options to the user. </p>
+<p>Complexity: O(1). </p>
+
 </div>
 </div>
 <a id="a0483fd97d8d4182a2c4acc26c0020e76" name="a0483fd97d8d4182a2c4acc26c0020e76"></a>
@@ -246,39 +338,8 @@ Private Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-</div>
-</div>
-<a id="a7e103a0b6b75b698769d736f3153bb0c" name="a7e103a0b6b75b698769d736f3153bb0c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7e103a0b6b75b698769d736f3153bb0c">&#9670;&#160;</a></span>parseNodes()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">std::vector&lt; int &gt; Menu::parseNodes </td>
-          <td>(</td>
-          <td class="paramtype">const std::string &amp;</td>          <td class="paramname"><span class="paramname"><em>input</em></span></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a7aa268b8b5e5eee880a64695f4e78c60" name="a7aa268b8b5e5eee880a64695f4e78c60"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7aa268b8b5e5eee880a64695f4e78c60">&#9670;&#160;</a></span>parseSegments()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">std::vector&lt; std::pair&lt; int, int &gt; &gt; Menu::parseSegments </td>
-          <td>(</td>
-          <td class="paramtype">const std::string &amp;</td>          <td class="paramname"><span class="paramname"><em>input</em></span></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
+<p>Handles independent route planning. </p>
+<p>Complexity: O(V + E), where V is the number of vertices and E is the number of edges. </p><dl class="section return"><dt>Returns</dt><dd>Status code (0 for success). </dd></dl>
 
 </div>
 </div>
@@ -297,6 +358,15 @@ Private Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Processes the selected menu option. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">option</td><td>The selected menu option.</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>Complexity: O(1). </p>
+
 </div>
 </div>
 <a id="a2c3f8e163b1562d2e41980bd7568abeb" name="a2c3f8e163b1562d2e41980bd7568abeb"></a>
@@ -313,6 +383,9 @@ Private Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Handles restricted route planning with constraints. </p>
+<p>Complexity: O(V + E), where V is the number of vertices and E is the number of edges. </p><dl class="section return"><dt>Returns</dt><dd>Status code (0 for success). </dd></dl>
 
 </div>
 </div>
@@ -336,6 +409,32 @@ Private Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>The graph representing the locations and distances. </p>
+
+</div>
+</div>
+<a id="a0d4f28ad619f688a30770a09763ed4b9" name="a0d4f28ad619f688a30770a09763ed4b9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0d4f28ad619f688a30770a09763ed4b9">&#9670;&#160;</a></span>parser</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_input_parser.html">InputParser</a> Menu::parser</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel private">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Utility for parsing input data. </p>
 
 </div>
 </div>

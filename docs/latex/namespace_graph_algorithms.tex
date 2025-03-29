@@ -4,34 +4,80 @@
 \begin{DoxyCompactItemize}
 \item 
 bool \mbox{\hyperlink{namespace_graph_algorithms_ad7539f73539ad028603834297e92f262}{relax}} (\mbox{\hyperlink{class_edge}{Edge}}$<$ \mbox{\hyperlink{struct_location_info}{Location\+Info}} $>$ \texorpdfstring{$\ast$}{*}edge, bool is\+Driving=true)
-\item 
+\begin{DoxyCompactList}\small\item\em Relaxes an edge during graph traversal. \end{DoxyCompactList}\item 
+std\+::vector$<$ \mbox{\hyperlink{struct_location_info}{Location\+Info}} $>$ \mbox{\hyperlink{namespace_graph_algorithms_a8221d490ee511e486db5a6d46a0d6f52}{dijkstra}} (\mbox{\hyperlink{class_graph}{Graph}}$<$ \mbox{\hyperlink{struct_location_info}{Location\+Info}} $>$ \texorpdfstring{$\ast$}{*}graph, int source, int dest, const std\+::vector$<$ int $>$ \&avoid\+Nodes, const std\+::vector$<$ std\+::pair$<$ int, int $>$ $>$ \&avoid\+Segments, bool is\+Driving)
+\begin{DoxyCompactList}\small\item\em Computes the shortest path between two nodes using Dijkstra\textquotesingle{}s algorithm. \end{DoxyCompactList}\item 
 std\+::vector$<$ \mbox{\hyperlink{struct_location_info}{Location\+Info}} $>$ \mbox{\hyperlink{namespace_graph_algorithms_ad0b355dbc6ee4505261170b7807be1df}{get\+Path}} (\mbox{\hyperlink{class_graph}{Graph}}$<$ \mbox{\hyperlink{struct_location_info}{Location\+Info}} $>$ \texorpdfstring{$\ast$}{*}g, const int \&origin, const int \&dest, bool is\+Driving)
-\item 
-std\+::vector$<$ \mbox{\hyperlink{struct_location_info}{Location\+Info}} $>$ \mbox{\hyperlink{namespace_graph_algorithms_a9dc4dd3b5c180f6d6da8c97c2bf78ac1}{dijkstra\+Driving}} (\mbox{\hyperlink{class_graph}{Graph}}$<$ \mbox{\hyperlink{struct_location_info}{Location\+Info}} $>$ \texorpdfstring{$\ast$}{*}graph, int source, int dest, const std\+::vector$<$ int $>$ \&avoid\+Nodes, const std\+::vector$<$ std\+::pair$<$ int, int $>$ $>$ \&avoid\+Segments)
-\item 
-std\+::vector$<$ \mbox{\hyperlink{struct_location_info}{Location\+Info}} $>$ \mbox{\hyperlink{namespace_graph_algorithms_a083c6864a8d1572b59b240e5331787bc}{dijkstra\+Walking}} (\mbox{\hyperlink{class_graph}{Graph}}$<$ \mbox{\hyperlink{struct_location_info}{Location\+Info}} $>$ \texorpdfstring{$\ast$}{*}graph, int source, int dest, const std\+::vector$<$ int $>$ \&avoid\+Nodes, const std\+::vector$<$ std\+::pair$<$ int, int $>$ $>$ \&avoid\+Segments)
-\item 
-std\+::vector$<$ \mbox{\hyperlink{struct_location_info}{Location\+Info}} $>$ \mbox{\hyperlink{namespace_graph_algorithms_acc2240cd6475571dfceccf4b170a0b71}{normal\+Route}} (\mbox{\hyperlink{class_graph}{Graph}}$<$ \mbox{\hyperlink{struct_location_info}{Location\+Info}} $>$ \texorpdfstring{$\ast$}{*}graph, int source, int dest, const std\+::vector$<$ int $>$ \&avoid\+Nodes, const std\+::vector$<$ std\+::pair$<$ int, int $>$ $>$ \&avoid\+Segments, int include\+Node=-\/1)
-\item 
-std\+::vector$<$ \mbox{\hyperlink{struct_environmental_path}{Environmental\+Path}} $>$ \mbox{\hyperlink{namespace_graph_algorithms_a3c3c493521b7bbdf877a4178b6e82a09}{environmental\+Route}} (\mbox{\hyperlink{class_graph}{Graph}}$<$ \mbox{\hyperlink{struct_location_info}{Location\+Info}} $>$ \texorpdfstring{$\ast$}{*}graph, int source, int dest, double max\+Walking\+Time, const std\+::vector$<$ int $>$ \&avoid\+Nodes, const std\+::vector$<$ std\+::pair$<$ int, int $>$ $>$ \&avoid\+Segments)
-\begin{DoxyCompactList}\small\item\em Computes the most environmentally friendly route. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Retrieves the path from the origin to the destination. \end{DoxyCompactList}\item 
+std\+::vector$<$ \mbox{\hyperlink{struct_location_info}{Location\+Info}} $>$ \mbox{\hyperlink{namespace_graph_algorithms_acf21e304ba607a6083cc3faa09cf8bfc}{driving\+Route}} (\mbox{\hyperlink{class_graph}{Graph}}$<$ \mbox{\hyperlink{struct_location_info}{Location\+Info}} $>$ \texorpdfstring{$\ast$}{*}graph, int source, int dest, const std\+::vector$<$ int $>$ \&avoid\+Nodes, const std\+::vector$<$ std\+::pair$<$ int, int $>$ $>$ \&avoid\+Segments, int include\+Node=-\/1)
+\begin{DoxyCompactList}\small\item\em Computes the driving route between two nodes. \end{DoxyCompactList}\item 
 std\+::vector$<$ std\+::pair$<$ \mbox{\hyperlink{class_vertex}{Vertex}}$<$ \mbox{\hyperlink{struct_location_info}{Location\+Info}} $>$ \texorpdfstring{$\ast$}{*}, std\+::vector$<$ \mbox{\hyperlink{struct_location_info}{Location\+Info}} $>$ $>$ $>$ \mbox{\hyperlink{namespace_graph_algorithms_ae93c882ba57501977a06f6cd052c2389}{get\+Parking\+Nodes}} (\mbox{\hyperlink{class_graph}{Graph}}$<$ \mbox{\hyperlink{struct_location_info}{Location\+Info}} $>$ \texorpdfstring{$\ast$}{*}graph, int source, const std\+::vector$<$ int $>$ \&avoid\+Nodes, const std\+::vector$<$ std\+::pair$<$ int, int $>$ $>$ \&avoid\+Segments)
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Finds all parking nodes reachable from the source. \end{DoxyCompactList}\item 
+std\+::vector$<$ \mbox{\hyperlink{struct_environmental_path}{Environmental\+Path}} $>$ \mbox{\hyperlink{namespace_graph_algorithms_a3c3c493521b7bbdf877a4178b6e82a09}{environmental\+Route}} (\mbox{\hyperlink{class_graph}{Graph}}$<$ \mbox{\hyperlink{struct_location_info}{Location\+Info}} $>$ \texorpdfstring{$\ast$}{*}graph, int source, int dest, double max\+Walking\+Time, const std\+::vector$<$ int $>$ \&avoid\+Nodes, const std\+::vector$<$ std\+::pair$<$ int, int $>$ $>$ \&avoid\+Segments)
+\begin{DoxyCompactList}\small\item\em Computes an environmental route combining driving and walking. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \doxysubsection{Function Documentation}
-\Hypertarget{namespace_graph_algorithms_a9dc4dd3b5c180f6d6da8c97c2bf78ac1}\index{GraphAlgorithms@{GraphAlgorithms}!dijkstraDriving@{dijkstraDriving}}
-\index{dijkstraDriving@{dijkstraDriving}!GraphAlgorithms@{GraphAlgorithms}}
-\doxysubsubsection{\texorpdfstring{dijkstraDriving()}{dijkstraDriving()}}
-{\footnotesize\ttfamily \label{namespace_graph_algorithms_a9dc4dd3b5c180f6d6da8c97c2bf78ac1} 
-std\+::vector$<$ \mbox{\hyperlink{struct_location_info}{Location\+Info}} $>$ Graph\+Algorithms\+::dijkstra\+Driving (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_graph}{Graph}}$<$ \mbox{\hyperlink{struct_location_info}{Location\+Info}} $>$ \texorpdfstring{$\ast$}{*}}]{graph}{, }\item[{int}]{source}{, }\item[{int}]{dest}{, }\item[{const std\+::vector$<$ int $>$ \&}]{avoid\+Nodes}{, }\item[{const std\+::vector$<$ std\+::pair$<$ int, int $>$ $>$ \&}]{avoid\+Segments}{}\end{DoxyParamCaption})}
+\Hypertarget{namespace_graph_algorithms_a8221d490ee511e486db5a6d46a0d6f52}\index{GraphAlgorithms@{GraphAlgorithms}!dijkstra@{dijkstra}}
+\index{dijkstra@{dijkstra}!GraphAlgorithms@{GraphAlgorithms}}
+\doxysubsubsection{\texorpdfstring{dijkstra()}{dijkstra()}}
+{\footnotesize\ttfamily \label{namespace_graph_algorithms_a8221d490ee511e486db5a6d46a0d6f52} 
+std\+::vector$<$ \mbox{\hyperlink{struct_location_info}{Location\+Info}} $>$ Graph\+Algorithms\+::dijkstra (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_graph}{Graph}}$<$ \mbox{\hyperlink{struct_location_info}{Location\+Info}} $>$ \texorpdfstring{$\ast$}{*}}]{graph}{, }\item[{int}]{source}{, }\item[{int}]{dest}{, }\item[{const std\+::vector$<$ int $>$ \&}]{avoid\+Nodes}{, }\item[{const std\+::vector$<$ std\+::pair$<$ int, int $>$ $>$ \&}]{avoid\+Segments}{, }\item[{bool}]{is\+Driving}{}\end{DoxyParamCaption})}
 
-\Hypertarget{namespace_graph_algorithms_a083c6864a8d1572b59b240e5331787bc}\index{GraphAlgorithms@{GraphAlgorithms}!dijkstraWalking@{dijkstraWalking}}
-\index{dijkstraWalking@{dijkstraWalking}!GraphAlgorithms@{GraphAlgorithms}}
-\doxysubsubsection{\texorpdfstring{dijkstraWalking()}{dijkstraWalking()}}
-{\footnotesize\ttfamily \label{namespace_graph_algorithms_a083c6864a8d1572b59b240e5331787bc} 
-std\+::vector$<$ \mbox{\hyperlink{struct_location_info}{Location\+Info}} $>$ Graph\+Algorithms\+::dijkstra\+Walking (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_graph}{Graph}}$<$ \mbox{\hyperlink{struct_location_info}{Location\+Info}} $>$ \texorpdfstring{$\ast$}{*}}]{graph}{, }\item[{int}]{source}{, }\item[{int}]{dest}{, }\item[{const std\+::vector$<$ int $>$ \&}]{avoid\+Nodes}{, }\item[{const std\+::vector$<$ std\+::pair$<$ int, int $>$ $>$ \&}]{avoid\+Segments}{}\end{DoxyParamCaption})}
 
+
+Computes the shortest path between two nodes using Dijkstra\textquotesingle{}s algorithm. 
+
+Finds the shortest path from the source to the destination while avoiding specified nodes and segments. The algorithm runs in O((V + E) log V), where V is the number of vertices and E is the number of edges.
+
+
+\begin{DoxyParams}{Parameters}
+{\em graph} & The graph to traverse. \\
+\hline
+{\em source} & The ID of the source node. \\
+\hline
+{\em dest} & The ID of the destination node. \\
+\hline
+{\em avoid\+Nodes} & A list of node IDs to avoid. \\
+\hline
+{\em avoid\+Segments} & A list of edge pairs (source, destination) to avoid. \\
+\hline
+{\em is\+Driving} & Indicates whether the path is for driving. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A vector of \doxylink{struct_location_info}{Location\+Info} representing the shortest path. 
+\end{DoxyReturn}
+\Hypertarget{namespace_graph_algorithms_acf21e304ba607a6083cc3faa09cf8bfc}\index{GraphAlgorithms@{GraphAlgorithms}!drivingRoute@{drivingRoute}}
+\index{drivingRoute@{drivingRoute}!GraphAlgorithms@{GraphAlgorithms}}
+\doxysubsubsection{\texorpdfstring{drivingRoute()}{drivingRoute()}}
+{\footnotesize\ttfamily \label{namespace_graph_algorithms_acf21e304ba607a6083cc3faa09cf8bfc} 
+std\+::vector$<$ \mbox{\hyperlink{struct_location_info}{Location\+Info}} $>$ Graph\+Algorithms\+::driving\+Route (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_graph}{Graph}}$<$ \mbox{\hyperlink{struct_location_info}{Location\+Info}} $>$ \texorpdfstring{$\ast$}{*}}]{graph}{, }\item[{int}]{source}{, }\item[{int}]{dest}{, }\item[{const std\+::vector$<$ int $>$ \&}]{avoid\+Nodes}{, }\item[{const std\+::vector$<$ std\+::pair$<$ int, int $>$ $>$ \&}]{avoid\+Segments}{, }\item[{int}]{include\+Node}{ = {\ttfamily -\/1}}\end{DoxyParamCaption})}
+
+
+
+Computes the driving route between two nodes. 
+
+Finds the shortest driving route from the source to the destination, optionally passing through an intermediate node. The algorithm runs in O((V + E) log V) for each segment of the route (source to intermediate and intermediate to destination).
+
+
+\begin{DoxyParams}{Parameters}
+{\em graph} & The graph to traverse. \\
+\hline
+{\em source} & The ID of the source node. \\
+\hline
+{\em dest} & The ID of the destination node. \\
+\hline
+{\em avoid\+Nodes} & A list of node IDs to avoid. \\
+\hline
+{\em avoid\+Segments} & A list of edge pairs (source, destination) to avoid. \\
+\hline
+{\em include\+Node} & An optional intermediate node to include in the route. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A vector of \doxylink{struct_location_info}{Location\+Info} representing the driving route. 
+\end{DoxyReturn}
 \Hypertarget{namespace_graph_algorithms_a3c3c493521b7bbdf877a4178b6e82a09}\index{GraphAlgorithms@{GraphAlgorithms}!environmentalRoute@{environmentalRoute}}
 \index{environmentalRoute@{environmentalRoute}!GraphAlgorithms@{GraphAlgorithms}}
 \doxysubsubsection{\texorpdfstring{environmentalRoute()}{environmentalRoute()}}
@@ -40,25 +86,27 @@ std\+::vector$<$ \mbox{\hyperlink{struct_environmental_path}{Environmental\+Path
 
 
 
-Computes the most environmentally friendly route. 
+Computes an environmental route combining driving and walking. 
+
+Finds a route from the source to the destination that minimizes total time while respecting a maximum walking time. The algorithm runs in O((V + E) log V) for each parking node considered, plus O(\+P log P) for sorting, where P is the number of parking nodes.
 
 
 \begin{DoxyParams}{Parameters}
-{\em graph} & The graph of locations. \\
+{\em graph} & The graph to traverse. \\
 \hline
-{\em source} & The starting node. \\
+{\em source} & The ID of the source node. \\
 \hline
-{\em dest} & The destination node. \\
+{\em dest} & The ID of the destination node. \\
 \hline
-{\em max\+Walking\+Time} & The maximum walking time. \\
+{\em max\+Walking\+Time} & The maximum allowable walking time. \\
 \hline
-{\em avoid\+Nodes} & Nodes to avoid. \\
+{\em avoid\+Nodes} & A list of node IDs to avoid. \\
 \hline
-{\em avoid\+Segments} & Road segments to avoid. \\
+{\em avoid\+Segments} & A list of edge pairs (source, destination) to avoid. \\
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
-An \doxylink{struct_environmental_path}{Environmental\+Path} containing the optimal route. 
+A vector of \doxylink{struct_environmental_path}{Environmental\+Path} objects representing the possible routes. 
 \end{DoxyReturn}
 \Hypertarget{namespace_graph_algorithms_ae93c882ba57501977a06f6cd052c2389}\index{GraphAlgorithms@{GraphAlgorithms}!getParkingNodes@{getParkingNodes}}
 \index{getParkingNodes@{getParkingNodes}!GraphAlgorithms@{GraphAlgorithms}}
@@ -66,21 +114,71 @@ An \doxylink{struct_environmental_path}{Environmental\+Path} containing the opti
 {\footnotesize\ttfamily \label{namespace_graph_algorithms_ae93c882ba57501977a06f6cd052c2389} 
 std\+::vector$<$ std\+::pair$<$ \mbox{\hyperlink{class_vertex}{Vertex}}$<$ \mbox{\hyperlink{struct_location_info}{Location\+Info}} $>$ \texorpdfstring{$\ast$}{*}, std\+::vector$<$ \mbox{\hyperlink{struct_location_info}{Location\+Info}} $>$ $>$ $>$ Graph\+Algorithms\+::get\+Parking\+Nodes (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_graph}{Graph}}$<$ \mbox{\hyperlink{struct_location_info}{Location\+Info}} $>$ \texorpdfstring{$\ast$}{*}}]{graph}{, }\item[{int}]{source}{, }\item[{const std\+::vector$<$ int $>$ \&}]{avoid\+Nodes}{, }\item[{const std\+::vector$<$ std\+::pair$<$ int, int $>$ $>$ \&}]{avoid\+Segments}{}\end{DoxyParamCaption})}
 
+
+
+Finds all parking nodes reachable from the source. 
+
+Identifies parking nodes and computes the driving path to each of them. The algorithm runs in O((V + E) log V), where V is the number of vertices and E is the number of edges.
+
+
+\begin{DoxyParams}{Parameters}
+{\em graph} & The graph to traverse. \\
+\hline
+{\em source} & The ID of the source node. \\
+\hline
+{\em avoid\+Nodes} & A list of node IDs to avoid. \\
+\hline
+{\em avoid\+Segments} & A list of edge pairs (source, destination) to avoid. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A vector of pairs, each containing a parking node and the path to it. 
+\end{DoxyReturn}
 \Hypertarget{namespace_graph_algorithms_ad0b355dbc6ee4505261170b7807be1df}\index{GraphAlgorithms@{GraphAlgorithms}!getPath@{getPath}}
 \index{getPath@{getPath}!GraphAlgorithms@{GraphAlgorithms}}
 \doxysubsubsection{\texorpdfstring{getPath()}{getPath()}}
 {\footnotesize\ttfamily \label{namespace_graph_algorithms_ad0b355dbc6ee4505261170b7807be1df} 
 std\+::vector$<$ \mbox{\hyperlink{struct_location_info}{Location\+Info}} $>$ Graph\+Algorithms\+::get\+Path (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_graph}{Graph}}$<$ \mbox{\hyperlink{struct_location_info}{Location\+Info}} $>$ \texorpdfstring{$\ast$}{*}}]{g}{, }\item[{const int \&}]{origin}{, }\item[{const int \&}]{dest}{, }\item[{bool}]{is\+Driving}{}\end{DoxyParamCaption})}
 
-\Hypertarget{namespace_graph_algorithms_acc2240cd6475571dfceccf4b170a0b71}\index{GraphAlgorithms@{GraphAlgorithms}!normalRoute@{normalRoute}}
-\index{normalRoute@{normalRoute}!GraphAlgorithms@{GraphAlgorithms}}
-\doxysubsubsection{\texorpdfstring{normalRoute()}{normalRoute()}}
-{\footnotesize\ttfamily \label{namespace_graph_algorithms_acc2240cd6475571dfceccf4b170a0b71} 
-std\+::vector$<$ \mbox{\hyperlink{struct_location_info}{Location\+Info}} $>$ Graph\+Algorithms\+::normal\+Route (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_graph}{Graph}}$<$ \mbox{\hyperlink{struct_location_info}{Location\+Info}} $>$ \texorpdfstring{$\ast$}{*}}]{graph}{, }\item[{int}]{source}{, }\item[{int}]{dest}{, }\item[{const std\+::vector$<$ int $>$ \&}]{avoid\+Nodes}{, }\item[{const std\+::vector$<$ std\+::pair$<$ int, int $>$ $>$ \&}]{avoid\+Segments}{, }\item[{int}]{include\+Node}{ = {\ttfamily -\/1}}\end{DoxyParamCaption})}
 
+
+Retrieves the path from the origin to the destination. 
+
+Constructs the path by backtracking from the destination to the origin using the shortest path tree. This function runs in O(\+V), where V is the number of vertices in the path.
+
+
+\begin{DoxyParams}{Parameters}
+{\em g} & The graph containing the path. \\
+\hline
+{\em origin} & The ID of the origin node. \\
+\hline
+{\em dest} & The ID of the destination node. \\
+\hline
+{\em is\+Driving} & Indicates whether the path is for driving. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A vector of \doxylink{struct_location_info}{Location\+Info} representing the path. 
+\end{DoxyReturn}
 \Hypertarget{namespace_graph_algorithms_ad7539f73539ad028603834297e92f262}\index{GraphAlgorithms@{GraphAlgorithms}!relax@{relax}}
 \index{relax@{relax}!GraphAlgorithms@{GraphAlgorithms}}
 \doxysubsubsection{\texorpdfstring{relax()}{relax()}}
 {\footnotesize\ttfamily \label{namespace_graph_algorithms_ad7539f73539ad028603834297e92f262} 
 bool Graph\+Algorithms\+::relax (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_edge}{Edge}}$<$ \mbox{\hyperlink{struct_location_info}{Location\+Info}} $>$ \texorpdfstring{$\ast$}{*}}]{edge}{, }\item[{bool}]{is\+Driving}{ = {\ttfamily true}}\end{DoxyParamCaption})}
 
+
+
+Relaxes an edge during graph traversal. 
+
+Updates the distance to the destination vertex if a shorter path is found. This function runs in constant time.
+
+
+\begin{DoxyParams}{Parameters}
+{\em edge} & The edge to relax. \\
+\hline
+{\em is\+Driving} & Indicates whether the edge is part of a driving path. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if the edge was relaxed, false otherwise. 
+\end{DoxyReturn}

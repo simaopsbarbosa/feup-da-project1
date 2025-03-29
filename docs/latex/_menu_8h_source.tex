@@ -6,30 +6,42 @@
 \DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ MENU\_HPP}}
 \DoxyCodeLine{00003\ }
 \DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_graph_algorithms_8h}{GraphAlgorithms.h}}"{}}}
-\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_graph_8h}{data-\/structures/Graph.h}}"{}}}
-\DoxyCodeLine{00006\ }
-\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ <iostream>}}
-\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ <string>}}
-\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ <vector>}}
-\DoxyCodeLine{00010\ }
-\DoxyCodeLine{00011\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_menu_ad466dd83355124a6ed958430450bfe94}{Menu}}\ \{}
-\DoxyCodeLine{00012\ \ \ \textcolor{keyword}{public}:}
-\DoxyCodeLine{00013\ \ \ \ \ \mbox{\hyperlink{class_menu_ad466dd83355124a6ed958430450bfe94}{Menu}}();}
-\DoxyCodeLine{00014\ \ \ \ \ \textcolor{keywordtype}{int}\ \ \mbox{\hyperlink{class_menu_a4002a6f96dc9a5f4843c9b9026a78ca4}{buildGraph}}(std::string\ locations,\ std::string\ distances);}
-\DoxyCodeLine{00015\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_menu_a6835ee888636371b6c7aaa5cfb402aa7}{getMenuOptions}}();}
-\DoxyCodeLine{00016\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_menu_a205ea3b1690a51fceb1e253e7fee2ee2}{processOption}}(\textcolor{keywordtype}{int}\ option);}
-\DoxyCodeLine{00017\ }
-\DoxyCodeLine{00018\ \ \ \ \ \textcolor{keywordtype}{int}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_menu_a0483fd97d8d4182a2c4acc26c0020e76}{independentRoutePlanning}}();}
-\DoxyCodeLine{00019\ \ \ \ \ \textcolor{keywordtype}{int}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_menu_a2c3f8e163b1562d2e41980bd7568abeb}{restrictedRoutePlanning}}();}
-\DoxyCodeLine{00020\ \ \ \ \ \textcolor{keywordtype}{int}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_menu_a5373365a076c91741b7bff05d133962e}{environmentallyFriendlyRoutePlanning}}();}
-\DoxyCodeLine{00021\ \ \ \ \ \textcolor{keywordtype}{int}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_menu_a06ceeac8c20fc509b58bb9aae6d5a15a}{batchMode}}();}
-\DoxyCodeLine{00022\ \ \ \ \ std::vector<int>\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_menu_a7e103a0b6b75b698769d736f3153bb0c}{parseNodes}}(\textcolor{keyword}{const}\ std::string\ \&input);}
-\DoxyCodeLine{00023\ \ \ \ \ std::vector<std::pair<int,\ int>>\ \mbox{\hyperlink{class_menu_a7aa268b8b5e5eee880a64695f4e78c60}{parseSegments}}(\textcolor{keyword}{const}\ std::string\ \&input);}
-\DoxyCodeLine{00024\ }
-\DoxyCodeLine{00025\ \ \ \textcolor{keyword}{private}:}
-\DoxyCodeLine{00026\ \ \ \ \ \mbox{\hyperlink{class_graph}{Graph<LocationInfo>}}\ \mbox{\hyperlink{class_menu_adcab1dd78a2c57d57ff0806be14feff0}{graph}};}
-\DoxyCodeLine{00027\ \};}
-\DoxyCodeLine{00028\ }
-\DoxyCodeLine{00029\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ MENU\_HPP}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_input_parser_8h}{InputParser.h}}"{}}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_graph_8h}{data-\/structures/Graph.h}}"{}}}
+\DoxyCodeLine{00007\ }
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ <fstream>}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ <iostream>}}
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#include\ <sstream>}}
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00012\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{00013\ }
+\DoxyCodeLine{00018\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_menu_a1330d001064fef628407352104fccf9f}{Menu}}\ \{}
+\DoxyCodeLine{00019\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00030\ \ \ \mbox{\hyperlink{class_menu_a1330d001064fef628407352104fccf9f}{Menu}}(std::string\ locations,\ std::string\ distances,\ std::string\ inputFile\ =\ \textcolor{stringliteral}{"{}"{}},}
+\DoxyCodeLine{00031\ \ \ \ \ \ \ \ std::string\ outputFile\ =\ \textcolor{stringliteral}{"{}"{}});}
+\DoxyCodeLine{00032\ }
+\DoxyCodeLine{00038\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_menu_a6835ee888636371b6c7aaa5cfb402aa7}{getMenuOptions}}();}
+\DoxyCodeLine{00039\ }
+\DoxyCodeLine{00046\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_menu_a205ea3b1690a51fceb1e253e7fee2ee2}{processOption}}(\textcolor{keywordtype}{int}\ option);}
+\DoxyCodeLine{00047\ }
+\DoxyCodeLine{00055\ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_menu_a0483fd97d8d4182a2c4acc26c0020e76}{independentRoutePlanning}}();}
+\DoxyCodeLine{00056\ }
+\DoxyCodeLine{00064\ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_menu_a2c3f8e163b1562d2e41980bd7568abeb}{restrictedRoutePlanning}}();}
+\DoxyCodeLine{00065\ }
+\DoxyCodeLine{00073\ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_menu_a5373365a076c91741b7bff05d133962e}{environmentallyFriendlyRoutePlanning}}();}
+\DoxyCodeLine{00074\ }
+\DoxyCodeLine{00084\ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_menu_afce0f3241d4c7093d090093e017c6900}{batchMode}}(std::string\ inputFile,\ std::string\ outputFile\ =\ \textcolor{stringliteral}{"{}"{}});}
+\DoxyCodeLine{00085\ }
+\DoxyCodeLine{00095\ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_menu_a4002a6f96dc9a5f4843c9b9026a78ca4}{buildGraph}}(std::string\ locations,\ std::string\ distances);}
+\DoxyCodeLine{00096\ }
+\DoxyCodeLine{00102\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_menu_a4415aab594fd4affce0f79deac6fa04e}{displayInstructions}}();}
+\DoxyCodeLine{00103\ }
+\DoxyCodeLine{00104\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00105\ \ \ \mbox{\hyperlink{class_graph}{Graph<LocationInfo>}}}
+\DoxyCodeLine{00106\ \ \ \ \ \ \ \mbox{\hyperlink{class_menu_adcab1dd78a2c57d57ff0806be14feff0}{graph}};\ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00107\ \ \ \mbox{\hyperlink{class_input_parser}{InputParser}}\ \mbox{\hyperlink{class_menu_a0d4f28ad619f688a30770a09763ed4b9}{parser}};\ }
+\DoxyCodeLine{00108\ \};}
+\DoxyCodeLine{00109\ }
+\DoxyCodeLine{00110\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ MENU\_HPP}}
 
 \end{DoxyCode}

@@ -2,102 +2,185 @@
 \hypertarget{class_menu}{}\label{class_menu}\index{Menu@{Menu}}
 
 
+Handles the user interface and interaction for route planning.  
+
+
+
+
 {\ttfamily \#include $<$Menu.\+h$>$}
 
 \doxysubsubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\hyperlink{class_menu_ad466dd83355124a6ed958430450bfe94}{Menu}} ()
-\item 
-int \mbox{\hyperlink{class_menu_a4002a6f96dc9a5f4843c9b9026a78ca4}{build\+Graph}} (std\+::string locations, std\+::string distances)
-\item 
+\mbox{\hyperlink{class_menu_a1330d001064fef628407352104fccf9f}{Menu}} (std\+::string locations, std\+::string distances, std\+::string input\+File="{}"{}, std\+::string output\+File="{}"{})
+\begin{DoxyCompactList}\small\item\em Constructs a \doxylink{class_menu}{Menu} object and initializes the graph. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{class_menu_a6835ee888636371b6c7aaa5cfb402aa7}{get\+Menu\+Options}} ()
-\item 
+\begin{DoxyCompactList}\small\item\em Displays the menu options to the user. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{class_menu_a205ea3b1690a51fceb1e253e7fee2ee2}{process\+Option}} (int option)
-\item 
+\begin{DoxyCompactList}\small\item\em Processes the selected menu option. \end{DoxyCompactList}\item 
 int \mbox{\hyperlink{class_menu_a0483fd97d8d4182a2c4acc26c0020e76}{independent\+Route\+Planning}} ()
-\item 
+\begin{DoxyCompactList}\small\item\em Handles independent route planning. \end{DoxyCompactList}\item 
 int \mbox{\hyperlink{class_menu_a2c3f8e163b1562d2e41980bd7568abeb}{restricted\+Route\+Planning}} ()
-\item 
+\begin{DoxyCompactList}\small\item\em Handles restricted route planning with constraints. \end{DoxyCompactList}\item 
 int \mbox{\hyperlink{class_menu_a5373365a076c91741b7bff05d133962e}{environmentally\+Friendly\+Route\+Planning}} ()
-\item 
-int \mbox{\hyperlink{class_menu_a06ceeac8c20fc509b58bb9aae6d5a15a}{batch\+Mode}} ()
-\item 
-std\+::vector$<$ int $>$ \mbox{\hyperlink{class_menu_a7e103a0b6b75b698769d736f3153bb0c}{parse\+Nodes}} (const std\+::string \&input)
-\item 
-std\+::vector$<$ std\+::pair$<$ int, int $>$ $>$ \mbox{\hyperlink{class_menu_a7aa268b8b5e5eee880a64695f4e78c60}{parse\+Segments}} (const std\+::string \&input)
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Handles environmentally-\/friendly route planning. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_menu_afce0f3241d4c7093d090093e017c6900}{batch\+Mode}} (std\+::string input\+File, std\+::string output\+File="{}"{})
+\begin{DoxyCompactList}\small\item\em Executes batch mode operations based on input and output files. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_menu_a4002a6f96dc9a5f4843c9b9026a78ca4}{build\+Graph}} (std\+::string locations, std\+::string distances)
+\begin{DoxyCompactList}\small\item\em Builds the graph from the provided locations and distances files. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_menu_a4415aab594fd4affce0f79deac6fa04e}{display\+Instructions}} ()
+\begin{DoxyCompactList}\small\item\em Displays instructions for using the program. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsubsection*{Private Attributes}
 \begin{DoxyCompactItemize}
 \item 
 \mbox{\hyperlink{class_graph}{Graph}}$<$ \mbox{\hyperlink{struct_location_info}{Location\+Info}} $>$ \mbox{\hyperlink{class_menu_adcab1dd78a2c57d57ff0806be14feff0}{graph}}
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em The graph representing the locations and distances. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_input_parser}{Input\+Parser}} \mbox{\hyperlink{class_menu_a0d4f28ad619f688a30770a09763ed4b9}{parser}}
+\begin{DoxyCompactList}\small\item\em Utility for parsing input data. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
+
+\doxysubsection{Detailed Description}
+Handles the user interface and interaction for route planning. 
 
 \doxysubsection{Constructor \& Destructor Documentation}
-\Hypertarget{class_menu_ad466dd83355124a6ed958430450bfe94}\index{Menu@{Menu}!Menu@{Menu}}
+\Hypertarget{class_menu_a1330d001064fef628407352104fccf9f}\index{Menu@{Menu}!Menu@{Menu}}
 \index{Menu@{Menu}!Menu@{Menu}}
 \doxysubsubsection{\texorpdfstring{Menu()}{Menu()}}
-{\footnotesize\ttfamily \label{class_menu_ad466dd83355124a6ed958430450bfe94} 
-Menu\+::\+Menu (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+{\footnotesize\ttfamily \label{class_menu_a1330d001064fef628407352104fccf9f} 
+Menu\+::\+Menu (\begin{DoxyParamCaption}\item[{std\+::string}]{locations}{, }\item[{std\+::string}]{distances}{, }\item[{std\+::string}]{input\+File}{ = {\ttfamily "{}"{}}, }\item[{std\+::string}]{output\+File}{ = {\ttfamily "{}"{}}}\end{DoxyParamCaption})}
 
 
+
+Constructs a \doxylink{class_menu}{Menu} object and initializes the graph. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em locations} & Path to the locations file. \\
+\hline
+{\em distances} & Path to the distances file. \\
+\hline
+{\em input\+File} & Path to the batch mode input file (optional). \\
+\hline
+{\em output\+File} & Path to the batch mode output file (optional).\\
+\hline
+\end{DoxyParams}
+Complexity\+: O(V + E), where V is the number of vertices and E is the number of edges. 
 
 \doxysubsection{Member Function Documentation}
-\Hypertarget{class_menu_a06ceeac8c20fc509b58bb9aae6d5a15a}\index{Menu@{Menu}!batchMode@{batchMode}}
+\Hypertarget{class_menu_afce0f3241d4c7093d090093e017c6900}\index{Menu@{Menu}!batchMode@{batchMode}}
 \index{batchMode@{batchMode}!Menu@{Menu}}
 \doxysubsubsection{\texorpdfstring{batchMode()}{batchMode()}}
-{\footnotesize\ttfamily \label{class_menu_a06ceeac8c20fc509b58bb9aae6d5a15a} 
-int Menu\+::batch\+Mode (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+{\footnotesize\ttfamily \label{class_menu_afce0f3241d4c7093d090093e017c6900} 
+int Menu\+::batch\+Mode (\begin{DoxyParamCaption}\item[{std\+::string}]{input\+File}{, }\item[{std\+::string}]{output\+File}{ = {\ttfamily "{}"{}}}\end{DoxyParamCaption})}
 
+
+
+Executes batch mode operations based on input and output files. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em input\+File} & Path to the batch mode input file. \\
+\hline
+{\em output\+File} & Path to the batch mode output file (optional).\\
+\hline
+\end{DoxyParams}
+Complexity\+: O(V + E), where V is the number of vertices and E is the number of edges. \begin{DoxyReturn}{Returns}
+Status code (0 for success). 
+\end{DoxyReturn}
 \Hypertarget{class_menu_a4002a6f96dc9a5f4843c9b9026a78ca4}\index{Menu@{Menu}!buildGraph@{buildGraph}}
 \index{buildGraph@{buildGraph}!Menu@{Menu}}
 \doxysubsubsection{\texorpdfstring{buildGraph()}{buildGraph()}}
 {\footnotesize\ttfamily \label{class_menu_a4002a6f96dc9a5f4843c9b9026a78ca4} 
 int Menu\+::build\+Graph (\begin{DoxyParamCaption}\item[{std\+::string}]{locations}{, }\item[{std\+::string}]{distances}{}\end{DoxyParamCaption})}
 
-\Hypertarget{class_menu_a5373365a076c91741b7bff05d133962e}\index{Menu@{Menu}!environmentallyFriendlyRoutePlanning@{environmentallyFriendlyRoutePlanning}}
+
+
+Builds the graph from the provided locations and distances files. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em locations} & Path to the locations file. \\
+\hline
+{\em distances} & Path to the distances file.\\
+\hline
+\end{DoxyParams}
+Complexity\+: O(V + E), where V is the number of vertices and E is the number of edges. \begin{DoxyReturn}{Returns}
+Status code (0 for success, 1 for failure). 
+\end{DoxyReturn}
+\Hypertarget{class_menu_a4415aab594fd4affce0f79deac6fa04e}\index{Menu@{Menu}!displayInstructions@{displayInstructions}}
+\index{displayInstructions@{displayInstructions}!Menu@{Menu}}
+\doxysubsubsection{\texorpdfstring{displayInstructions()}{displayInstructions()}}
+{\footnotesize\ttfamily \label{class_menu_a4415aab594fd4affce0f79deac6fa04e} 
+void Menu\+::display\+Instructions (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Displays instructions for using the program. 
+
+Complexity\+: O(1). \Hypertarget{class_menu_a5373365a076c91741b7bff05d133962e}\index{Menu@{Menu}!environmentallyFriendlyRoutePlanning@{environmentallyFriendlyRoutePlanning}}
 \index{environmentallyFriendlyRoutePlanning@{environmentallyFriendlyRoutePlanning}!Menu@{Menu}}
 \doxysubsubsection{\texorpdfstring{environmentallyFriendlyRoutePlanning()}{environmentallyFriendlyRoutePlanning()}}
 {\footnotesize\ttfamily \label{class_menu_a5373365a076c91741b7bff05d133962e} 
 int Menu\+::environmentally\+Friendly\+Route\+Planning (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
 
+
+
+Handles environmentally-\/friendly route planning. 
+
+Complexity\+: O(V + E), where V is the number of vertices and E is the number of edges. \begin{DoxyReturn}{Returns}
+Status code (0 for success). 
+\end{DoxyReturn}
 \Hypertarget{class_menu_a6835ee888636371b6c7aaa5cfb402aa7}\index{Menu@{Menu}!getMenuOptions@{getMenuOptions}}
 \index{getMenuOptions@{getMenuOptions}!Menu@{Menu}}
 \doxysubsubsection{\texorpdfstring{getMenuOptions()}{getMenuOptions()}}
 {\footnotesize\ttfamily \label{class_menu_a6835ee888636371b6c7aaa5cfb402aa7} 
 void Menu\+::get\+Menu\+Options (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
 
-\Hypertarget{class_menu_a0483fd97d8d4182a2c4acc26c0020e76}\index{Menu@{Menu}!independentRoutePlanning@{independentRoutePlanning}}
+
+
+Displays the menu options to the user. 
+
+Complexity\+: O(1). \Hypertarget{class_menu_a0483fd97d8d4182a2c4acc26c0020e76}\index{Menu@{Menu}!independentRoutePlanning@{independentRoutePlanning}}
 \index{independentRoutePlanning@{independentRoutePlanning}!Menu@{Menu}}
 \doxysubsubsection{\texorpdfstring{independentRoutePlanning()}{independentRoutePlanning()}}
 {\footnotesize\ttfamily \label{class_menu_a0483fd97d8d4182a2c4acc26c0020e76} 
 int Menu\+::independent\+Route\+Planning (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
 
-\Hypertarget{class_menu_a7e103a0b6b75b698769d736f3153bb0c}\index{Menu@{Menu}!parseNodes@{parseNodes}}
-\index{parseNodes@{parseNodes}!Menu@{Menu}}
-\doxysubsubsection{\texorpdfstring{parseNodes()}{parseNodes()}}
-{\footnotesize\ttfamily \label{class_menu_a7e103a0b6b75b698769d736f3153bb0c} 
-std\+::vector$<$ int $>$ Menu\+::parse\+Nodes (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{input}{}\end{DoxyParamCaption})}
 
-\Hypertarget{class_menu_a7aa268b8b5e5eee880a64695f4e78c60}\index{Menu@{Menu}!parseSegments@{parseSegments}}
-\index{parseSegments@{parseSegments}!Menu@{Menu}}
-\doxysubsubsection{\texorpdfstring{parseSegments()}{parseSegments()}}
-{\footnotesize\ttfamily \label{class_menu_a7aa268b8b5e5eee880a64695f4e78c60} 
-std\+::vector$<$ std\+::pair$<$ int, int $>$ $>$ Menu\+::parse\+Segments (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{input}{}\end{DoxyParamCaption})}
 
+Handles independent route planning. 
+
+Complexity\+: O(V + E), where V is the number of vertices and E is the number of edges. \begin{DoxyReturn}{Returns}
+Status code (0 for success). 
+\end{DoxyReturn}
 \Hypertarget{class_menu_a205ea3b1690a51fceb1e253e7fee2ee2}\index{Menu@{Menu}!processOption@{processOption}}
 \index{processOption@{processOption}!Menu@{Menu}}
 \doxysubsubsection{\texorpdfstring{processOption()}{processOption()}}
 {\footnotesize\ttfamily \label{class_menu_a205ea3b1690a51fceb1e253e7fee2ee2} 
 void Menu\+::process\+Option (\begin{DoxyParamCaption}\item[{int}]{option}{}\end{DoxyParamCaption})}
 
-\Hypertarget{class_menu_a2c3f8e163b1562d2e41980bd7568abeb}\index{Menu@{Menu}!restrictedRoutePlanning@{restrictedRoutePlanning}}
+
+
+Processes the selected menu option. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em option} & The selected menu option.\\
+\hline
+\end{DoxyParams}
+Complexity\+: O(1). \Hypertarget{class_menu_a2c3f8e163b1562d2e41980bd7568abeb}\index{Menu@{Menu}!restrictedRoutePlanning@{restrictedRoutePlanning}}
 \index{restrictedRoutePlanning@{restrictedRoutePlanning}!Menu@{Menu}}
 \doxysubsubsection{\texorpdfstring{restrictedRoutePlanning()}{restrictedRoutePlanning()}}
 {\footnotesize\ttfamily \label{class_menu_a2c3f8e163b1562d2e41980bd7568abeb} 
 int Menu\+::restricted\+Route\+Planning (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
 
+
+
+Handles restricted route planning with constraints. 
+
+Complexity\+: O(V + E), where V is the number of vertices and E is the number of edges. \begin{DoxyReturn}{Returns}
+Status code (0 for success). 
+\end{DoxyReturn}
 
 
 \doxysubsection{Member Data Documentation}
@@ -106,6 +189,20 @@ int Menu\+::restricted\+Route\+Planning (\begin{DoxyParamCaption}{}{}\end{DoxyPa
 \doxysubsubsection{\texorpdfstring{graph}{graph}}
 {\footnotesize\ttfamily \label{class_menu_adcab1dd78a2c57d57ff0806be14feff0} 
 \mbox{\hyperlink{class_graph}{Graph}}$<$\mbox{\hyperlink{struct_location_info}{Location\+Info}}$>$ Menu\+::graph\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The graph representing the locations and distances. 
+
+\Hypertarget{class_menu_a0d4f28ad619f688a30770a09763ed4b9}\index{Menu@{Menu}!parser@{parser}}
+\index{parser@{parser}!Menu@{Menu}}
+\doxysubsubsection{\texorpdfstring{parser}{parser}}
+{\footnotesize\ttfamily \label{class_menu_a0d4f28ad619f688a30770a09763ed4b9} 
+\mbox{\hyperlink{class_input_parser}{Input\+Parser}} Menu\+::parser\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Utility for parsing input data. 
 
 
 

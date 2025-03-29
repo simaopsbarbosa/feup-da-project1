@@ -2,19 +2,24 @@
 \hypertarget{struct_location_info}{}\label{struct_location_info}\index{LocationInfo@{LocationInfo}}
 
 
+Represents information about a location.  
+
+
+
+
 {\ttfamily \#include $<$Location\+Info.\+h$>$}
 
 \doxysubsubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
 \mbox{\hyperlink{struct_location_info_af905670d1f24c4edd156adb74d40d21e}{Location\+Info}} (int \mbox{\hyperlink{struct_location_info_aee8b757eb333dd5e6d40c304114d3331}{id}}, std\+::string \mbox{\hyperlink{struct_location_info_a58b8db85a09612f3523c292d11aee39e}{location}}, std\+::string \mbox{\hyperlink{struct_location_info_a895200e44a50e3b6596989b90feec859}{code}}, bool \mbox{\hyperlink{struct_location_info_ad5fd892008ebe6494bfbce8676d4fddd}{parking}})
-\item 
+\begin{DoxyCompactList}\small\item\em Constructs a \doxylink{struct_location_info}{Location\+Info} object. \end{DoxyCompactList}\item 
 bool \mbox{\hyperlink{struct_location_info_ab2ca35167fbf90cb892d5f43a89b8aea}{operator==}} (const \mbox{\hyperlink{struct_location_info}{Location\+Info}} \&other) const
-\item 
+\begin{DoxyCompactList}\small\item\em Compares two \doxylink{struct_location_info}{Location\+Info} objects for equality. \end{DoxyCompactList}\item 
 bool \mbox{\hyperlink{struct_location_info_a110511aa82448083c3fd681d345ec076}{operator!=}} (const \mbox{\hyperlink{struct_location_info}{Location\+Info}} \&other) const
-\item 
+\begin{DoxyCompactList}\small\item\em Compares two \doxylink{struct_location_info}{Location\+Info} objects for inequality. \end{DoxyCompactList}\item 
 bool \mbox{\hyperlink{struct_location_info_aefeb8fb784be7b5286c5069fad874458}{operator$<$}} (const \mbox{\hyperlink{struct_location_info}{Location\+Info}} \&other) const
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Compares two \doxylink{struct_location_info}{Location\+Info} objects to determine ordering. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsubsection*{Public Attributes}
 \begin{DoxyCompactItemize}
 \item 
@@ -30,8 +35,11 @@ bool \mbox{\hyperlink{struct_location_info_ad5fd892008ebe6494bfbce8676d4fddd}{pa
 \begin{DoxyCompactItemize}
 \item 
 std\+::ostream \& \mbox{\hyperlink{struct_location_info_a0965a184e9d1d1af35f45839d7d0acfc}{operator$<$$<$}} (std\+::ostream \&os, const \mbox{\hyperlink{struct_location_info}{Location\+Info}} \&info)
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Outputs the \doxylink{struct_location_info}{Location\+Info} object to a stream. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
+
+\doxysubsection{Detailed Description}
+Represents information about a location. 
 
 \doxysubsection{Constructor \& Destructor Documentation}
 \Hypertarget{struct_location_info_af905670d1f24c4edd156adb74d40d21e}\index{LocationInfo@{LocationInfo}!LocationInfo@{LocationInfo}}
@@ -42,6 +50,21 @@ Location\+Info\+::\+Location\+Info (\begin{DoxyParamCaption}\item[{int}]{id}{, }
 
 
 
+Constructs a \doxylink{struct_location_info}{Location\+Info} object. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em id} & The unique identifier for the location. \\
+\hline
+{\em location} & The name or description of the location. \\
+\hline
+{\em code} & The code associated with the location. \\
+\hline
+{\em parking} & Whether parking is available at the location. \\
+\hline
+\end{DoxyParams}
+
+
 \doxysubsection{Member Function Documentation}
 \Hypertarget{struct_location_info_a110511aa82448083c3fd681d345ec076}\index{LocationInfo@{LocationInfo}!operator"!=@{operator"!=}}
 \index{operator"!=@{operator"!=}!LocationInfo@{LocationInfo}}
@@ -49,19 +72,55 @@ Location\+Info\+::\+Location\+Info (\begin{DoxyParamCaption}\item[{int}]{id}{, }
 {\footnotesize\ttfamily \label{struct_location_info_a110511aa82448083c3fd681d345ec076} 
 bool Location\+Info\+::operator!= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{struct_location_info}{Location\+Info}} \&}]{other}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
-\Hypertarget{struct_location_info_aefeb8fb784be7b5286c5069fad874458}\index{LocationInfo@{LocationInfo}!operator$<$@{operator$<$}}
+
+
+Compares two \doxylink{struct_location_info}{Location\+Info} objects for inequality. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em other} & The other \doxylink{struct_location_info}{Location\+Info} object to compare. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if any attribute is different, false otherwise.
+\end{DoxyReturn}
+This operation has constant time complexity. \Hypertarget{struct_location_info_aefeb8fb784be7b5286c5069fad874458}\index{LocationInfo@{LocationInfo}!operator$<$@{operator$<$}}
 \index{operator$<$@{operator$<$}!LocationInfo@{LocationInfo}}
 \doxysubsubsection{\texorpdfstring{operator$<$()}{operator<()}}
 {\footnotesize\ttfamily \label{struct_location_info_aefeb8fb784be7b5286c5069fad874458} 
 bool Location\+Info\+::operator$<$ (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{struct_location_info}{Location\+Info}} \&}]{other}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
-\Hypertarget{struct_location_info_ab2ca35167fbf90cb892d5f43a89b8aea}\index{LocationInfo@{LocationInfo}!operator==@{operator==}}
+
+
+Compares two \doxylink{struct_location_info}{Location\+Info} objects to determine ordering. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em other} & The other \doxylink{struct_location_info}{Location\+Info} object to compare. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if this object\textquotesingle{}s ID is less than the other\textquotesingle{}s ID, false otherwise.
+\end{DoxyReturn}
+This operation has constant time complexity. \Hypertarget{struct_location_info_ab2ca35167fbf90cb892d5f43a89b8aea}\index{LocationInfo@{LocationInfo}!operator==@{operator==}}
 \index{operator==@{operator==}!LocationInfo@{LocationInfo}}
 \doxysubsubsection{\texorpdfstring{operator==()}{operator==()}}
 {\footnotesize\ttfamily \label{struct_location_info_ab2ca35167fbf90cb892d5f43a89b8aea} 
 bool Location\+Info\+::operator== (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{struct_location_info}{Location\+Info}} \&}]{other}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
 
+
+Compares two \doxylink{struct_location_info}{Location\+Info} objects for equality. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em other} & The other \doxylink{struct_location_info}{Location\+Info} object to compare. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if all attributes are equal, false otherwise.
+\end{DoxyReturn}
+This operation has constant time complexity. 
 
 \doxysubsection{Friends And Related Symbol Documentation}
 \Hypertarget{struct_location_info_a0965a184e9d1d1af35f45839d7d0acfc}\index{LocationInfo@{LocationInfo}!operator$<$$<$@{operator$<$$<$}}
@@ -72,6 +131,20 @@ std\+::ostream \& operator$<$$<$ (\begin{DoxyParamCaption}\item[{std\+::ostream 
 
 
 
+Outputs the \doxylink{struct_location_info}{Location\+Info} object to a stream. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em os} & The output stream. \\
+\hline
+{\em info} & The \doxylink{struct_location_info}{Location\+Info} object to output. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The output stream.
+\end{DoxyReturn}
+This operation has constant time complexity. 
+
 \doxysubsection{Member Data Documentation}
 \Hypertarget{struct_location_info_a895200e44a50e3b6596989b90feec859}\index{LocationInfo@{LocationInfo}!code@{code}}
 \index{code@{code}!LocationInfo@{LocationInfo}}
@@ -79,25 +152,25 @@ std\+::ostream \& operator$<$$<$ (\begin{DoxyParamCaption}\item[{std\+::ostream 
 {\footnotesize\ttfamily \label{struct_location_info_a895200e44a50e3b6596989b90feec859} 
 std\+::string Location\+Info\+::code}
 
-\Hypertarget{struct_location_info_aee8b757eb333dd5e6d40c304114d3331}\index{LocationInfo@{LocationInfo}!id@{id}}
+Code associated with the location. \Hypertarget{struct_location_info_aee8b757eb333dd5e6d40c304114d3331}\index{LocationInfo@{LocationInfo}!id@{id}}
 \index{id@{id}!LocationInfo@{LocationInfo}}
 \doxysubsubsection{\texorpdfstring{id}{id}}
 {\footnotesize\ttfamily \label{struct_location_info_aee8b757eb333dd5e6d40c304114d3331} 
 int Location\+Info\+::id}
 
-\Hypertarget{struct_location_info_a58b8db85a09612f3523c292d11aee39e}\index{LocationInfo@{LocationInfo}!location@{location}}
+Unique identifier for the location. \Hypertarget{struct_location_info_a58b8db85a09612f3523c292d11aee39e}\index{LocationInfo@{LocationInfo}!location@{location}}
 \index{location@{location}!LocationInfo@{LocationInfo}}
 \doxysubsubsection{\texorpdfstring{location}{location}}
 {\footnotesize\ttfamily \label{struct_location_info_a58b8db85a09612f3523c292d11aee39e} 
 std\+::string Location\+Info\+::location}
 
-\Hypertarget{struct_location_info_ad5fd892008ebe6494bfbce8676d4fddd}\index{LocationInfo@{LocationInfo}!parking@{parking}}
+Name or description of the location. \Hypertarget{struct_location_info_ad5fd892008ebe6494bfbce8676d4fddd}\index{LocationInfo@{LocationInfo}!parking@{parking}}
 \index{parking@{parking}!LocationInfo@{LocationInfo}}
 \doxysubsubsection{\texorpdfstring{parking}{parking}}
 {\footnotesize\ttfamily \label{struct_location_info_ad5fd892008ebe6494bfbce8676d4fddd} 
 bool Location\+Info\+::parking}
 
-
+Indicates whether parking is available at the location. 
 
 The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
 \item 

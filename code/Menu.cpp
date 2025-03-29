@@ -319,7 +319,7 @@ int Menu::environmentallyFriendlyRoutePlanning() {
   std::cout << "------------------------------------------------------\n";
 
   std::cout << "------------------------OUTPUT------------------------\n";
-  std::vector<EnvironmentalPath> paths = GraphAlgorithms::environmentalRoute(
+  std::vector<EnvironmentalPath> paths = GraphAlgorithms::drivingWalkingRoute(
       &graph, source, dest, maxWalkingTime, avoidNodes, avoidSegments);
 
   std::cout << "Source:" << source << "\n";
@@ -482,7 +482,7 @@ int Menu::batchMode(std::string input, std::string output) {
           parser.parseSegments(avoidSegmentsStr);
 
       std::vector<EnvironmentalPath> paths =
-          GraphAlgorithms::environmentalRoute(
+          GraphAlgorithms::drivingWalkingRoute(
               &graph, source, dest, maxWalkingTime, avoidNodes, avoidSegments);
 
       outputFile << "Source:" << source << "\n";

@@ -8,27 +8,27 @@
 \begin{DoxyCompactItemize}
 \item 
 \mbox{\hyperlink{class_edge_a7ada023d13897c5bd1c4252b73f1d581}{Edge}} (\mbox{\hyperlink{class_vertex}{Vertex}}$<$ T $>$ \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{class_edge_a4510c31e0479f9d25f6e35d086887192}{orig}}, \mbox{\hyperlink{class_vertex}{Vertex}}$<$ T $>$ \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{class_edge_ae4d65678b91bd9d814af4720ad87cd0c}{dest}}, double dw, double ww)
-\item 
+\begin{DoxyCompactList}\small\item\em Constructor for the \doxylink{class_edge}{Edge} class. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{class_vertex}{Vertex}}$<$ T $>$ \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{class_edge_a9a2de066dff8513dd788d553fc1d0c81}{get\+Dest}} () const
-\item 
+\begin{DoxyCompactList}\small\item\em Gets the destination vertex of the edge. \end{DoxyCompactList}\item 
 double \mbox{\hyperlink{class_edge_a0bc8c909cb7902a7f6e47481ca7709b8}{get\+Walking\+Weight}} () const
-\item 
+\begin{DoxyCompactList}\small\item\em Gets the walking weight of the edge. \end{DoxyCompactList}\item 
 double \mbox{\hyperlink{class_edge_a0464d183c7fa0a0509481d07489b1be4}{get\+Driving\+Weight}} () const
-\item 
+\begin{DoxyCompactList}\small\item\em Gets the driving weight of the edge. \end{DoxyCompactList}\item 
 bool \mbox{\hyperlink{class_edge_a2d36af60fa3dea16824bec12e5f68c58}{is\+Selected}} () const
-\item 
+\begin{DoxyCompactList}\small\item\em Checks if the edge is selected. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{class_vertex}{Vertex}}$<$ T $>$ \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{class_edge_a40fc1470c5339203defca19b67c2535b}{get\+Orig}} () const
-\item 
+\begin{DoxyCompactList}\small\item\em Gets the origin vertex of the edge. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{class_edge}{Edge}}$<$ T $>$ \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{class_edge_af0a900f3006e47b9f363df7429298eeb}{get\+Reverse}} () const
-\item 
+\begin{DoxyCompactList}\small\item\em Gets the reverse edge of the edge. \end{DoxyCompactList}\item 
 double \mbox{\hyperlink{class_edge_a75458cfc838ca5aee5c34cb9f03b5647}{get\+Flow}} () const
-\item 
+\begin{DoxyCompactList}\small\item\em Gets the flow of the edge. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{class_edge_a87c8402c5edd6729a2c934e2a0cce6fe}{set\+Selected}} (bool \mbox{\hyperlink{class_edge_a5242549271b59544ad1189fb532b5bbe}{selected}})
-\item 
+\begin{DoxyCompactList}\small\item\em Sets the selected status of the edge. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{class_edge_afe8f8429025756c63f38e8c6fde7382c}{set\+Reverse}} (\mbox{\hyperlink{class_edge}{Edge}}$<$ T $>$ \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{class_edge_a6c1e5191f85afbd20cf6198815c9b079}{reverse}})
-\item 
+\begin{DoxyCompactList}\small\item\em Sets the reverse edge of the edge. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{class_edge_a1819116e2c156733a14bbd94cc27908e}{set\+Flow}} (double \mbox{\hyperlink{class_edge_a30808601fa37f509147eabf9cc5f9ed6}{flow}})
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Sets the flow of the edge. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsubsection*{Protected Attributes}
 \begin{DoxyCompactItemize}
 \item 
@@ -58,6 +58,21 @@ template$<$class T$>$ \\
 
 
 
+Constructor for the \doxylink{class_edge}{Edge} class. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em orig} & Origin vertex of the edge. \\
+\hline
+{\em dest} & Destination vertex of the edge. \\
+\hline
+{\em dw} & Driving weight of the edge. \\
+\hline
+{\em ww} & Walking weight of the edge. \\
+\hline
+\end{DoxyParams}
+
+
 \doxysubsection{Member Function Documentation}
 \Hypertarget{class_edge_a9a2de066dff8513dd788d553fc1d0c81}\index{Edge$<$ T $>$@{Edge$<$ T $>$}!getDest@{getDest}}
 \index{getDest@{getDest}!Edge$<$ T $>$@{Edge$<$ T $>$}}
@@ -66,6 +81,13 @@ template$<$class T$>$ \\
 template$<$class T$>$ \\
 \mbox{\hyperlink{class_vertex}{Vertex}}$<$ T $>$ \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{class_edge}{Edge}}$<$ T $>$\+::get\+Dest (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
 
+
+
+Gets the destination vertex of the edge. 
+
+\begin{DoxyReturn}{Returns}
+Destination vertex of the edge. 
+\end{DoxyReturn}
 \Hypertarget{class_edge_a0464d183c7fa0a0509481d07489b1be4}\index{Edge$<$ T $>$@{Edge$<$ T $>$}!getDrivingWeight@{getDrivingWeight}}
 \index{getDrivingWeight@{getDrivingWeight}!Edge$<$ T $>$@{Edge$<$ T $>$}}
 \doxysubsubsection{\texorpdfstring{getDrivingWeight()}{getDrivingWeight()}}
@@ -73,6 +95,13 @@ template$<$class T$>$ \\
 template$<$class T$>$ \\
 double \mbox{\hyperlink{class_edge}{Edge}}$<$ T $>$\+::get\+Driving\+Weight (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
 
+
+
+Gets the driving weight of the edge. 
+
+\begin{DoxyReturn}{Returns}
+Driving weight of the edge. 
+\end{DoxyReturn}
 \Hypertarget{class_edge_a75458cfc838ca5aee5c34cb9f03b5647}\index{Edge$<$ T $>$@{Edge$<$ T $>$}!getFlow@{getFlow}}
 \index{getFlow@{getFlow}!Edge$<$ T $>$@{Edge$<$ T $>$}}
 \doxysubsubsection{\texorpdfstring{getFlow()}{getFlow()}}
@@ -80,6 +109,13 @@ double \mbox{\hyperlink{class_edge}{Edge}}$<$ T $>$\+::get\+Driving\+Weight (\be
 template$<$class T$>$ \\
 double \mbox{\hyperlink{class_edge}{Edge}}$<$ T $>$\+::get\+Flow (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
 
+
+
+Gets the flow of the edge. 
+
+\begin{DoxyReturn}{Returns}
+Flow of the edge. 
+\end{DoxyReturn}
 \Hypertarget{class_edge_a40fc1470c5339203defca19b67c2535b}\index{Edge$<$ T $>$@{Edge$<$ T $>$}!getOrig@{getOrig}}
 \index{getOrig@{getOrig}!Edge$<$ T $>$@{Edge$<$ T $>$}}
 \doxysubsubsection{\texorpdfstring{getOrig()}{getOrig()}}
@@ -87,6 +123,13 @@ double \mbox{\hyperlink{class_edge}{Edge}}$<$ T $>$\+::get\+Flow (\begin{DoxyPar
 template$<$class T$>$ \\
 \mbox{\hyperlink{class_vertex}{Vertex}}$<$ T $>$ \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{class_edge}{Edge}}$<$ T $>$\+::get\+Orig (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
 
+
+
+Gets the origin vertex of the edge. 
+
+\begin{DoxyReturn}{Returns}
+Origin vertex of the edge. 
+\end{DoxyReturn}
 \Hypertarget{class_edge_af0a900f3006e47b9f363df7429298eeb}\index{Edge$<$ T $>$@{Edge$<$ T $>$}!getReverse@{getReverse}}
 \index{getReverse@{getReverse}!Edge$<$ T $>$@{Edge$<$ T $>$}}
 \doxysubsubsection{\texorpdfstring{getReverse()}{getReverse()}}
@@ -94,6 +137,13 @@ template$<$class T$>$ \\
 template$<$class T$>$ \\
 \mbox{\hyperlink{class_edge}{Edge}}$<$ T $>$ \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{class_edge}{Edge}}$<$ T $>$\+::get\+Reverse (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
 
+
+
+Gets the reverse edge of the edge. 
+
+\begin{DoxyReturn}{Returns}
+Reverse edge of the edge. 
+\end{DoxyReturn}
 \Hypertarget{class_edge_a0bc8c909cb7902a7f6e47481ca7709b8}\index{Edge$<$ T $>$@{Edge$<$ T $>$}!getWalkingWeight@{getWalkingWeight}}
 \index{getWalkingWeight@{getWalkingWeight}!Edge$<$ T $>$@{Edge$<$ T $>$}}
 \doxysubsubsection{\texorpdfstring{getWalkingWeight()}{getWalkingWeight()}}
@@ -101,6 +151,13 @@ template$<$class T$>$ \\
 template$<$class T$>$ \\
 double \mbox{\hyperlink{class_edge}{Edge}}$<$ T $>$\+::get\+Walking\+Weight (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
 
+
+
+Gets the walking weight of the edge. 
+
+\begin{DoxyReturn}{Returns}
+Walking weight of the edge. 
+\end{DoxyReturn}
 \Hypertarget{class_edge_a2d36af60fa3dea16824bec12e5f68c58}\index{Edge$<$ T $>$@{Edge$<$ T $>$}!isSelected@{isSelected}}
 \index{isSelected@{isSelected}!Edge$<$ T $>$@{Edge$<$ T $>$}}
 \doxysubsubsection{\texorpdfstring{isSelected()}{isSelected()}}
@@ -108,6 +165,13 @@ double \mbox{\hyperlink{class_edge}{Edge}}$<$ T $>$\+::get\+Walking\+Weight (\be
 template$<$class T$>$ \\
 bool \mbox{\hyperlink{class_edge}{Edge}}$<$ T $>$\+::is\+Selected (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
 
+
+
+Checks if the edge is selected. 
+
+\begin{DoxyReturn}{Returns}
+True if the edge is selected, false otherwise. 
+\end{DoxyReturn}
 \Hypertarget{class_edge_a1819116e2c156733a14bbd94cc27908e}\index{Edge$<$ T $>$@{Edge$<$ T $>$}!setFlow@{setFlow}}
 \index{setFlow@{setFlow}!Edge$<$ T $>$@{Edge$<$ T $>$}}
 \doxysubsubsection{\texorpdfstring{setFlow()}{setFlow()}}
@@ -115,6 +179,15 @@ bool \mbox{\hyperlink{class_edge}{Edge}}$<$ T $>$\+::is\+Selected (\begin{DoxyPa
 template$<$class T$>$ \\
 void \mbox{\hyperlink{class_edge}{Edge}}$<$ T $>$\+::set\+Flow (\begin{DoxyParamCaption}\item[{double}]{flow}{}\end{DoxyParamCaption})}
 
+
+
+Sets the flow of the edge. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em flow} & Flow to set. \\
+\hline
+\end{DoxyParams}
 \Hypertarget{class_edge_afe8f8429025756c63f38e8c6fde7382c}\index{Edge$<$ T $>$@{Edge$<$ T $>$}!setReverse@{setReverse}}
 \index{setReverse@{setReverse}!Edge$<$ T $>$@{Edge$<$ T $>$}}
 \doxysubsubsection{\texorpdfstring{setReverse()}{setReverse()}}
@@ -122,6 +195,15 @@ void \mbox{\hyperlink{class_edge}{Edge}}$<$ T $>$\+::set\+Flow (\begin{DoxyParam
 template$<$class T$>$ \\
 void \mbox{\hyperlink{class_edge}{Edge}}$<$ T $>$\+::set\+Reverse (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_edge}{Edge}}$<$ T $>$ \texorpdfstring{$\ast$}{*}}]{reverse}{}\end{DoxyParamCaption})}
 
+
+
+Sets the reverse edge of the edge. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em reverse} & Reverse edge to set. \\
+\hline
+\end{DoxyParams}
 \Hypertarget{class_edge_a87c8402c5edd6729a2c934e2a0cce6fe}\index{Edge$<$ T $>$@{Edge$<$ T $>$}!setSelected@{setSelected}}
 \index{setSelected@{setSelected}!Edge$<$ T $>$@{Edge$<$ T $>$}}
 \doxysubsubsection{\texorpdfstring{setSelected()}{setSelected()}}
@@ -129,6 +211,15 @@ void \mbox{\hyperlink{class_edge}{Edge}}$<$ T $>$\+::set\+Reverse (\begin{DoxyPa
 template$<$class T$>$ \\
 void \mbox{\hyperlink{class_edge}{Edge}}$<$ T $>$\+::set\+Selected (\begin{DoxyParamCaption}\item[{bool}]{selected}{}\end{DoxyParamCaption})}
 
+
+
+Sets the selected status of the edge. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em selected} & Selected status to set. \\
+\hline
+\end{DoxyParams}
 
 
 \doxysubsection{Member Data Documentation}

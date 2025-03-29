@@ -234,7 +234,7 @@ GraphAlgorithms::getParkingNodes(
   return parkingNodes;
 }
 
-std::vector<EnvironmentalPath> GraphAlgorithms::environmentalRoute(
+std::vector<EnvironmentalPath> GraphAlgorithms::drivingWalkingRoute(
     Graph<LocationInfo> *graph, int source, int dest, double maxWalkingTime,
     const std::vector<int> &avoidNodes,
     const std::vector<std::pair<int, int>> &avoidSegments) {

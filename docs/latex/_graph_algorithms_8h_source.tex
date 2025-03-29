@@ -11,20 +11,34 @@
 \DoxyCodeLine{00007\ }
 \DoxyCodeLine{00008\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespace_graph_algorithms}{GraphAlgorithms}}\ \{}
 \DoxyCodeLine{00009\ }
-\DoxyCodeLine{00010\ \textcolor{keywordtype}{bool}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_graph_algorithms_ad7539f73539ad028603834297e92f262}{relax}}(\mbox{\hyperlink{class_edge}{Edge<LocationInfo>}}\ *edge,\ \textcolor{keywordtype}{bool}\ isDriving\ =\ \textcolor{keyword}{true});}
-\DoxyCodeLine{00011\ std::vector<LocationInfo>\ \ \ \ \ \ \mbox{\hyperlink{namespace_graph_algorithms_ad0b355dbc6ee4505261170b7807be1df}{getPath}}(\mbox{\hyperlink{class_graph}{Graph<LocationInfo>}}\ *g,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ \&origin,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ \&dest,\ \textcolor{keywordtype}{bool}\ isDriving);}
-\DoxyCodeLine{00012\ std::vector<LocationInfo>\ \ \ \ \ \ \mbox{\hyperlink{namespace_graph_algorithms_a9dc4dd3b5c180f6d6da8c97c2bf78ac1}{dijkstraDriving}}(\mbox{\hyperlink{class_graph}{Graph<LocationInfo>}}\ *graph,\ \textcolor{keywordtype}{int}\ source,\ \textcolor{keywordtype}{int}\ dest,\ \textcolor{keyword}{const}\ std::vector<int>\ \&avoidNodes,}
-\DoxyCodeLine{00013\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::vector<std::pair<int,\ int>>\ \&avoidSegments);}
-\DoxyCodeLine{00014\ std::vector<LocationInfo>\ \ \ \ \ \ \mbox{\hyperlink{namespace_graph_algorithms_a083c6864a8d1572b59b240e5331787bc}{dijkstraWalking}}(\mbox{\hyperlink{class_graph}{Graph<LocationInfo>}}\ *graph,\ \textcolor{keywordtype}{int}\ source,\ \textcolor{keywordtype}{int}\ dest,\ \textcolor{keyword}{const}\ std::vector<int>\ \&avoidNodes,}
-\DoxyCodeLine{00015\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::vector<std::pair<int,\ int>>\ \&avoidSegments);}
-\DoxyCodeLine{00016\ std::vector<LocationInfo>\ \ \ \ \ \ \mbox{\hyperlink{namespace_graph_algorithms_acc2240cd6475571dfceccf4b170a0b71}{normalRoute}}(\mbox{\hyperlink{class_graph}{Graph<LocationInfo>}}\ *graph,\ \textcolor{keywordtype}{int}\ source,\ \textcolor{keywordtype}{int}\ dest,\ \textcolor{keyword}{const}\ std::vector<int>\ \&avoidNodes,}
-\DoxyCodeLine{00017\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::vector<std::pair<int,\ int>>\ \&avoidSegments,\ \textcolor{keywordtype}{int}\ includeNode\ =\ -\/1);}
-\DoxyCodeLine{00018\ std::vector<EnvironmentalPath>\ \mbox{\hyperlink{namespace_graph_algorithms_a3c3c493521b7bbdf877a4178b6e82a09}{environmentalRoute}}(\mbox{\hyperlink{class_graph}{Graph<LocationInfo>}}\ *graph,\ \textcolor{keywordtype}{int}\ source,\ \textcolor{keywordtype}{int}\ dest,\ \textcolor{keywordtype}{double}\ maxWalkingTime,}
-\DoxyCodeLine{00019\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::vector<int>\ \&avoidNodes,\ \textcolor{keyword}{const}\ std::vector<std::pair<int,\ int>>\ \&avoidSegments);}
-\DoxyCodeLine{00020\ std::vector<std::pair<Vertex<LocationInfo>\ *,\ std::vector<LocationInfo>>>}
-\DoxyCodeLine{00021\ \mbox{\hyperlink{namespace_graph_algorithms_ae93c882ba57501977a06f6cd052c2389}{getParkingNodes}}(\mbox{\hyperlink{class_graph}{Graph<LocationInfo>}}\ *graph,\ \textcolor{keywordtype}{int}\ source,\ \textcolor{keyword}{const}\ std::vector<int>\ \&avoidNodes,\ \textcolor{keyword}{const}\ std::vector<std::pair<int,\ int>>\ \&avoidSegments);}
-\DoxyCodeLine{00022\ \}\ \textcolor{comment}{//\ namespace\ GraphAlgorithms}}
-\DoxyCodeLine{00023\ }
-\DoxyCodeLine{00024\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00020\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{namespace_graph_algorithms_ad7539f73539ad028603834297e92f262}{relax}}(\mbox{\hyperlink{class_edge}{Edge<LocationInfo>}}\ *edge,\ \textcolor{keywordtype}{bool}\ isDriving\ =\ \textcolor{keyword}{true});}
+\DoxyCodeLine{00021\ }
+\DoxyCodeLine{00038\ std::vector<LocationInfo>}
+\DoxyCodeLine{00039\ \mbox{\hyperlink{namespace_graph_algorithms_a8221d490ee511e486db5a6d46a0d6f52}{dijkstra}}(\mbox{\hyperlink{class_graph}{Graph<LocationInfo>}}\ *graph,\ \textcolor{keywordtype}{int}\ source,\ \textcolor{keywordtype}{int}\ dest,}
+\DoxyCodeLine{00040\ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::vector<int>\ \&avoidNodes,}
+\DoxyCodeLine{00041\ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::vector<std::pair<int,\ int>>\ \&avoidSegments,\ \textcolor{keywordtype}{bool}\ isDriving);}
+\DoxyCodeLine{00042\ }
+\DoxyCodeLine{00056\ std::vector<LocationInfo>\ \mbox{\hyperlink{namespace_graph_algorithms_ad0b355dbc6ee4505261170b7807be1df}{getPath}}(\mbox{\hyperlink{class_graph}{Graph<LocationInfo>}}\ *g,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ \&origin,}
+\DoxyCodeLine{00057\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ \&dest,\ \textcolor{keywordtype}{bool}\ isDriving);}
+\DoxyCodeLine{00058\ }
+\DoxyCodeLine{00075\ std::vector<LocationInfo>}
+\DoxyCodeLine{00076\ \mbox{\hyperlink{namespace_graph_algorithms_acf21e304ba607a6083cc3faa09cf8bfc}{drivingRoute}}(\mbox{\hyperlink{class_graph}{Graph<LocationInfo>}}\ *graph,\ \textcolor{keywordtype}{int}\ source,\ \textcolor{keywordtype}{int}\ dest,}
+\DoxyCodeLine{00077\ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::vector<int>\ \&avoidNodes,}
+\DoxyCodeLine{00078\ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::vector<std::pair<int,\ int>>\ \&avoidSegments,}
+\DoxyCodeLine{00079\ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ includeNode\ =\ -\/1);}
+\DoxyCodeLine{00080\ }
+\DoxyCodeLine{00094\ std::vector<std::pair<Vertex<LocationInfo>\ *,\ std::vector<LocationInfo>>>}
+\DoxyCodeLine{00095\ \mbox{\hyperlink{namespace_graph_algorithms_ae93c882ba57501977a06f6cd052c2389}{getParkingNodes}}(\mbox{\hyperlink{class_graph}{Graph<LocationInfo>}}\ *graph,\ \textcolor{keywordtype}{int}\ source,}
+\DoxyCodeLine{00096\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::vector<int>\ \&avoidNodes,}
+\DoxyCodeLine{00097\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::vector<std::pair<int,\ int>>\ \&avoidSegments);}
+\DoxyCodeLine{00098\ }
+\DoxyCodeLine{00116\ std::vector<EnvironmentalPath>}
+\DoxyCodeLine{00117\ \mbox{\hyperlink{namespace_graph_algorithms_a3c3c493521b7bbdf877a4178b6e82a09}{environmentalRoute}}(\mbox{\hyperlink{class_graph}{Graph<LocationInfo>}}\ *graph,\ \textcolor{keywordtype}{int}\ source,\ \textcolor{keywordtype}{int}\ dest,}
+\DoxyCodeLine{00118\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ maxWalkingTime,\ \textcolor{keyword}{const}\ std::vector<int>\ \&avoidNodes,}
+\DoxyCodeLine{00119\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::vector<std::pair<int,\ int>>\ \&avoidSegments);}
+\DoxyCodeLine{00120\ }
+\DoxyCodeLine{00121\ \}\ \textcolor{comment}{//\ namespace\ GraphAlgorithms}}
+\DoxyCodeLine{00122\ }
+\DoxyCodeLine{00123\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ GRAPH\_ALGORITHMS\_H}}
 
 \end{DoxyCode}

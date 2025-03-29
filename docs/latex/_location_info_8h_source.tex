@@ -8,33 +8,32 @@
 \DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <iostream>}}
 \DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <string>}}
 \DoxyCodeLine{00006\ }
-\DoxyCodeLine{00007\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_location_info_af905670d1f24c4edd156adb74d40d21e}{LocationInfo}}\ \{}
-\DoxyCodeLine{00008\ \ \ \ \ \textcolor{keywordtype}{int}\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{struct_location_info_aee8b757eb333dd5e6d40c304114d3331}{id}};}
-\DoxyCodeLine{00009\ \ \ \ \ std::string\ \mbox{\hyperlink{struct_location_info_a58b8db85a09612f3523c292d11aee39e}{location}};}
-\DoxyCodeLine{00010\ \ \ \ \ std::string\ \mbox{\hyperlink{struct_location_info_a895200e44a50e3b6596989b90feec859}{code}};}
-\DoxyCodeLine{00011\ \ \ \ \ \textcolor{keywordtype}{bool}\ \ \ \ \ \ \ \ \mbox{\hyperlink{struct_location_info_ad5fd892008ebe6494bfbce8676d4fddd}{parking}};}
-\DoxyCodeLine{00012\ }
-\DoxyCodeLine{00013\ \ \ \ \ \mbox{\hyperlink{struct_location_info_af905670d1f24c4edd156adb74d40d21e}{LocationInfo}}(\textcolor{keywordtype}{int}\ \textcolor{keywordtype}{id},\ std::string\ \mbox{\hyperlink{struct_location_info_a58b8db85a09612f3523c292d11aee39e}{location}},\ std::string\ \mbox{\hyperlink{struct_location_info_a895200e44a50e3b6596989b90feec859}{code}},\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{struct_location_info_ad5fd892008ebe6494bfbce8676d4fddd}{parking}})\ :\ \mbox{\hyperlink{struct_location_info_aee8b757eb333dd5e6d40c304114d3331}{id}}(\mbox{\hyperlink{struct_location_info_aee8b757eb333dd5e6d40c304114d3331}{id}}),\ \mbox{\hyperlink{struct_location_info_a58b8db85a09612f3523c292d11aee39e}{location}}(\mbox{\hyperlink{struct_location_info_a58b8db85a09612f3523c292d11aee39e}{location}}),\ \mbox{\hyperlink{struct_location_info_a895200e44a50e3b6596989b90feec859}{code}}(\mbox{\hyperlink{struct_location_info_a895200e44a50e3b6596989b90feec859}{code}}),\ \mbox{\hyperlink{struct_location_info_ad5fd892008ebe6494bfbce8676d4fddd}{parking}}(\mbox{\hyperlink{struct_location_info_ad5fd892008ebe6494bfbce8676d4fddd}{parking}})\ \{}
-\DoxyCodeLine{00014\ \ \ \ \ \}}
-\DoxyCodeLine{00015\ }
-\DoxyCodeLine{00016\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{struct_location_info_ab2ca35167fbf90cb892d5f43a89b8aea}{operator==}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{struct_location_info_af905670d1f24c4edd156adb74d40d21e}{LocationInfo}}\ \&other)\textcolor{keyword}{\ const\ }\{}
-\DoxyCodeLine{00017\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keywordtype}{id}\ ==\ other.\mbox{\hyperlink{struct_location_info_aee8b757eb333dd5e6d40c304114d3331}{id}}\ \&\&\ \mbox{\hyperlink{struct_location_info_a58b8db85a09612f3523c292d11aee39e}{location}}\ ==\ other.\mbox{\hyperlink{struct_location_info_a58b8db85a09612f3523c292d11aee39e}{location}}\ \&\&\ \mbox{\hyperlink{struct_location_info_a895200e44a50e3b6596989b90feec859}{code}}\ ==\ other.\mbox{\hyperlink{struct_location_info_a895200e44a50e3b6596989b90feec859}{code}}\ \&\&\ \mbox{\hyperlink{struct_location_info_ad5fd892008ebe6494bfbce8676d4fddd}{parking}}\ ==\ other.\mbox{\hyperlink{struct_location_info_ad5fd892008ebe6494bfbce8676d4fddd}{parking}};}
-\DoxyCodeLine{00018\ \ \ \ \ \}}
-\DoxyCodeLine{00019\ }
-\DoxyCodeLine{00020\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{struct_location_info_a110511aa82448083c3fd681d345ec076}{operator!=}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{struct_location_info_af905670d1f24c4edd156adb74d40d21e}{LocationInfo}}\ \&other)\textcolor{keyword}{\ const\ }\{}
-\DoxyCodeLine{00021\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ !(*\textcolor{keyword}{this}\ ==\ other);}
-\DoxyCodeLine{00022\ \ \ \ \ \}}
-\DoxyCodeLine{00023\ }
-\DoxyCodeLine{00024\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{struct_location_info_aefeb8fb784be7b5286c5069fad874458}{operator<}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{struct_location_info_af905670d1f24c4edd156adb74d40d21e}{LocationInfo}}\ \&other)\textcolor{keyword}{\ const\ }\{}
-\DoxyCodeLine{00025\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keywordtype}{id}\ <\ other.\mbox{\hyperlink{struct_location_info_aee8b757eb333dd5e6d40c304114d3331}{id}};}
-\DoxyCodeLine{00026\ \ \ \ \ \}}
-\DoxyCodeLine{00027\ }
-\DoxyCodeLine{00028\ \ \ \ \ \textcolor{keyword}{friend}\ std::ostream\ \&\mbox{\hyperlink{struct_location_info_a0965a184e9d1d1af35f45839d7d0acfc}{operator<<}}(std::ostream\ \&os,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{struct_location_info_af905670d1f24c4edd156adb74d40d21e}{LocationInfo}}\ \&info)\ \{}
-\DoxyCodeLine{00029\ \ \ \ \ \ \ \ \ os\ <<\ \textcolor{stringliteral}{"{}ID:\ "{}}\ <<\ info.\mbox{\hyperlink{struct_location_info_aee8b757eb333dd5e6d40c304114d3331}{id}}\ <<\ \textcolor{stringliteral}{"{},\ Location:\ "{}}\ <<\ info.\mbox{\hyperlink{struct_location_info_a58b8db85a09612f3523c292d11aee39e}{location}}\ <<\ \textcolor{stringliteral}{"{},\ Code:\ "{}}\ <<\ info.\mbox{\hyperlink{struct_location_info_a895200e44a50e3b6596989b90feec859}{code}}\ <<\ \textcolor{stringliteral}{"{},\ Parking:\ "{}}\ <<\ (info.\mbox{\hyperlink{struct_location_info_ad5fd892008ebe6494bfbce8676d4fddd}{parking}}\ ?\ \textcolor{stringliteral}{"{}Yes"{}}\ :\ \textcolor{stringliteral}{"{}No"{}});}
-\DoxyCodeLine{00030\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ os;}
-\DoxyCodeLine{00031\ \ \ \ \ \}}
-\DoxyCodeLine{00032\ \};}
-\DoxyCodeLine{00033\ }
-\DoxyCodeLine{00034\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ LOCATION\_INFO\_H}}
+\DoxyCodeLine{00011\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_location_info_af905670d1f24c4edd156adb74d40d21e}{LocationInfo}}\ \{}
+\DoxyCodeLine{00012\ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{struct_location_info_aee8b757eb333dd5e6d40c304114d3331}{id}};\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00013\ \ \ std::string\ \mbox{\hyperlink{struct_location_info_a58b8db85a09612f3523c292d11aee39e}{location}};\ }
+\DoxyCodeLine{00014\ \ \ std::string\ \mbox{\hyperlink{struct_location_info_a895200e44a50e3b6596989b90feec859}{code}};\ \ \ \ \ }
+\DoxyCodeLine{00015\ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{struct_location_info_ad5fd892008ebe6494bfbce8676d4fddd}{parking}};\ }
+\DoxyCodeLine{00016\ }
+\DoxyCodeLine{00024\ \ \ \mbox{\hyperlink{struct_location_info_af905670d1f24c4edd156adb74d40d21e}{LocationInfo}}(\textcolor{keywordtype}{int}\ \textcolor{keywordtype}{id},\ std::string\ \mbox{\hyperlink{struct_location_info_a58b8db85a09612f3523c292d11aee39e}{location}},\ std::string\ \mbox{\hyperlink{struct_location_info_a895200e44a50e3b6596989b90feec859}{code}},\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{struct_location_info_ad5fd892008ebe6494bfbce8676d4fddd}{parking}})}
+\DoxyCodeLine{00025\ \ \ \ \ \ \ :\ \mbox{\hyperlink{struct_location_info_aee8b757eb333dd5e6d40c304114d3331}{id}}(\mbox{\hyperlink{struct_location_info_aee8b757eb333dd5e6d40c304114d3331}{id}}),\ \mbox{\hyperlink{struct_location_info_a58b8db85a09612f3523c292d11aee39e}{location}}(\mbox{\hyperlink{struct_location_info_a58b8db85a09612f3523c292d11aee39e}{location}}),\ \mbox{\hyperlink{struct_location_info_a895200e44a50e3b6596989b90feec859}{code}}(\mbox{\hyperlink{struct_location_info_a895200e44a50e3b6596989b90feec859}{code}}),\ \mbox{\hyperlink{struct_location_info_ad5fd892008ebe6494bfbce8676d4fddd}{parking}}(\mbox{\hyperlink{struct_location_info_ad5fd892008ebe6494bfbce8676d4fddd}{parking}})\ \{\}}
+\DoxyCodeLine{00026\ }
+\DoxyCodeLine{00033\ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{struct_location_info_ab2ca35167fbf90cb892d5f43a89b8aea}{operator==}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{struct_location_info_af905670d1f24c4edd156adb74d40d21e}{LocationInfo}}\ \&other)\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{00034\ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keywordtype}{id}\ ==\ other.\mbox{\hyperlink{struct_location_info_aee8b757eb333dd5e6d40c304114d3331}{id}}\ \&\&\ \mbox{\hyperlink{struct_location_info_a58b8db85a09612f3523c292d11aee39e}{location}}\ ==\ other.\mbox{\hyperlink{struct_location_info_a58b8db85a09612f3523c292d11aee39e}{location}}\ \&\&\ \mbox{\hyperlink{struct_location_info_a895200e44a50e3b6596989b90feec859}{code}}\ ==\ other.\mbox{\hyperlink{struct_location_info_a895200e44a50e3b6596989b90feec859}{code}}\ \&\&}
+\DoxyCodeLine{00035\ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{struct_location_info_ad5fd892008ebe6494bfbce8676d4fddd}{parking}}\ ==\ other.\mbox{\hyperlink{struct_location_info_ad5fd892008ebe6494bfbce8676d4fddd}{parking}};}
+\DoxyCodeLine{00036\ \ \ \}}
+\DoxyCodeLine{00037\ }
+\DoxyCodeLine{00044\ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{struct_location_info_a110511aa82448083c3fd681d345ec076}{operator!=}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{struct_location_info_af905670d1f24c4edd156adb74d40d21e}{LocationInfo}}\ \&other)\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ !(*\textcolor{keyword}{this}\ ==\ other);\ \}}
+\DoxyCodeLine{00045\ }
+\DoxyCodeLine{00053\ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{struct_location_info_aefeb8fb784be7b5286c5069fad874458}{operator<}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{struct_location_info_af905670d1f24c4edd156adb74d40d21e}{LocationInfo}}\ \&other)\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ \textcolor{keywordtype}{id}\ <\ other.\mbox{\hyperlink{struct_location_info_aee8b757eb333dd5e6d40c304114d3331}{id}};\ \}}
+\DoxyCodeLine{00054\ }
+\DoxyCodeLine{00062\ \ \ \textcolor{keyword}{friend}\ std::ostream\ \&\mbox{\hyperlink{struct_location_info_a0965a184e9d1d1af35f45839d7d0acfc}{operator<<}}(std::ostream\ \&os,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{struct_location_info_af905670d1f24c4edd156adb74d40d21e}{LocationInfo}}\ \&info)\ \{}
+\DoxyCodeLine{00063\ \ \ \ \ os\ <<\ \textcolor{stringliteral}{"{}ID:\ "{}}\ <<\ info.\mbox{\hyperlink{struct_location_info_aee8b757eb333dd5e6d40c304114d3331}{id}}\ <<\ \textcolor{stringliteral}{"{},\ Location:\ "{}}\ <<\ info.\mbox{\hyperlink{struct_location_info_a58b8db85a09612f3523c292d11aee39e}{location}}}
+\DoxyCodeLine{00064\ \ \ \ \ \ \ \ <<\ \textcolor{stringliteral}{"{},\ Code:\ "{}}\ <<\ info.\mbox{\hyperlink{struct_location_info_a895200e44a50e3b6596989b90feec859}{code}}}
+\DoxyCodeLine{00065\ \ \ \ \ \ \ \ <<\ \textcolor{stringliteral}{"{},\ Parking:\ "{}}\ <<\ (info.\mbox{\hyperlink{struct_location_info_ad5fd892008ebe6494bfbce8676d4fddd}{parking}}\ ?\ \textcolor{stringliteral}{"{}Yes"{}}\ :\ \textcolor{stringliteral}{"{}No"{}});}
+\DoxyCodeLine{00066\ \ \ \ \ \textcolor{keywordflow}{return}\ os;}
+\DoxyCodeLine{00067\ \ \ \}}
+\DoxyCodeLine{00068\ \};}
+\DoxyCodeLine{00069\ }
+\DoxyCodeLine{00070\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ LOCATION\_INFO\_H}}
 
 \end{DoxyCode}
