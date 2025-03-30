@@ -100,9 +100,7 @@ getParkingNodes(Graph<LocationInfo> *graph, int source,
  * @brief Computes an environmental route combining driving and walking.
  *
  * Finds a route from the source to the destination that minimizes total time
- * while respecting a maximum walking time. The algorithm runs in O((V + E) log
- * V) for each parking node considered, plus O(P log P) for sorting, where P is
- * the number of parking nodes.
+ * while respecting a maximum walking time. The algorithm runs in O(V⋅(V+E)logV).
  *
  * @param graph The graph to traverse.
  * @param source The ID of the source node.

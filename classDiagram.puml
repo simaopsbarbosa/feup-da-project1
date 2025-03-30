@@ -1,0 +1,259 @@
+@startuml "Route Planning System Class Diagram"
+
+skinparam classAttributeIconSize 0
+skinparam classFontSize 32
+skinparam backgroundColor #000000
+skinparam class {
+  BackgroundColor #111111
+  ArrowColor #aaaabb
+  BorderColor #aaaabb
+  FontColor #ECEFF4
+  AttributeFontColor #D8DEE9
+  StereotypeFontColor #D8DEE9
+}
+skinparam stereotypeCBackgroundColor #4C566A
+skinparam packageBackgroundColor #3B4252
+skinparam packageBorderColor #81A1C1
+skinparam noteBorderColor #EBCB8B
+skinparam noteBackgroundColor #4C566A
+skinparam noteFontColor #E5E9F0
+skinparam ArrowColor #bbbbcc
+skinparam ArrowFontColor #D8DEE9
+
+  class LocationInfo {
+    ' Attributes
+    +int id
+    +string location
+    +string code
+    +bool parking
+    
+    ' Constructor and methods
+    +LocationInfo(int id, string location, string code, bool parking)
+    +bool operator==(const LocationInfo& other) const
+    +bool operator!=(const LocationInfo& other) const
+    +bool operator<(const LocationInfo& other) const
+    +friend ostream& operator<<(ostream& os, const LocationInfo& info)
+  }
+  
+  note right of LocationInfo
+    File: LocationInfo.h
+  end note
+  
+  ' EnvironmentalPath struct
+  class EnvironmentalPath {
+    ' Attributes
+    +vector<LocationInfo> drivingPath
+    +double drivingTime
+    +Vertex<LocationInfo>* parkingNode
+    +vector<LocationInfo> walkingPath
+    +double walkingTime
+    +double totalTime
+    +string message
+    
+    ' Constructor
+    +EnvironmentalPath()
+  }
+  
+  note right of EnvironmentalPath
+    File: EnvironmentalPath.h
+  end note
+  
+  ' MutablePriorityQueue class
+  class "MutablePriorityQueue<M>" {
+    ' Attributes
+    -vector<M*> H
+    
+    ' Constructor and methods
+    +MutablePriorityQueue()
+    +void insert(M* x)
+    +M* extractMin()
+    +void decreaseKey(M* x)
+    +bool empty()
+    -void heapifyUp(unsigned i)
+    -void heapifyDown(unsigned i)
+    -inline void set(unsigned i, M* x)
+  }
+  
+  note right of "MutablePriorityQueue<M>"
+    File: MutablePriorityQueue.h
+  end note
+  
+  ' Vertex class
+  class "Vertex<T>" {
+    ' Attributes
+    #T info
+    #vector<Edge<T>*> adj
+    #bool visited
+    #bool processing
+    #int low
+    #int num
+    #unsigned int indegree
+    #double walkingDist
+    #double drivingDist
+    #Edge<T>* path
+    #vector<Edge<T>*> incoming
+    #int queueIndex
+    
+    ' Constructor and methods
+    +Vertex(T in)
+    +bool operator<(Vertex<T>& vertex) const
+    +T getInfo() const
+    +vector<Edge<T>*> getAdj() const
+    +bool isVisited() const
+    +bool isProcessing() const
+    +unsigned int getIndegree() const
+    +double getDrivingDist() const
+    +double getWalkingDist() const
+    +Edge<T>* getPath() const
+    +vector<Edge<T>*> getIncoming() const
+    +void setInfo(T info)
+    +void setVisited(bool visited)
+    +void setProcessing(bool processing)
+    +int getLow() const
+    +void setLow(int value)
+    +int getNum() const
+    +void setNum(int value)
+    +void setIndegree(unsigned int indegree)
+    +void setDrivingDist(double dd)
+    +void setWalkingDist(double wd)
+    +void setPath(Edge<T>* path)
+    +void setQueueIndex(int idx)
+    +Edge<T>* addEdge(Vertex<T>* dest, double dw, double ww)
+    +bool removeEdge(T in)
+    +void removeOutgoingEdges()
+    +int getQueueIndex() const
+    -void deleteEdge(Edge<T>* edge)
+  }
+  
+  note bottom of "Vertex<T>"
+    File: Graph.h
+  end note
+  
+  ' Edge class
+  class "Edge<T>" {
+    ' Attributes
+    #Vertex<T>* dest
+    #double drivingWeight
+    #double walkingWeight
+    #bool selected
+    #Vertex<T>* orig
+    #Edge<T>* reverse
+    #double flow
+    
+    ' Constructor and methods
+    +Edge(Vertex<T>* orig, Vertex<T>* dest, double dw, double ww)
+    +Vertex<T>* getDest() const
+    +double getWalkingWeight() const
+    +double getDrivingWeight() const
+    +bool isSelected() const
+    +Vertex<T>* getOrig() const
+    +Edge<T>* getReverse() const
+    +double getFlow() const
+    +void setSelected(bool selected)
+    +void setReverse(Edge<T>* reverse)
+    +void setFlow(double flow)
+  }
+  
+  note bottom of "Edge<T>"
+    File: Graph.h
+  end note
+  
+  ' Graph class
+  class "Graph<T>" {
+    ' Attributes
+    #vector<Vertex<T>*> vertexSet
+    #double** distMatrix
+    #int** pathMatrix
+    
+    ' Constructor and methods
+    +~Graph()
+    +Vertex<T>* findVertex(const T& in) const
+    +Vertex<T>* findVertexByCode(const string code) const
+    +Vertex<T>* findVertexById(const int id) const
+    +bool addVertex(const T& in)
+    +bool removeVertex(const T& in)
+    +bool addEdge(const T& sourc, const T& dest, double dw, double ww)
+    +bool removeEdge(const T& source, const T& dest)
+    +bool addBidirectionalEdge(const T& sourc, const T& dest, double dw, double ww)
+    +Edge<T>* findEdge(int sourceId, int destId)
+    +int getNumVertex() const
+    +vector<Vertex<T>*> getVertexSet() const
+    -int findVertexIdx(const T& in) const
+    +static void deleteMatrix(int** m, int n)
+    +static void deleteMatrix(double** m, int n)
+  }
+  
+  note bottom of "Graph<T>"
+    File: Graph.h
+  end note
+
+
+class "GraphAlgorithms" <<namespace>> {
+    +bool relax(Edge<LocationInfo>* edge, bool isDriving = true)
+    +vector<LocationInfo> dijkstra(Graph<LocationInfo>* graph, int source, int dest, const vector<int>& avoidNodes, const vector<pair<int, int>>& avoidSegments, bool isDriving)
+    +vector<LocationInfo> getPath(Graph<LocationInfo>* g, const int& origin, const int& dest, bool isDriving)
+    +vector<LocationInfo> drivingRoute(Graph<LocationInfo>* graph, int source, int dest, const vector<int>& avoidNodes, const vector<pair<int, int>>& avoidSegments, int includeNode = -1)
+    +vector<pair<Vertex<LocationInfo>*, vector<LocationInfo>>> getParkingNodes(Graph<LocationInfo>* graph, int source, const vector<int>& avoidNodes, const vector<pair<int, int>>& avoidSegments)
+    +vector<EnvironmentalPath> drivingWalkingRoute(Graph<LocationInfo>* graph, int source, int dest, double maxWalkingTime, const vector<int>& avoidNodes, const vector<pair<int, int>>& avoidSegments)
+  }
+  
+  note bottom of "GraphAlgorithms"
+    File: GraphAlgorithms.h, GraphAlgorithms.cpp
+  end note
+
+
+  class InputParser {
+    +vector<int> parseNodes(const string& input)
+    +vector<pair<int, int>> parseSegments(const string& input)
+  }
+  
+  note right of InputParser
+    File: InputParser.h, InputParser.cpp
+  end note
+  
+  ' Menu class
+  class Menu {
+    -Graph<LocationInfo> graph
+    -InputParser parser
+    
+    +Menu(string locations, string distances, string inputFile = "", string outputFile = "")
+    +void getMenuOptions()
+    +void processOption(int option)
+    +int independentRoutePlanning()
+    +int restrictedRoutePlanning()
+    +int environmentallyFriendlyRoutePlanning()
+    +int batchMode(string inputFile, string outputFile = "")
+    +int buildGraph(string locations, string distances)
+    +void displayInstructions()
+  }
+  
+  note right of Menu
+    File: Menu.h, Menu.cpp
+  end note
+
+
+' Relationships
+
+' Data structure relationships
+"Edge<T>" --> "Vertex<T>" : references >
+"Graph<T>" --> "Edge<T>" : contains >
+"Graph<T>" --> "Vertex<T>" : contains >
+"MutablePriorityQueue<M>" ..> "Vertex<T>" : manages >
+EnvironmentalPath --> "Vertex<LocationInfo>" : references >
+EnvironmentalPath --> "LocationInfo" : contains >
+
+' Dependencies
+"GraphAlgorithms" ..> "Graph<T>" : uses >
+"GraphAlgorithms" ..> "Edge<T>" : uses >
+"GraphAlgorithms" ..> "Vertex<T>" : uses >
+"GraphAlgorithms" ..> "MutablePriorityQueue<M>" : uses >
+"GraphAlgorithms" ..> "EnvironmentalPath" : creates >
+"GraphAlgorithms" ..> "LocationInfo" : uses >
+Menu ..> "Graph<T>" : contains >
+Menu ..> InputParser : uses >
+Menu ..> "GraphAlgorithms" : uses >
+
+' Friend relationships
+"MutablePriorityQueue<M>" -- "Vertex<T>" : friend >
+
+@enduml
