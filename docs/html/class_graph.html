@@ -116,34 +116,27 @@ $(function(){initNavTree('class_graph.html',''); initResizable(true); });
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a43eab1460b5c8ceaa526b40e56a0fb0c" id="r_a43eab1460b5c8ceaa526b40e56a0fb0c"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a43eab1460b5c8ceaa526b40e56a0fb0c">~Graph</a> ()</td></tr>
-<tr class="memdesc:a43eab1460b5c8ceaa526b40e56a0fb0c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destructor for the <a class="el" href="class_graph.html">Graph</a> class. Frees allocated memory. This operation has a time complexity of O(V + n), where V is the number of vertices and n is the size of the matrices.  <br /></td></tr>
 <tr class="separator:a43eab1460b5c8ceaa526b40e56a0fb0c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8b7b7465fbfd562e2a469f90a437ab75" id="r_a8b7b7465fbfd562e2a469f90a437ab75"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_vertex.html">Vertex</a>&lt; T &gt; *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a8b7b7465fbfd562e2a469f90a437ab75">findVertex</a> (const T &amp;in) const</td></tr>
 <tr class="memdesc:a8b7b7465fbfd562e2a469f90a437ab75"><td class="mdescLeft">&#160;</td><td class="mdescRight">Finds a vertex in the graph by its info. This operation has a time complexity of O(V), where V is the number of vertices in the graph.  <br /></td></tr>
 <tr class="separator:a8b7b7465fbfd562e2a469f90a437ab75"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0a67645f5fc78680af8c08acfab50092" id="r_a0a67645f5fc78680af8c08acfab50092"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_vertex.html">Vertex</a>&lt; T &gt; *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a0a67645f5fc78680af8c08acfab50092">findVertexByCode</a> (const std::string code) const</td></tr>
-<tr class="memdesc:a0a67645f5fc78680af8c08acfab50092"><td class="mdescLeft">&#160;</td><td class="mdescRight">Finds a vertex in the graph by its code. This operation has a time complexity of O(V), where V is the number of vertices in the graph.  <br /></td></tr>
 <tr class="separator:a0a67645f5fc78680af8c08acfab50092"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a61a95dd5a17ceedacd3ac023112bf4b6" id="r_a61a95dd5a17ceedacd3ac023112bf4b6"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_vertex.html">Vertex</a>&lt; T &gt; *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a61a95dd5a17ceedacd3ac023112bf4b6">findVertexById</a> (const int id) const</td></tr>
-<tr class="memdesc:a61a95dd5a17ceedacd3ac023112bf4b6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Finds a vertex in the graph by its ID. This operation has a time complexity of O(V), where V is the number of vertices in the graph.  <br /></td></tr>
 <tr class="separator:a61a95dd5a17ceedacd3ac023112bf4b6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a00be284ea2be3b3d0f0d2e493b70245b" id="r_a00be284ea2be3b3d0f0d2e493b70245b"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a00be284ea2be3b3d0f0d2e493b70245b">addVertex</a> (const T &amp;in)</td></tr>
 <tr class="memdesc:a00be284ea2be3b3d0f0d2e493b70245b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds a vertex to the graph. This operation has a time complexity of O(V), where V is the number of vertices in the graph.  <br /></td></tr>
 <tr class="separator:a00be284ea2be3b3d0f0d2e493b70245b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af9c903104ad69a7782979fa9caedf163" id="r_af9c903104ad69a7782979fa9caedf163"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#af9c903104ad69a7782979fa9caedf163">removeVertex</a> (const T &amp;in)</td></tr>
-<tr class="memdesc:af9c903104ad69a7782979fa9caedf163"><td class="mdescLeft">&#160;</td><td class="mdescRight">Removes a vertex from the graph. This operation has a time complexity of O(V + E), where V is the number of vertices and E is the number of edges.  <br /></td></tr>
 <tr class="separator:af9c903104ad69a7782979fa9caedf163"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a08da44f06ea7762bbb34f67bd7912a4b" id="r_a08da44f06ea7762bbb34f67bd7912a4b"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a08da44f06ea7762bbb34f67bd7912a4b">addEdge</a> (const T &amp;sourc, const T &amp;dest, double dw, double ww)</td></tr>
 <tr class="memdesc:a08da44f06ea7762bbb34f67bd7912a4b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds a directed edge between two vertices. This operation has a time complexity of O(V), where V is the number of vertices in the graph.  <br /></td></tr>
 <tr class="separator:a08da44f06ea7762bbb34f67bd7912a4b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8949d071d45bf93e171e275462e1007a" id="r_a8949d071d45bf93e171e275462e1007a"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a8949d071d45bf93e171e275462e1007a">removeEdge</a> (const T &amp;source, const T &amp;dest)</td></tr>
-<tr class="memdesc:a8949d071d45bf93e171e275462e1007a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Removes a directed edge between two vertices. This operation has a time complexity of O(E), where E is the number of edges in the adjacency list of the source vertex.  <br /></td></tr>
 <tr class="separator:a8949d071d45bf93e171e275462e1007a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6ec9f2dd0ef1a40d83d649dfd5dfb8cf" id="r_a6ec9f2dd0ef1a40d83d649dfd5dfb8cf"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a6ec9f2dd0ef1a40d83d649dfd5dfb8cf">addBidirectionalEdge</a> (const T &amp;sourc, const T &amp;dest, double dw, double ww)</td></tr>
-<tr class="memdesc:a6ec9f2dd0ef1a40d83d649dfd5dfb8cf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds a bidirectional edge between two vertices. This operation has a time complexity of O(V), where V is the number of vertices in the graph.  <br /></td></tr>
 <tr class="separator:a6ec9f2dd0ef1a40d83d649dfd5dfb8cf"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adaf3c95db5021636bbeb02c19502d09a" id="r_adaf3c95db5021636bbeb02c19502d09a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_edge.html">Edge</a>&lt; T &gt; *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#adaf3c95db5021636bbeb02c19502d09a">findEdge</a> (int sourceId, int destId)</td></tr>
-<tr class="memdesc:adaf3c95db5021636bbeb02c19502d09a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Finds an edge between two vertices by their IDs. This operation has a time complexity of O(E), where E is the number of edges in the adjacency list of the source vertex.  <br /></td></tr>
 <tr class="separator:adaf3c95db5021636bbeb02c19502d09a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0853eac15cdf0f06d63f4b8a7820ec71" id="r_a0853eac15cdf0f06d63f4b8a7820ec71"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a0853eac15cdf0f06d63f4b8a7820ec71">getNumVertex</a> () const</td></tr>
 <tr class="memdesc:a0853eac15cdf0f06d63f4b8a7820ec71"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the number of vertices in the graph.  <br /></td></tr>
@@ -155,7 +148,6 @@ Public Member Functions</h2></td></tr>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-methods" name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
 <tr class="memitem:a676cdfb976eccfa82b631d2094c1cdac" id="r_a676cdfb976eccfa82b631d2094c1cdac"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a676cdfb976eccfa82b631d2094c1cdac">findVertexIdx</a> (const T &amp;in) const</td></tr>
-<tr class="memdesc:a676cdfb976eccfa82b631d2094c1cdac"><td class="mdescLeft">&#160;</td><td class="mdescRight">Finds the index of a vertex in the graph by its info. This operation has a time complexity of O(V), where V is the number of vertices in the graph.  <br /></td></tr>
 <tr class="separator:a676cdfb976eccfa82b631d2094c1cdac"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
@@ -184,8 +176,6 @@ template&lt;class T&gt; </div>
         </tr>
       </table>
 </div><div class="memdoc">
-
-<p>Destructor for the <a class="el" href="class_graph.html">Graph</a> class. Frees allocated memory. This operation has a time complexity of O(V + n), where V is the number of vertices and n is the size of the matrices. </p>
 
 </div>
 </div>
@@ -220,18 +210,6 @@ template&lt;class T&gt; </div>
         </tr>
       </table>
 </div><div class="memdoc">
-
-<p>Adds a bidirectional edge between two vertices. This operation has a time complexity of O(V), where V is the number of vertices in the graph. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">sourc</td><td>Info of the source vertex. </td></tr>
-    <tr><td class="paramname">dest</td><td>Info of the destination vertex. </td></tr>
-    <tr><td class="paramname">dw</td><td>Driving weight of the edge. </td></tr>
-    <tr><td class="paramname">ww</td><td>Walking weight of the edge. </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>True if the edge was added, false otherwise. </dd></dl>
 
 </div>
 </div>
@@ -329,16 +307,6 @@ template&lt;class T&gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p>Finds an edge between two vertices by their IDs. This operation has a time complexity of O(E), where E is the number of edges in the adjacency list of the source vertex. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">sourceId</td><td>ID of the source vertex. </td></tr>
-    <tr><td class="paramname">destId</td><td>ID of the destination vertex. </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>Pointer to the edge if found, nullptr otherwise. </dd></dl>
-
 </div>
 </div>
 <a id="a8b7b7465fbfd562e2a469f90a437ab75" name="a8b7b7465fbfd562e2a469f90a437ab75"></a>
@@ -386,15 +354,6 @@ template&lt;class T&gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p>Finds a vertex in the graph by its code. This operation has a time complexity of O(V), where V is the number of vertices in the graph. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">code</td><td>Code of the vertex to find. </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>Pointer to the vertex if found, nullptr otherwise. </dd></dl>
-
 </div>
 </div>
 <a id="a61a95dd5a17ceedacd3ac023112bf4b6" name="a61a95dd5a17ceedacd3ac023112bf4b6"></a>
@@ -413,15 +372,6 @@ template&lt;class T&gt; </div>
         </tr>
       </table>
 </div><div class="memdoc">
-
-<p>Finds a vertex in the graph by its ID. This operation has a time complexity of O(V), where V is the number of vertices in the graph. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">id</td><td>ID of the vertex to find. </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>Pointer to the vertex if found, nullptr otherwise. </dd></dl>
 
 </div>
 </div>
@@ -449,15 +399,6 @@ template&lt;class T&gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
-
-<p>Finds the index of a vertex in the graph by its info. This operation has a time complexity of O(V), where V is the number of vertices in the graph. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">in</td><td>Info of the vertex to find. </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>Index of the vertex if found, -1 otherwise. </dd></dl>
 
 </div>
 </div>
@@ -516,7 +457,7 @@ template&lt;class T&gt; </div>
         <tr>
           <td class="memname">bool <a class="el" href="class_graph.html">Graph</a>&lt; T &gt;::removeEdge </td>
           <td>(</td>
-          <td class="paramtype">const T &amp;</td>          <td class="paramname"><span class="paramname"><em>sourc</em></span>, </td>
+          <td class="paramtype">const T &amp;</td>          <td class="paramname"><span class="paramname"><em>source</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -525,16 +466,6 @@ template&lt;class T&gt; </div>
         </tr>
       </table>
 </div><div class="memdoc">
-
-<p>Removes a directed edge between two vertices. This operation has a time complexity of O(E), where E is the number of edges in the adjacency list of the source vertex. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">sourc</td><td>Info of the source vertex. </td></tr>
-    <tr><td class="paramname">dest</td><td>Info of the destination vertex. </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>True if the edge was removed, false otherwise. </dd></dl>
 
 </div>
 </div>
@@ -554,15 +485,6 @@ template&lt;class T&gt; </div>
         </tr>
       </table>
 </div><div class="memdoc">
-
-<p>Removes a vertex from the graph. This operation has a time complexity of O(V + E), where V is the number of vertices and E is the number of edges. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">in</td><td>Info of the vertex to remove. </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>True if the vertex was removed, false otherwise. </dd></dl>
 
 </div>
 </div>

@@ -125,9 +125,9 @@ Functions</h2></td></tr>
 <tr class="memitem:ae93c882ba57501977a06f6cd052c2389" id="r_ae93c882ba57501977a06f6cd052c2389"><td class="memItemLeft" align="right" valign="top">std::vector&lt; std::pair&lt; <a class="el" href="class_vertex.html">Vertex</a>&lt; <a class="el" href="struct_location_info.html">LocationInfo</a> &gt; *, std::vector&lt; <a class="el" href="struct_location_info.html">LocationInfo</a> &gt; &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae93c882ba57501977a06f6cd052c2389">getParkingNodes</a> (<a class="el" href="class_graph.html">Graph</a>&lt; <a class="el" href="struct_location_info.html">LocationInfo</a> &gt; *graph, int source, const std::vector&lt; int &gt; &amp;avoidNodes, const std::vector&lt; std::pair&lt; int, int &gt; &gt; &amp;avoidSegments)</td></tr>
 <tr class="memdesc:ae93c882ba57501977a06f6cd052c2389"><td class="mdescLeft">&#160;</td><td class="mdescRight">Finds all parking nodes reachable from the source.  <br /></td></tr>
 <tr class="separator:ae93c882ba57501977a06f6cd052c2389"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3c3c493521b7bbdf877a4178b6e82a09" id="r_a3c3c493521b7bbdf877a4178b6e82a09"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="struct_environmental_path.html">EnvironmentalPath</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a3c3c493521b7bbdf877a4178b6e82a09">environmentalRoute</a> (<a class="el" href="class_graph.html">Graph</a>&lt; <a class="el" href="struct_location_info.html">LocationInfo</a> &gt; *graph, int source, int dest, double maxWalkingTime, const std::vector&lt; int &gt; &amp;avoidNodes, const std::vector&lt; std::pair&lt; int, int &gt; &gt; &amp;avoidSegments)</td></tr>
-<tr class="memdesc:a3c3c493521b7bbdf877a4178b6e82a09"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes an environmental route combining driving and walking.  <br /></td></tr>
-<tr class="separator:a3c3c493521b7bbdf877a4178b6e82a09"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad85786700be21b72b89c949011473d74" id="r_ad85786700be21b72b89c949011473d74"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="struct_environmental_path.html">EnvironmentalPath</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ad85786700be21b72b89c949011473d74">drivingWalkingRoute</a> (<a class="el" href="class_graph.html">Graph</a>&lt; <a class="el" href="struct_location_info.html">LocationInfo</a> &gt; *graph, int source, int dest, double maxWalkingTime, const std::vector&lt; int &gt; &amp;avoidNodes, const std::vector&lt; std::pair&lt; int, int &gt; &gt; &amp;avoidSegments)</td></tr>
+<tr class="memdesc:ad85786700be21b72b89c949011473d74"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes an environmental route combining driving and walking.  <br /></td></tr>
+<tr class="separator:ad85786700be21b72b89c949011473d74"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Function Documentation</h2>
 <a id="a8221d490ee511e486db5a6d46a0d6f52" name="a8221d490ee511e486db5a6d46a0d6f52"></a>
@@ -178,7 +178,7 @@ Functions</h2></td></tr>
     <tr><td class="paramname">dest</td><td>The ID of the destination node. </td></tr>
     <tr><td class="paramname">avoidNodes</td><td>A list of node IDs to avoid. </td></tr>
     <tr><td class="paramname">avoidSegments</td><td>A list of edge pairs (source, destination) to avoid. </td></tr>
-    <tr><td class="paramname">isDriving</td><td>Indicates whether the path is for driving. </td></tr>
+    <tr><td class="paramname">isDriving</td><td>Indicates whether the path is for driving. Defaults to true. </td></tr>
   </table>
   </dd>
 </dl>
@@ -226,7 +226,10 @@ Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Computes the driving route between two nodes. </p>
-<p>Finds the shortest driving route from the source to the destination, optionally passing through an intermediate node. The algorithm runs in O((V + E) log V) for each segment of the route (source to intermediate and intermediate to destination).</p>
+<p>Finds the shortest driving route from the source to the destination, optionally passing through an intermediate node. The algorithm runs in O((V + E) log V) for each segment of the route (source to intermediate and intermediate to destination), where:</p><ul>
+<li>V is the number of vertices.</li>
+<li>E is the number of edges.</li>
+</ul>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">graph</td><td>The graph to traverse. </td></tr>
@@ -234,7 +237,7 @@ Functions</h2></td></tr>
     <tr><td class="paramname">dest</td><td>The ID of the destination node. </td></tr>
     <tr><td class="paramname">avoidNodes</td><td>A list of node IDs to avoid. </td></tr>
     <tr><td class="paramname">avoidSegments</td><td>A list of edge pairs (source, destination) to avoid. </td></tr>
-    <tr><td class="paramname">includeNode</td><td>An optional intermediate node to include in the route. </td></tr>
+    <tr><td class="paramname">includeNode</td><td>An optional intermediate node to include in the route. Defaults to -1. </td></tr>
   </table>
   </dd>
 </dl>
@@ -242,14 +245,14 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a3c3c493521b7bbdf877a4178b6e82a09" name="a3c3c493521b7bbdf877a4178b6e82a09"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3c3c493521b7bbdf877a4178b6e82a09">&#9670;&#160;</a></span>environmentalRoute()</h2>
+<a id="ad85786700be21b72b89c949011473d74" name="ad85786700be21b72b89c949011473d74"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad85786700be21b72b89c949011473d74">&#9670;&#160;</a></span>drivingWalkingRoute()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">std::vector&lt; <a class="el" href="struct_environmental_path.html">EnvironmentalPath</a> &gt; GraphAlgorithms::environmentalRoute </td>
+          <td class="memname">std::vector&lt; <a class="el" href="struct_environmental_path.html">EnvironmentalPath</a> &gt; GraphAlgorithms::drivingWalkingRoute </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="class_graph.html">Graph</a>&lt; <a class="el" href="struct_location_info.html">LocationInfo</a> &gt; *</td>          <td class="paramname"><span class="paramname"><em>graph</em></span>, </td>
         </tr>
@@ -282,7 +285,10 @@ Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Computes an environmental route combining driving and walking. </p>
-<p>Finds a route from the source to the destination that minimizes total time while respecting a maximum walking time. The algorithm runs in O((V + E) log V) for each parking node considered, plus O(P log P) for sorting, where P is the number of parking nodes.</p>
+<p>Finds a route from the source to the destination that minimizes total time while respecting a maximum walking time. The algorithm runs in O(V ⋅ (V + E) log V), where:</p><ul>
+<li>V is the number of vertices.</li>
+<li>E is the number of edges.</li>
+</ul>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">graph</td><td>The graph to traverse. </td></tr>
@@ -378,7 +384,7 @@ Functions</h2></td></tr>
     <tr><td class="paramname">g</td><td>The graph containing the path. </td></tr>
     <tr><td class="paramname">origin</td><td>The ID of the origin node. </td></tr>
     <tr><td class="paramname">dest</td><td>The ID of the destination node. </td></tr>
-    <tr><td class="paramname">isDriving</td><td>Indicates whether the path is for driving. </td></tr>
+    <tr><td class="paramname">isDriving</td><td>Indicates whether the path is for driving. Defaults to true. </td></tr>
   </table>
   </dd>
 </dl>
@@ -410,7 +416,7 @@ Functions</h2></td></tr>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">edge</td><td>The edge to relax. </td></tr>
-    <tr><td class="paramname">isDriving</td><td>Indicates whether the edge is part of a driving path. </td></tr>
+    <tr><td class="paramname">isDriving</td><td>Indicates whether the edge is part of a driving path. Defaults to true. </td></tr>
   </table>
   </dd>
 </dl>

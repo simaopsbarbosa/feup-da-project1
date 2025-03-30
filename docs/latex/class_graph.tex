@@ -8,25 +8,25 @@
 \begin{DoxyCompactItemize}
 \item 
 \mbox{\hyperlink{class_graph_a43eab1460b5c8ceaa526b40e56a0fb0c}{\texorpdfstring{$\sim$}{\string~}\+Graph}} ()
-\begin{DoxyCompactList}\small\item\em Destructor for the \doxylink{class_graph}{Graph} class. Frees allocated memory. This operation has a time complexity of O(V + n), where V is the number of vertices and n is the size of the matrices. \end{DoxyCompactList}\item 
+\item 
 \mbox{\hyperlink{class_vertex}{Vertex}}$<$ T $>$ \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{class_graph_a8b7b7465fbfd562e2a469f90a437ab75}{find\+Vertex}} (const T \&in) const
 \begin{DoxyCompactList}\small\item\em Finds a vertex in the graph by its info. This operation has a time complexity of O(\+V), where V is the number of vertices in the graph. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{class_vertex}{Vertex}}$<$ T $>$ \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{class_graph_a0a67645f5fc78680af8c08acfab50092}{find\+Vertex\+By\+Code}} (const std\+::string code) const
-\begin{DoxyCompactList}\small\item\em Finds a vertex in the graph by its code. This operation has a time complexity of O(\+V), where V is the number of vertices in the graph. \end{DoxyCompactList}\item 
+\item 
 \mbox{\hyperlink{class_vertex}{Vertex}}$<$ T $>$ \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{class_graph_a61a95dd5a17ceedacd3ac023112bf4b6}{find\+Vertex\+By\+Id}} (const int id) const
-\begin{DoxyCompactList}\small\item\em Finds a vertex in the graph by its ID. This operation has a time complexity of O(\+V), where V is the number of vertices in the graph. \end{DoxyCompactList}\item 
+\item 
 bool \mbox{\hyperlink{class_graph_a00be284ea2be3b3d0f0d2e493b70245b}{add\+Vertex}} (const T \&in)
 \begin{DoxyCompactList}\small\item\em Adds a vertex to the graph. This operation has a time complexity of O(\+V), where V is the number of vertices in the graph. \end{DoxyCompactList}\item 
 bool \mbox{\hyperlink{class_graph_af9c903104ad69a7782979fa9caedf163}{remove\+Vertex}} (const T \&in)
-\begin{DoxyCompactList}\small\item\em Removes a vertex from the graph. This operation has a time complexity of O(V + E), where V is the number of vertices and E is the number of edges. \end{DoxyCompactList}\item 
+\item 
 bool \mbox{\hyperlink{class_graph_a08da44f06ea7762bbb34f67bd7912a4b}{add\+Edge}} (const T \&sourc, const T \&dest, double dw, double ww)
 \begin{DoxyCompactList}\small\item\em Adds a directed edge between two vertices. This operation has a time complexity of O(\+V), where V is the number of vertices in the graph. \end{DoxyCompactList}\item 
 bool \mbox{\hyperlink{class_graph_a8949d071d45bf93e171e275462e1007a}{remove\+Edge}} (const T \&source, const T \&dest)
-\begin{DoxyCompactList}\small\item\em Removes a directed edge between two vertices. This operation has a time complexity of O(\+E), where E is the number of edges in the adjacency list of the source vertex. \end{DoxyCompactList}\item 
+\item 
 bool \mbox{\hyperlink{class_graph_a6ec9f2dd0ef1a40d83d649dfd5dfb8cf}{add\+Bidirectional\+Edge}} (const T \&sourc, const T \&dest, double dw, double ww)
-\begin{DoxyCompactList}\small\item\em Adds a bidirectional edge between two vertices. This operation has a time complexity of O(\+V), where V is the number of vertices in the graph. \end{DoxyCompactList}\item 
+\item 
 \mbox{\hyperlink{class_edge}{Edge}}$<$ T $>$ \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{class_graph_adaf3c95db5021636bbeb02c19502d09a}{find\+Edge}} (int source\+Id, int dest\+Id)
-\begin{DoxyCompactList}\small\item\em Finds an edge between two vertices by their IDs. This operation has a time complexity of O(\+E), where E is the number of edges in the adjacency list of the source vertex. \end{DoxyCompactList}\item 
+\item 
 int \mbox{\hyperlink{class_graph_a0853eac15cdf0f06d63f4b8a7820ec71}{get\+Num\+Vertex}} () const
 \begin{DoxyCompactList}\small\item\em Gets the number of vertices in the graph. \end{DoxyCompactList}\item 
 std\+::vector$<$ \mbox{\hyperlink{class_vertex}{Vertex}}$<$ T $>$ \texorpdfstring{$\ast$}{*} $>$ \mbox{\hyperlink{class_graph_a41624b03fcb6bd29e4df574a1ec58541}{get\+Vertex\+Set}} () const
@@ -35,7 +35,7 @@ std\+::vector$<$ \mbox{\hyperlink{class_vertex}{Vertex}}$<$ T $>$ \texorpdfstrin
 \begin{DoxyCompactItemize}
 \item 
 int \mbox{\hyperlink{class_graph_a676cdfb976eccfa82b631d2094c1cdac}{find\+Vertex\+Idx}} (const T \&in) const
-\begin{DoxyCompactList}\small\item\em Finds the index of a vertex in the graph by its info. This operation has a time complexity of O(\+V), where V is the number of vertices in the graph. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{DoxyCompactItemize}
 \doxysubsubsection*{Protected Attributes}
 \begin{DoxyCompactItemize}
 \item 
@@ -57,10 +57,6 @@ template$<$class T$>$ \\
 
 
 
-Destructor for the \doxylink{class_graph}{Graph} class. Frees allocated memory. This operation has a time complexity of O(V + n), where V is the number of vertices and n is the size of the matrices. 
-
-
-
 \doxysubsection{Member Function Documentation}
 \Hypertarget{class_graph_a6ec9f2dd0ef1a40d83d649dfd5dfb8cf}\index{Graph$<$ T $>$@{Graph$<$ T $>$}!addBidirectionalEdge@{addBidirectionalEdge}}
 \index{addBidirectionalEdge@{addBidirectionalEdge}!Graph$<$ T $>$@{Graph$<$ T $>$}}
@@ -69,24 +65,6 @@ Destructor for the \doxylink{class_graph}{Graph} class. Frees allocated memory. 
 template$<$class T$>$ \\
 bool \mbox{\hyperlink{class_graph}{Graph}}$<$ T $>$\+::add\+Bidirectional\+Edge (\begin{DoxyParamCaption}\item[{const T \&}]{sourc}{, }\item[{const T \&}]{dest}{, }\item[{double}]{dw}{, }\item[{double}]{ww}{}\end{DoxyParamCaption})}
 
-
-
-Adds a bidirectional edge between two vertices. This operation has a time complexity of O(\+V), where V is the number of vertices in the graph. 
-
-
-\begin{DoxyParams}{Parameters}
-{\em sourc} & Info of the source vertex. \\
-\hline
-{\em dest} & Info of the destination vertex. \\
-\hline
-{\em dw} & Driving weight of the edge. \\
-\hline
-{\em ww} & Walking weight of the edge. \\
-\hline
-\end{DoxyParams}
-\begin{DoxyReturn}{Returns}
-True if the edge was added, false otherwise. 
-\end{DoxyReturn}
 \Hypertarget{class_graph_a08da44f06ea7762bbb34f67bd7912a4b}\index{Graph$<$ T $>$@{Graph$<$ T $>$}!addEdge@{addEdge}}
 \index{addEdge@{addEdge}!Graph$<$ T $>$@{Graph$<$ T $>$}}
 \doxysubsubsection{\texorpdfstring{addEdge()}{addEdge()}}
@@ -138,20 +116,6 @@ True if the vertex was added, false if it already exists.
 template$<$class T$>$ \\
 \mbox{\hyperlink{class_edge}{Edge}}$<$ T $>$ \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{class_graph}{Graph}}$<$ T $>$\+::find\+Edge (\begin{DoxyParamCaption}\item[{int}]{source\+Id}{, }\item[{int}]{dest\+Id}{}\end{DoxyParamCaption})}
 
-
-
-Finds an edge between two vertices by their IDs. This operation has a time complexity of O(\+E), where E is the number of edges in the adjacency list of the source vertex. 
-
-
-\begin{DoxyParams}{Parameters}
-{\em source\+Id} & ID of the source vertex. \\
-\hline
-{\em dest\+Id} & ID of the destination vertex. \\
-\hline
-\end{DoxyParams}
-\begin{DoxyReturn}{Returns}
-Pointer to the edge if found, nullptr otherwise. 
-\end{DoxyReturn}
 \Hypertarget{class_graph_a8b7b7465fbfd562e2a469f90a437ab75}\index{Graph$<$ T $>$@{Graph$<$ T $>$}!findVertex@{findVertex}}
 \index{findVertex@{findVertex}!Graph$<$ T $>$@{Graph$<$ T $>$}}
 \doxysubsubsection{\texorpdfstring{findVertex()}{findVertex()}}
@@ -178,18 +142,6 @@ Pointer to the vertex if found, nullptr otherwise.
 template$<$class T$>$ \\
 \mbox{\hyperlink{class_vertex}{Vertex}}$<$ T $>$ \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{class_graph}{Graph}}$<$ T $>$\+::find\+Vertex\+By\+Code (\begin{DoxyParamCaption}\item[{const std\+::string}]{code}{}\end{DoxyParamCaption}) const}
 
-
-
-Finds a vertex in the graph by its code. This operation has a time complexity of O(\+V), where V is the number of vertices in the graph. 
-
-
-\begin{DoxyParams}{Parameters}
-{\em code} & Code of the vertex to find. \\
-\hline
-\end{DoxyParams}
-\begin{DoxyReturn}{Returns}
-Pointer to the vertex if found, nullptr otherwise. 
-\end{DoxyReturn}
 \Hypertarget{class_graph_a61a95dd5a17ceedacd3ac023112bf4b6}\index{Graph$<$ T $>$@{Graph$<$ T $>$}!findVertexById@{findVertexById}}
 \index{findVertexById@{findVertexById}!Graph$<$ T $>$@{Graph$<$ T $>$}}
 \doxysubsubsection{\texorpdfstring{findVertexById()}{findVertexById()}}
@@ -197,18 +149,6 @@ Pointer to the vertex if found, nullptr otherwise.
 template$<$class T$>$ \\
 \mbox{\hyperlink{class_vertex}{Vertex}}$<$ T $>$ \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{class_graph}{Graph}}$<$ T $>$\+::find\+Vertex\+By\+Id (\begin{DoxyParamCaption}\item[{const int}]{id}{}\end{DoxyParamCaption}) const}
 
-
-
-Finds a vertex in the graph by its ID. This operation has a time complexity of O(\+V), where V is the number of vertices in the graph. 
-
-
-\begin{DoxyParams}{Parameters}
-{\em id} & ID of the vertex to find. \\
-\hline
-\end{DoxyParams}
-\begin{DoxyReturn}{Returns}
-Pointer to the vertex if found, nullptr otherwise. 
-\end{DoxyReturn}
 \Hypertarget{class_graph_a676cdfb976eccfa82b631d2094c1cdac}\index{Graph$<$ T $>$@{Graph$<$ T $>$}!findVertexIdx@{findVertexIdx}}
 \index{findVertexIdx@{findVertexIdx}!Graph$<$ T $>$@{Graph$<$ T $>$}}
 \doxysubsubsection{\texorpdfstring{findVertexIdx()}{findVertexIdx()}}
@@ -216,18 +156,6 @@ Pointer to the vertex if found, nullptr otherwise.
 template$<$class T$>$ \\
 int \mbox{\hyperlink{class_graph}{Graph}}$<$ T $>$\+::find\+Vertex\+Idx (\begin{DoxyParamCaption}\item[{const T \&}]{in}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [protected]}}
 
-
-
-Finds the index of a vertex in the graph by its info. This operation has a time complexity of O(\+V), where V is the number of vertices in the graph. 
-
-
-\begin{DoxyParams}{Parameters}
-{\em in} & Info of the vertex to find. \\
-\hline
-\end{DoxyParams}
-\begin{DoxyReturn}{Returns}
-Index of the vertex if found, -\/1 otherwise. 
-\end{DoxyReturn}
 \Hypertarget{class_graph_a0853eac15cdf0f06d63f4b8a7820ec71}\index{Graph$<$ T $>$@{Graph$<$ T $>$}!getNumVertex@{getNumVertex}}
 \index{getNumVertex@{getNumVertex}!Graph$<$ T $>$@{Graph$<$ T $>$}}
 \doxysubsubsection{\texorpdfstring{getNumVertex()}{getNumVertex()}}
@@ -261,22 +189,8 @@ Gets the vertex set of the graph.
 \doxysubsubsection{\texorpdfstring{removeEdge()}{removeEdge()}}
 {\footnotesize\ttfamily \label{class_graph_a8949d071d45bf93e171e275462e1007a} 
 template$<$class T$>$ \\
-bool \mbox{\hyperlink{class_graph}{Graph}}$<$ T $>$\+::remove\+Edge (\begin{DoxyParamCaption}\item[{const T \&}]{sourc}{, }\item[{const T \&}]{dest}{}\end{DoxyParamCaption})}
+bool \mbox{\hyperlink{class_graph}{Graph}}$<$ T $>$\+::remove\+Edge (\begin{DoxyParamCaption}\item[{const T \&}]{source}{, }\item[{const T \&}]{dest}{}\end{DoxyParamCaption})}
 
-
-
-Removes a directed edge between two vertices. This operation has a time complexity of O(\+E), where E is the number of edges in the adjacency list of the source vertex. 
-
-
-\begin{DoxyParams}{Parameters}
-{\em sourc} & Info of the source vertex. \\
-\hline
-{\em dest} & Info of the destination vertex. \\
-\hline
-\end{DoxyParams}
-\begin{DoxyReturn}{Returns}
-True if the edge was removed, false otherwise. 
-\end{DoxyReturn}
 \Hypertarget{class_graph_af9c903104ad69a7782979fa9caedf163}\index{Graph$<$ T $>$@{Graph$<$ T $>$}!removeVertex@{removeVertex}}
 \index{removeVertex@{removeVertex}!Graph$<$ T $>$@{Graph$<$ T $>$}}
 \doxysubsubsection{\texorpdfstring{removeVertex()}{removeVertex()}}
@@ -284,18 +198,6 @@ True if the edge was removed, false otherwise.
 template$<$class T$>$ \\
 bool \mbox{\hyperlink{class_graph}{Graph}}$<$ T $>$\+::remove\+Vertex (\begin{DoxyParamCaption}\item[{const T \&}]{in}{}\end{DoxyParamCaption})}
 
-
-
-Removes a vertex from the graph. This operation has a time complexity of O(V + E), where V is the number of vertices and E is the number of edges. 
-
-
-\begin{DoxyParams}{Parameters}
-{\em in} & Info of the vertex to remove. \\
-\hline
-\end{DoxyParams}
-\begin{DoxyReturn}{Returns}
-True if the vertex was removed, false otherwise. 
-\end{DoxyReturn}
 
 
 \doxysubsection{Member Data Documentation}

@@ -15,6 +15,7 @@ namespace GraphAlgorithms {
  *
  * @param edge The edge to relax.
  * @param isDriving Indicates whether the edge is part of a driving path.
+ * Defaults to true.
  * @return True if the edge was relaxed, false otherwise.
  */
 bool relax(Edge<LocationInfo> *edge, bool isDriving = true);
@@ -32,7 +33,7 @@ bool relax(Edge<LocationInfo> *edge, bool isDriving = true);
  * @param dest The ID of the destination node.
  * @param avoidNodes A list of node IDs to avoid.
  * @param avoidSegments A list of edge pairs (source, destination) to avoid.
- * @param isDriving Indicates whether the path is for driving.
+ * @param isDriving Indicates whether the path is for driving. Defaults to true.
  * @return A vector of LocationInfo representing the shortest path.
  */
 std::vector<LocationInfo>
@@ -50,7 +51,7 @@ dijkstra(Graph<LocationInfo> *graph, int source, int dest,
  * @param g The graph containing the path.
  * @param origin The ID of the origin node.
  * @param dest The ID of the destination node.
- * @param isDriving Indicates whether the path is for driving.
+ * @param isDriving Indicates whether the path is for driving. Defaults to true.
  * @return A vector of LocationInfo representing the path.
  */
 std::vector<LocationInfo> getPath(Graph<LocationInfo> *g, const int &origin,
@@ -62,7 +63,9 @@ std::vector<LocationInfo> getPath(Graph<LocationInfo> *g, const int &origin,
  * Finds the shortest driving route from the source to the destination,
  * optionally passing through an intermediate node. The algorithm runs in O((V +
  * E) log V) for each segment of the route (source to intermediate and
- * intermediate to destination).
+ * intermediate to destination), where:
+ * - V is the number of vertices.
+ * - E is the number of edges.
  *
  * @param graph The graph to traverse.
  * @param source The ID of the source node.
@@ -70,6 +73,7 @@ std::vector<LocationInfo> getPath(Graph<LocationInfo> *g, const int &origin,
  * @param avoidNodes A list of node IDs to avoid.
  * @param avoidSegments A list of edge pairs (source, destination) to avoid.
  * @param includeNode An optional intermediate node to include in the route.
+ * Defaults to -1.
  * @return A vector of LocationInfo representing the driving route.
  */
 std::vector<LocationInfo>
@@ -100,7 +104,10 @@ getParkingNodes(Graph<LocationInfo> *graph, int source,
  * @brief Computes an environmental route combining driving and walking.
  *
  * Finds a route from the source to the destination that minimizes total time
- * while respecting a maximum walking time. The algorithm runs in O(V⋅(V+E)logV).
+ * while respecting a maximum walking time. The algorithm runs in O(V ⋅ (V + E)
+ * log V), where:
+ * - V is the number of vertices.
+ * - E is the number of edges.
  *
  * @param graph The graph to traverse.
  * @param source The ID of the source node.
@@ -113,8 +120,8 @@ getParkingNodes(Graph<LocationInfo> *graph, int source,
  */
 std::vector<EnvironmentalPath>
 drivingWalkingRoute(Graph<LocationInfo> *graph, int source, int dest,
-                   double maxWalkingTime, const std::vector<int> &avoidNodes,
-                   const std::vector<std::pair<int, int>> &avoidSegments);
+                    double maxWalkingTime, const std::vector<int> &avoidNodes,
+                    const std::vector<std::pair<int, int>> &avoidSegments);
 
 } // namespace GraphAlgorithms
 

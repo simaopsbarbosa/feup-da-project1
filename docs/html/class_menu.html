@@ -127,13 +127,13 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:a205ea3b1690a51fceb1e253e7fee2ee2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Processes the selected menu option.  <br /></td></tr>
 <tr class="separator:a205ea3b1690a51fceb1e253e7fee2ee2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0483fd97d8d4182a2c4acc26c0020e76" id="r_a0483fd97d8d4182a2c4acc26c0020e76"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a0483fd97d8d4182a2c4acc26c0020e76">independentRoutePlanning</a> ()</td></tr>
-<tr class="memdesc:a0483fd97d8d4182a2c4acc26c0020e76"><td class="mdescLeft">&#160;</td><td class="mdescRight">Handles independent route planning.  <br /></td></tr>
+<tr class="memdesc:a0483fd97d8d4182a2c4acc26c0020e76"><td class="mdescLeft">&#160;</td><td class="mdescRight">Handles independent route planning without additional constraints.  <br /></td></tr>
 <tr class="separator:a0483fd97d8d4182a2c4acc26c0020e76"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2c3f8e163b1562d2e41980bd7568abeb" id="r_a2c3f8e163b1562d2e41980bd7568abeb"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a2c3f8e163b1562d2e41980bd7568abeb">restrictedRoutePlanning</a> ()</td></tr>
 <tr class="memdesc:a2c3f8e163b1562d2e41980bd7568abeb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Handles restricted route planning with constraints.  <br /></td></tr>
 <tr class="separator:a2c3f8e163b1562d2e41980bd7568abeb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5373365a076c91741b7bff05d133962e" id="r_a5373365a076c91741b7bff05d133962e"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a5373365a076c91741b7bff05d133962e">environmentallyFriendlyRoutePlanning</a> ()</td></tr>
-<tr class="memdesc:a5373365a076c91741b7bff05d133962e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Handles environmentally-friendly route planning.  <br /></td></tr>
+<tr class="memdesc:a5373365a076c91741b7bff05d133962e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Handles environmentally-friendly route planning focusing on minimizing environmental impact.  <br /></td></tr>
 <tr class="separator:a5373365a076c91741b7bff05d133962e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afce0f3241d4c7093d090093e017c6900" id="r_afce0f3241d4c7093d090093e017c6900"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#afce0f3241d4c7093d090093e017c6900">batchMode</a> (std::string inputFile, std::string outputFile=&quot;&quot;)</td></tr>
 <tr class="memdesc:afce0f3241d4c7093d090093e017c6900"><td class="mdescLeft">&#160;</td><td class="mdescRight">Executes batch mode operations based on input and output files.  <br /></td></tr>
@@ -298,7 +298,7 @@ Private Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Handles environmentally-friendly route planning. </p>
+<p>Handles environmentally-friendly route planning focusing on minimizing environmental impact. </p>
 <p>Complexity: O(V + E), where V is the number of vertices and E is the number of edges. </p><dl class="section return"><dt>Returns</dt><dd>Status code (0 for success). </dd></dl>
 
 </div>
@@ -338,7 +338,7 @@ Private Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Handles independent route planning. </p>
+<p>Handles independent route planning without additional constraints. </p>
 <p>Complexity: O(V + E), where V is the number of vertices and E is the number of edges. </p><dl class="section return"><dt>Returns</dt><dd>Status code (0 for success). </dd></dl>
 
 </div>

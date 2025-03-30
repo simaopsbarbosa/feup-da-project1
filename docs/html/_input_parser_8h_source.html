@@ -108,21 +108,22 @@ $(function(){initNavTree('_input_parser_8h_source.html',''); initResizable(true)
 <a href="_input_parser_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#ifndef INPUTPARSER_HPP</span></div>
 <div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="preprocessor">#define INPUTPARSER_HPP</span></div>
 <div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span> </div>
-<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="preprocessor">#include &lt;string&gt;</span></div>
-<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="preprocessor">#include &lt;utility&gt;</span></div>
-<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="preprocessor">#include &lt;vector&gt;</span></div>
-<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span></div>
-<div class="foldopen" id="foldopen00012" data-start="{" data-end="};">
-<div class="line"><a id="l00012" name="l00012"></a><span class="lineno"><a class="line" href="class_input_parser.html">   12</a></span><span class="keyword">class </span><a class="code hl_class" href="class_input_parser.html">InputParser</a> {</div>
-<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="keyword">public</span>:</div>
-<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>  std::vector&lt;int&gt; <a class="code hl_function" href="class_input_parser.html#a2521ffcecd6de13bab9345729add6c86">parseNodes</a>(<span class="keyword">const</span> std::string &amp;input);</div>
-<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span></div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="preprocessor">#include &lt;algorithm&gt;</span></div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="preprocessor">#include &lt;string&gt;</span></div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="preprocessor">#include &lt;utility&gt;</span></div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="preprocessor">#include &lt;vector&gt;</span></div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span></div>
+<div class="foldopen" id="foldopen00013" data-start="{" data-end="};">
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno"><a class="line" href="class_input_parser.html">   13</a></span><span class="keyword">class </span><a class="code hl_class" href="class_input_parser.html">InputParser</a> {</div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="keyword">public</span>:</div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>  std::vector&lt;int&gt; <a class="code hl_function" href="class_input_parser.html#a2521ffcecd6de13bab9345729add6c86">parseNodes</a>(<span class="keyword">const</span> std::string &amp;input);</div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span></div>
 <div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>  std::vector&lt;std::pair&lt;int, int&gt;&gt; <a class="code hl_function" href="class_input_parser.html#ae2a0eab04ef36dcd5498149e94584be7">parseSegments</a>(<span class="keyword">const</span> std::string &amp;input);</div>
 <div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>};</div>
 </div>
 <div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span> </div>
 <div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span><span class="preprocessor">#endif </span><span class="comment">// INPUTPARSER_HPP</span></div>
-<div class="ttc" id="aclass_input_parser_html"><div class="ttname"><a href="class_input_parser.html">InputParser</a></div><div class="ttdoc">A utility class for parsing input strings into nodes and segments.</div><div class="ttdef"><b>Definition</b> InputParser.h:12</div></div>
+<div class="ttc" id="aclass_input_parser_html"><div class="ttname"><a href="class_input_parser.html">InputParser</a></div><div class="ttdoc">A utility class for parsing input strings into nodes and segments.</div><div class="ttdef"><b>Definition</b> InputParser.h:13</div></div>
 <div class="ttc" id="aclass_input_parser_html_a2521ffcecd6de13bab9345729add6c86"><div class="ttname"><a href="class_input_parser.html#a2521ffcecd6de13bab9345729add6c86">InputParser::parseNodes</a></div><div class="ttdeci">std::vector&lt; int &gt; parseNodes(const std::string &amp;input)</div><div class="ttdoc">Parses a string of integers into a vector of nodes.</div><div class="ttdef"><b>Definition</b> InputParser.cpp:4</div></div>
 <div class="ttc" id="aclass_input_parser_html_ae2a0eab04ef36dcd5498149e94584be7"><div class="ttname"><a href="class_input_parser.html#ae2a0eab04ef36dcd5498149e94584be7">InputParser::parseSegments</a></div><div class="ttdeci">std::vector&lt; std::pair&lt; int, int &gt; &gt; parseSegments(const std::string &amp;input)</div><div class="ttdoc">Parses a string of segments into a vector of pairs of integers.</div><div class="ttdef"><b>Definition</b> InputParser.cpp:15</div></div>
 </div><!-- fragment --></div><!-- contents -->

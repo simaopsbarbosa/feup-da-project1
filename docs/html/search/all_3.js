@@ -11,5 +11,6 @@ var searchData=
   ['drivingpath_8',['drivingPath',['../struct_environmental_path.html#a9f6f49ad75c85811ae37742d515eb3f5',1,'EnvironmentalPath']]],
   ['drivingroute_9',['drivingRoute',['../namespace_graph_algorithms.html#acf21e304ba607a6083cc3faa09cf8bfc',1,'GraphAlgorithms']]],
   ['drivingtime_10',['drivingTime',['../struct_environmental_path.html#ad8839d4bfe9665517ff1db366a1ef754',1,'EnvironmentalPath']]],
-  ['drivingweight_11',['drivingWeight',['../class_edge.html#ad71622e176f02a0f694e2f130e231a1d',1,'Edge']]]
+  ['drivingwalkingroute_11',['drivingWalkingRoute',['../namespace_graph_algorithms.html#ad85786700be21b72b89c949011473d74',1,'GraphAlgorithms']]],
+  ['drivingweight_12',['drivingWeight',['../class_edge.html#ad71622e176f02a0f694e2f130e231a1d',1,'Edge']]]
 ];

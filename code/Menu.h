@@ -46,7 +46,7 @@ public:
   void processOption(int option);
 
   /**
-   * @brief Handles independent route planning.
+   * @brief Handles independent route planning without additional constraints.
    *
    * Complexity: O(V + E), where V is the number of vertices and E is the number
    * of edges.
@@ -64,7 +64,8 @@ public:
   int restrictedRoutePlanning();
 
   /**
-   * @brief Handles environmentally-friendly route planning.
+   * @brief Handles environmentally-friendly route planning focusing on
+   * minimizing environmental impact.
    *
    * Complexity: O(V + E), where V is the number of vertices and E is the number
    * of edges.

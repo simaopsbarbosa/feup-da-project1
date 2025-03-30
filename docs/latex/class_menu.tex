@@ -19,11 +19,11 @@ void \mbox{\hyperlink{class_menu_a6835ee888636371b6c7aaa5cfb402aa7}{get\+Menu\+O
 void \mbox{\hyperlink{class_menu_a205ea3b1690a51fceb1e253e7fee2ee2}{process\+Option}} (int option)
 \begin{DoxyCompactList}\small\item\em Processes the selected menu option. \end{DoxyCompactList}\item 
 int \mbox{\hyperlink{class_menu_a0483fd97d8d4182a2c4acc26c0020e76}{independent\+Route\+Planning}} ()
-\begin{DoxyCompactList}\small\item\em Handles independent route planning. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Handles independent route planning without additional constraints. \end{DoxyCompactList}\item 
 int \mbox{\hyperlink{class_menu_a2c3f8e163b1562d2e41980bd7568abeb}{restricted\+Route\+Planning}} ()
 \begin{DoxyCompactList}\small\item\em Handles restricted route planning with constraints. \end{DoxyCompactList}\item 
 int \mbox{\hyperlink{class_menu_a5373365a076c91741b7bff05d133962e}{environmentally\+Friendly\+Route\+Planning}} ()
-\begin{DoxyCompactList}\small\item\em Handles environmentally-\/friendly route planning. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Handles environmentally-\/friendly route planning focusing on minimizing environmental impact. \end{DoxyCompactList}\item 
 int \mbox{\hyperlink{class_menu_afce0f3241d4c7093d090093e017c6900}{batch\+Mode}} (std\+::string input\+File, std\+::string output\+File="{}"{})
 \begin{DoxyCompactList}\small\item\em Executes batch mode operations based on input and output files. \end{DoxyCompactList}\item 
 int \mbox{\hyperlink{class_menu_a4002a6f96dc9a5f4843c9b9026a78ca4}{build\+Graph}} (std\+::string locations, std\+::string distances)
@@ -125,7 +125,7 @@ int Menu\+::environmentally\+Friendly\+Route\+Planning (\begin{DoxyParamCaption}
 
 
 
-Handles environmentally-\/friendly route planning. 
+Handles environmentally-\/friendly route planning focusing on minimizing environmental impact. 
 
 Complexity\+: O(V + E), where V is the number of vertices and E is the number of edges. \begin{DoxyReturn}{Returns}
 Status code (0 for success). 
@@ -148,7 +148,7 @@ int Menu\+::independent\+Route\+Planning (\begin{DoxyParamCaption}{}{}\end{DoxyP
 
 
 
-Handles independent route planning. 
+Handles independent route planning without additional constraints. 
 
 Complexity\+: O(V + E), where V is the number of vertices and E is the number of edges. \begin{DoxyReturn}{Returns}
 Status code (0 for success). 

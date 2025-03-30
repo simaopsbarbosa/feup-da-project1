@@ -13,7 +13,7 @@ std\+::vector$<$ \mbox{\hyperlink{struct_location_info}{Location\+Info}} $>$ \mb
 \begin{DoxyCompactList}\small\item\em Computes the driving route between two nodes. \end{DoxyCompactList}\item 
 std\+::vector$<$ std\+::pair$<$ \mbox{\hyperlink{class_vertex}{Vertex}}$<$ \mbox{\hyperlink{struct_location_info}{Location\+Info}} $>$ \texorpdfstring{$\ast$}{*}, std\+::vector$<$ \mbox{\hyperlink{struct_location_info}{Location\+Info}} $>$ $>$ $>$ \mbox{\hyperlink{namespace_graph_algorithms_ae93c882ba57501977a06f6cd052c2389}{get\+Parking\+Nodes}} (\mbox{\hyperlink{class_graph}{Graph}}$<$ \mbox{\hyperlink{struct_location_info}{Location\+Info}} $>$ \texorpdfstring{$\ast$}{*}graph, int source, const std\+::vector$<$ int $>$ \&avoid\+Nodes, const std\+::vector$<$ std\+::pair$<$ int, int $>$ $>$ \&avoid\+Segments)
 \begin{DoxyCompactList}\small\item\em Finds all parking nodes reachable from the source. \end{DoxyCompactList}\item 
-std\+::vector$<$ \mbox{\hyperlink{struct_environmental_path}{Environmental\+Path}} $>$ \mbox{\hyperlink{namespace_graph_algorithms_a3c3c493521b7bbdf877a4178b6e82a09}{environmental\+Route}} (\mbox{\hyperlink{class_graph}{Graph}}$<$ \mbox{\hyperlink{struct_location_info}{Location\+Info}} $>$ \texorpdfstring{$\ast$}{*}graph, int source, int dest, double max\+Walking\+Time, const std\+::vector$<$ int $>$ \&avoid\+Nodes, const std\+::vector$<$ std\+::pair$<$ int, int $>$ $>$ \&avoid\+Segments)
+std\+::vector$<$ \mbox{\hyperlink{struct_environmental_path}{Environmental\+Path}} $>$ \mbox{\hyperlink{namespace_graph_algorithms_ad85786700be21b72b89c949011473d74}{driving\+Walking\+Route}} (\mbox{\hyperlink{class_graph}{Graph}}$<$ \mbox{\hyperlink{struct_location_info}{Location\+Info}} $>$ \texorpdfstring{$\ast$}{*}graph, int source, int dest, double max\+Walking\+Time, const std\+::vector$<$ int $>$ \&avoid\+Nodes, const std\+::vector$<$ std\+::pair$<$ int, int $>$ $>$ \&avoid\+Segments)
 \begin{DoxyCompactList}\small\item\em Computes an environmental route combining driving and walking. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
@@ -42,7 +42,7 @@ Finds the shortest path from the source to the destination while avoiding specif
 \hline
 {\em avoid\+Segments} & A list of edge pairs (source, destination) to avoid. \\
 \hline
-{\em is\+Driving} & Indicates whether the path is for driving. \\
+{\em is\+Driving} & Indicates whether the path is for driving. Defaults to true. \\
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
@@ -58,7 +58,11 @@ std\+::vector$<$ \mbox{\hyperlink{struct_location_info}{Location\+Info}} $>$ Gra
 
 Computes the driving route between two nodes. 
 
-Finds the shortest driving route from the source to the destination, optionally passing through an intermediate node. The algorithm runs in O((V + E) log V) for each segment of the route (source to intermediate and intermediate to destination).
+Finds the shortest driving route from the source to the destination, optionally passing through an intermediate node. The algorithm runs in O((V + E) log V) for each segment of the route (source to intermediate and intermediate to destination), where\+:
+\begin{DoxyItemize}
+\item V is the number of vertices.
+\item E is the number of edges.
+\end{DoxyItemize}
 
 
 \begin{DoxyParams}{Parameters}
@@ -72,23 +76,27 @@ Finds the shortest driving route from the source to the destination, optionally 
 \hline
 {\em avoid\+Segments} & A list of edge pairs (source, destination) to avoid. \\
 \hline
-{\em include\+Node} & An optional intermediate node to include in the route. \\
+{\em include\+Node} & An optional intermediate node to include in the route. Defaults to -\/1. \\
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
 A vector of \doxylink{struct_location_info}{Location\+Info} representing the driving route. 
 \end{DoxyReturn}
-\Hypertarget{namespace_graph_algorithms_a3c3c493521b7bbdf877a4178b6e82a09}\index{GraphAlgorithms@{GraphAlgorithms}!environmentalRoute@{environmentalRoute}}
-\index{environmentalRoute@{environmentalRoute}!GraphAlgorithms@{GraphAlgorithms}}
-\doxysubsubsection{\texorpdfstring{environmentalRoute()}{environmentalRoute()}}
-{\footnotesize\ttfamily \label{namespace_graph_algorithms_a3c3c493521b7bbdf877a4178b6e82a09} 
-std\+::vector$<$ \mbox{\hyperlink{struct_environmental_path}{Environmental\+Path}} $>$ Graph\+Algorithms\+::environmental\+Route (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_graph}{Graph}}$<$ \mbox{\hyperlink{struct_location_info}{Location\+Info}} $>$ \texorpdfstring{$\ast$}{*}}]{graph}{, }\item[{int}]{source}{, }\item[{int}]{dest}{, }\item[{double}]{max\+Walking\+Time}{, }\item[{const std\+::vector$<$ int $>$ \&}]{avoid\+Nodes}{, }\item[{const std\+::vector$<$ std\+::pair$<$ int, int $>$ $>$ \&}]{avoid\+Segments}{}\end{DoxyParamCaption})}
+\Hypertarget{namespace_graph_algorithms_ad85786700be21b72b89c949011473d74}\index{GraphAlgorithms@{GraphAlgorithms}!drivingWalkingRoute@{drivingWalkingRoute}}
+\index{drivingWalkingRoute@{drivingWalkingRoute}!GraphAlgorithms@{GraphAlgorithms}}
+\doxysubsubsection{\texorpdfstring{drivingWalkingRoute()}{drivingWalkingRoute()}}
+{\footnotesize\ttfamily \label{namespace_graph_algorithms_ad85786700be21b72b89c949011473d74} 
+std\+::vector$<$ \mbox{\hyperlink{struct_environmental_path}{Environmental\+Path}} $>$ Graph\+Algorithms\+::driving\+Walking\+Route (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_graph}{Graph}}$<$ \mbox{\hyperlink{struct_location_info}{Location\+Info}} $>$ \texorpdfstring{$\ast$}{*}}]{graph}{, }\item[{int}]{source}{, }\item[{int}]{dest}{, }\item[{double}]{max\+Walking\+Time}{, }\item[{const std\+::vector$<$ int $>$ \&}]{avoid\+Nodes}{, }\item[{const std\+::vector$<$ std\+::pair$<$ int, int $>$ $>$ \&}]{avoid\+Segments}{}\end{DoxyParamCaption})}
 
 
 
 Computes an environmental route combining driving and walking. 
 
-Finds a route from the source to the destination that minimizes total time while respecting a maximum walking time. The algorithm runs in O((V + E) log V) for each parking node considered, plus O(\+P log P) for sorting, where P is the number of parking nodes.
+Finds a route from the source to the destination that minimizes total time while respecting a maximum walking time. The algorithm runs in O(V ⋅ (V + E) log V), where\+:
+\begin{DoxyItemize}
+\item V is the number of vertices.
+\item E is the number of edges.
+\end{DoxyItemize}
 
 
 \begin{DoxyParams}{Parameters}
@@ -154,7 +162,7 @@ Constructs the path by backtracking from the destination to the origin using the
 \hline
 {\em dest} & The ID of the destination node. \\
 \hline
-{\em is\+Driving} & Indicates whether the path is for driving. \\
+{\em is\+Driving} & Indicates whether the path is for driving. Defaults to true. \\
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
@@ -176,7 +184,7 @@ Updates the distance to the destination vertex if a shorter path is found. This 
 \begin{DoxyParams}{Parameters}
 {\em edge} & The edge to relax. \\
 \hline
-{\em is\+Driving} & Indicates whether the edge is part of a driving path. \\
+{\em is\+Driving} & Indicates whether the edge is part of a driving path. Defaults to true. \\
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}

@@ -6,6 +6,5 @@ var searchData=
   ['environmentallyfriendlyrouteplanning_3',['environmentallyFriendlyRoutePlanning',['../class_menu.html#a5373365a076c91741b7bff05d133962e',1,'Menu']]],
   ['environmentalpath_4',['EnvironmentalPath',['../struct_environmental_path.html',1,'EnvironmentalPath'],['../struct_environmental_path.html#a8108cb507b116087908635c43a1ac50b',1,'EnvironmentalPath::EnvironmentalPath()']]],
   ['environmentalpath_2eh_5',['EnvironmentalPath.h',['../_environmental_path_8h.html',1,'']]],
-  ['environmentalroute_6',['environmentalRoute',['../namespace_graph_algorithms.html#a3c3c493521b7bbdf877a4178b6e82a09',1,'GraphAlgorithms']]],
-  ['extractmin_7',['extractMin',['../class_mutable_priority_queue.html#af47686310dc556773819d2ba0fdb1255',1,'MutablePriorityQueue']]]
+  ['extractmin_6',['extractMin',['../class_mutable_priority_queue.html#af47686310dc556773819d2ba0fdb1255',1,'MutablePriorityQueue']]]
 ];
