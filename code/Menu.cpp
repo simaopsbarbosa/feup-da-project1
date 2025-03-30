@@ -246,16 +246,16 @@ int Menu::restrictedRoutePlanning() {
   std::cin >> dest;
   std::cin.ignore();
 
-  std::cout << "AvoidNodes: ";
+  std::cout << "AvoidNodes:";
   std::getline(std::cin, avoidNodesInput);
   std::vector<int> avoidNodes = parser.parseNodes(avoidNodesInput);
 
-  std::cout << "AvoidSegments: ";
+  std::cout << "AvoidSegments:";
   std::getline(std::cin, avoidSegmentsInput);
   std::vector<std::pair<int, int>> avoidSegments =
       parser.parseSegments(avoidSegmentsInput);
 
-  std::cout << "IncludeNode: ";
+  std::cout << "IncludeNode:";
   std::getline(std::cin, includeNodeInput);
   includeNode = includeNodeInput.empty() ? -1 : std::stoi(includeNodeInput);
   std::cout << "------------------------------------------------------\n";
@@ -293,29 +293,25 @@ int Menu::environmentallyFriendlyRoutePlanning() {
   std::cout << "------------------------INPUT-------------------------\n";
   int source, dest, includeNode;
   double maxWalkingTime;
-  std::string includeNodeInput;
   std::string avoidNodesInput, avoidSegmentsInput;
 
   std::cout << "Source:";
   std::cin >> source;
   std::cout << "Destination:";
   std::cin >> dest;
-  std::cout << "MaxWalkingTime: ";
+  std::cout << "MaxWalkingTime:";
   std::cin >> maxWalkingTime;
   std::cin.ignore();
 
-  std::cout << "AvoidNodes: ";
+  std::cout << "AvoidNodes:";
   std::getline(std::cin, avoidNodesInput);
   std::vector<int> avoidNodes = parser.parseNodes(avoidNodesInput);
 
-  std::cout << "AvoidSegments: ";
+  std::cout << "AvoidSegments:";
   std::getline(std::cin, avoidSegmentsInput);
   std::vector<std::pair<int, int>> avoidSegments =
       parser.parseSegments(avoidSegmentsInput);
 
-  std::cout << "IncludeNode: ";
-  std::getline(std::cin, includeNodeInput);
-  includeNode = includeNodeInput.empty() ? -1 : std::stoi(includeNodeInput);
   std::cout << "------------------------------------------------------\n";
 
   std::cout << "------------------------OUTPUT------------------------\n";
