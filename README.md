@@ -1,4 +1,4 @@
-# Individual Route Planning Tool
+# Route Planning Tool
 
 A command-line application for urban route planning, developed in C++ as part of the *Algorithm Design* course (Spring 2025, FEUP).
 
